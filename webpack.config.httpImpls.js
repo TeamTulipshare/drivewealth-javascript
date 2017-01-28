@@ -3,7 +3,7 @@ const webpack = require("webpack");
 module.exports = function(name) {
 	return {
 		output: {
-			library: name,
+			library: "dw_" + name,
 			libraryTarget: "umd",
 			filename: `${name}.js`
 		},

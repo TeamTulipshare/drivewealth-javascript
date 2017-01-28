@@ -1,14 +1,18 @@
 export default function (method, endpoint, headers, body, cb) {
     fetch(endpoint, {
-        endpoint: endpoint,
+        method: method,
         headers: headers,
         body: body,
     })
     .then(response => {
         response.text().then(text => {
-            cb(response.status, response.headers, text);
+            let resHeaders = {};
+            for (let pair of response.headers.entries()) {
+                resHeaders[pair[0]] = pair[1];
+            }
+            cb(response.status, resHeaders, text);
         });
     }, error => {
-        // TODO:
+        cb(-1, {}, error.toString());
     });
 }
