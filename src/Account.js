@@ -6,6 +6,7 @@ export default class Account {
     constructor(data) {
         for (let key of [
             "accountID",
+            "userID",
             "accountNo",
             "accountType",
             "currencyID",
@@ -20,6 +21,29 @@ export default class Account {
             this[key] = data[key];
         }
     }
+
+    getBlotter(type, cb) {
+        if (type && !cb) {
+            cb = type;
+            type = null;
+        }
+
+        request({
+            method: "GET",
+            endpoint: `/users/${this.userID}/accountSummary/${this.accountID}${type ? '/' + type : ""}`,
+            sessionKey: Sessions.get(this.userID)
+        }, (data) => {
+            cb && cb(null, type ? data[type] : data);
+        }, err => cb && cb(err));
+    }
+
+    static get BLOTTER_TYPES() { return {
+        CASH: "cash",
+        ORDERS: "orders",
+        TRANSACTIONS: "transactions",
+        POSITIONS: "positions",
+        ALL: null,
+    } };
 
     static getListForUserID(userID, cb) {
         request({
