@@ -27,6 +27,12 @@ export default class Instrument {
         }
     }
 
+    static get TRADE_STATUSES() { return {
+        INACTIVE: "0",
+        ACTIVE: "1",
+        CLOSED: "2"
+    } }
+
     static getBySymbol(symbol, cb) {
         let symbols = symbol;
         if (typeof symbol === "string") symbols = [symbol];
@@ -48,6 +54,21 @@ export default class Instrument {
             sessionKey: Sessions.getAny(),
         }, (data) => {
             cb && cb(null, new Instrument(data));
+        }, err => cb && cb(err));
+    }
+
+    static getAll(tradeStatus, cb) {
+        if (!cb) {
+            cb = tradeStatus;
+            tradeStatus = "-1";
+        }
+
+        request({
+            method: "GET",
+            endpoint: `/instruments?tradeStatus=${tradeStatus}`,
+            sessionKey: Sessions.getAny(),
+        }, (data) => {
+            cb && cb(null, data.map(ins => new Instrument(ins)));
         }, err => cb && cb(err));
     }
 

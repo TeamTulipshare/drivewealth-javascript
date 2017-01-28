@@ -19,6 +19,10 @@ drivewealth.User.login("e75", "eeeeeee75", (err, user) => {
             drivewealth.Instrument.getBySymbol("AAPL", (err, instrument) => {
                 console.log(`${instrument.name} will probably perform well!`);
             });
+
+            drivewealth.Instrument.getAll((err, instruments) => {
+                console.log(`There are ${instruments.length} total instruments.`);
+            });
         });
     });
 });
