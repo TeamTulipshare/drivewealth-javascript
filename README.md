@@ -3,7 +3,7 @@
 JavaScript bindings for the DriveWealth API
 
 [Usage](#usage)  
-[API Reference](#)  
+[API Reference](https://github.com/DriveWealth/drivewealth-javascript/wiki)  
 [Examples](https://github.com/DriveWealth/drivewealth-javascript/tree/master/examples)
 
 ## Usage
