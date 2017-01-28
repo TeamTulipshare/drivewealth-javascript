@@ -22,6 +22,7 @@ export default class Instrument {
             "chaikinPgr",
             "priorClose",
             "marketState",
+            "fundamentalDataModel",
         ]) {
             this[key] = data[key];
         }
@@ -66,6 +67,20 @@ export default class Instrument {
         request({
             method: "GET",
             endpoint: `/instruments?tradeStatus=${tradeStatus}`,
+            sessionKey: Sessions.getAny(),
+        }, (data) => {
+            cb && cb(null, data.map(ins => new Instrument(ins)));
+        }, err => cb && cb(err));
+    }
+
+    static search(criteria, cb) {
+        let queryString = "?";
+        if (criteria.symbol) queryString += `symbol=${criteria.symbol}&`;
+        if (criteria.name) queryString += `name=${criteria.name}&`;
+
+        request({
+            method: "GET",
+            endpoint: `/instruments${queryString}`,
             sessionKey: Sessions.getAny(),
         }, (data) => {
             cb && cb(null, data.map(ins => new Instrument(ins)));
