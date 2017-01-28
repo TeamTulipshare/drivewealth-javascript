@@ -41,7 +41,7 @@ console.log(drivewealth);
 
 #### Step 3: Setup
 
-You'll need to call the setup function to initialize the library. In this call, pass a function that the library will use to make HTTP requests. The library supports a few [out of the box](#).
+You'll need to call the setup function to initialize the library. In this call, pass a function that the library will use to make HTTP requests. The library supports a few [out of the box](https://github.com/DriveWealth/drivewealth-javascript/wiki/HTTP-Implementations).
 
 ```javascript
 drivewealth.setup({
