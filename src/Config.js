@@ -1,6 +1,8 @@
 export const Config = {
     env: null,
     httpImpl: null,
+    appTypeID: null,
+    appVersion: null,
 };
 
 export const ENVIRONMENTS = {
@@ -11,7 +13,11 @@ export const ENVIRONMENTS = {
 export function setup({
     env,
     httpImpl,
+    appTypeID,
+    appVersion,
 }) {
     Config.env = env;
     Config.httpImpl = httpImpl;
+    Config.appTypeID = appTypeID;
+    Config.appVersion = appVersion;
 }

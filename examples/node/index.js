@@ -5,6 +5,14 @@ const drivewealth = require("../../lib/drivewealth.js");
 drivewealth.setup({
     env: drivewealth.ENVIRONMENTS.UAT,
     httpImpl: require("../../lib/httpImpls/request.js"),
+    appTypeID: "2000",
+    appVersion: "1.0",
 });
 
-drivewealth.User.login("e75", "eeeeeee75")
+drivewealth.User.login("e75", "eeeeeee75", (err, user) => {
+    console.log(user);
+
+    user.getAccounts((err, accounts) => {
+        console.log(accounts);
+    });
+});

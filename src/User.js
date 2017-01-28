@@ -1,19 +1,54 @@
 import request from "./request";
+import { Config } from "./Config";
+import Sessions from "./Sessions";
+import Account from "./Account";
 
 export default class User {
 
-    static login(username, password, {
-        appTypeID = "2000",
-        appVersion = "0.0",
-    } = {}) {
+    constructor(data) {
+        for (let key of [
+            "countryID",
+            "emailAddress",
+            "firstName",
+            "languageID",
+            "lastName",
+            "phoneNumber",
+            "referralCode",
+            "userID",
+            "username",
+            "wlpID",
+            "status",
+            "usCitizen",
+            "lastLoginWhen",
+            "citizenship",
+        ]) {
+            this[key] = data[key];
+        }
+    }
+
+    getAccounts(cb) {
+        Account.getListForUserID(this.userID, cb);
+    }
+
+    static getByUserID(userID, cb) {
+        request({
+            method: "GET",
+            endpoint: `/users/${userID}`,
+            sessionKey: Sessions.get(userID)
+        }, (data) => {
+            cb && cb(null, new User(data));
+        }, err => cb && cb(err));
+    }
+
+    static login(username, password, cb) {
         request({
             method: "POST",
             endpoint: "/userSessions",
             body: {
                 username,
                 password,
-                appTypeID,
-                appVersion,
+                appTypeID: Config.appTypeID,
+                appVersion: Config.appVersion,
                 languageID: "en_US",
                 osType: "unknown",
                 osVersion: "unknown",
@@ -21,10 +56,12 @@ export default class User {
                 ipAddress: "unknown"
             }
         }, (data) => {
-            console.log(data);
-        }, (err) => {
-            console.log(err);
-        })
+            Sessions.save(data.userID, data.sessionKey);
+            User.getByUserID(data.userID, (err, user) => {
+                if (err) return cb && cb(err);
+                cb && cb(null, user);
+            });
+        }, err => cb && cb(err));
     }
 
 }

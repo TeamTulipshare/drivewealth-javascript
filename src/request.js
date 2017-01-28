@@ -25,7 +25,8 @@ export default function request({
     if (headers["Content-Type"] === "application/json") body = JSON.stringify(body);
 
     Config.httpImpl(method, endpoint, headers, body, (statusCode, resHeaders, resBody) => {
-        if (resHeaders["Content-Type"] === "application/json" && resBody) {
+        if ( (resHeaders["Content-Type"] === "application/json" || resHeaders["content-type"] === "application/json")
+            && resBody) {
             resBody = JSON.parse(resBody);
         }
 
