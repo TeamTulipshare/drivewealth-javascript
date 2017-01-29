@@ -16,18 +16,23 @@ User.login("e75", "eeeeeee75", (err, user) => {
     user.getAccounts((err, accounts) => {
         accounts[0].getBlotter(Account.BLOTTER_TYPES.CASH, (err, cash) => {
             console.log(`Nice, you have $${cash.cashAvailableForTrade} of buying power.`);
-
-            Instrument.getBySymbol("AAPL", (err, instrument) => {
-                console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
-            });
-
-            Instrument.getAll((err, instruments) => {
-                console.log(`There are ${instruments.length} total instruments.`);
-            });
-
-            Instrument.search({ symbol: "AA" }, (err, instruments) => {
-                console.log(`There are ${instruments.length} instruments with "AA" in their symbol.`);
-            });
         });
+
+        accounts[0].getPerformance("1w", (err, performance) => {
+            const pl = performance[performance.length - 1].equity - performance[0].equity;
+            console.log(`Your 1-week P/L is $${Math.round(pl * 100) / 100}`);
+        });
+    });
+
+    Instrument.getBySymbol("AAPL", (err, instrument) => {
+        console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
+    });
+
+    Instrument.getAll((err, instruments) => {
+        console.log(`There are ${instruments.length} total instruments.`);
+    });
+
+    Instrument.search({ symbol: "AA" }, (err, instruments) => {
+        console.log(`There are ${instruments.length} instruments with "AA" in their symbol.`);
     });
 });

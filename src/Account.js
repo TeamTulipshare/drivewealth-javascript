@@ -37,6 +37,34 @@ export default class Account {
         }, err => cb && cb(err));
     }
 
+    // getPerformance(startDate, endDate, cb)
+    // getPerformance(period, cb)
+    // getPerformance(cb)
+    getPerformance() {
+        let queryString = "";
+        let cb;
+        if (arguments.length === 3) {
+            cb = arguments[2];
+            const [ startDate, endDate ] = arguments;
+            queryString += "/dateRange?";
+            queryString += `startDate=${startDate.getFullYear()}${startDate.getMonth() + 1}${startDate.getDate()}`;
+            queryString +=  `&endDate=${startDate.getFullYear()}${startDate.getMonth() + 1}${startDate.getDate()}`;
+        } else if (arguments.length === 2) {
+            cb = arguments[1];
+            queryString += `/history?period=${arguments[0]}`;
+        } else {
+            cb = arguments[0];
+        }
+
+        request({
+            method: "GET",
+            endpoint: `/users/${this.userID}/accountPerformance/${this.accountID}${queryString}`,
+            sessionKey: Sessions.get(this.userID)
+        }, (data) => {
+            cb && cb(null, data.performance);
+        }, err => cb && cb(err));
+    }
+
     static get BLOTTER_TYPES() { return {
         CASH: "cash",
         ORDERS: "orders",
