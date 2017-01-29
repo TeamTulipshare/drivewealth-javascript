@@ -87,4 +87,36 @@ export default class Instrument {
         }, err => cb && cb(err));
     }
 
+    static getQuote(symbol, cb) {
+        let userPassedOneSymbol = false;
+        if (!Array.isArray(symbol)) {
+            userPassedOneSymbol = true;
+            symbol = [symbol];
+        }
+        symbol = symbol.map(sym => {
+            return sym instanceof Instrument ? sym.symbol : sym;
+        });
+
+        request({
+            method: "GET",
+            endpoint: `/quotes?symbols=${symbol.join(",")}`,
+            sessionKey: Sessions.getAny(),
+            addlHeaders: {
+                "Accept": "text/plain"
+            }
+        }, (data) => {
+            let obj = {};
+            data = data.split("|").slice(10);
+            for (let rawQuote of data) {
+                const parsedQuote = rawQuote.split(",");
+                obj[parsedQuote[0]] = {
+                    bid: parsedQuote[1],
+                    ask: parsedQuote[2],
+                };
+            }
+            if (userPassedOneSymbol) obj = obj[symbol[0]];
+            cb && cb(null, obj);
+        }, err => cb && cb(err));
+    }
+
 }
