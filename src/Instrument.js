@@ -31,7 +31,16 @@ export default class Instrument {
     static get TRADE_STATUSES() { return {
         INACTIVE: "0",
         ACTIVE: "1",
-        CLOSED: "2"
+        CLOSED: "2",
+    } }
+
+    static get CHART_COMPRESSIONS() { return {
+        DAY: 0,
+        MINUTE_ONE: 1,
+        MINUTE_FIVE: 4,
+        MINUTE_30: 8,
+        HOUR: 9,
+        WEEK: 10
     } }
 
     static getBySymbol(symbol, cb) {
@@ -87,6 +96,10 @@ export default class Instrument {
         }, err => cb && cb(err));
     }
 
+    getQuote(cb) {
+        return Instrument.getQuote(this.symbol, cb);
+    }
+
     static getQuote(symbol, cb) {
         let userPassedOneSymbol = false;
         if (!Array.isArray(symbol)) {
@@ -116,6 +129,35 @@ export default class Instrument {
             }
             if (userPassedOneSymbol) obj = obj[symbol[0]];
             cb && cb(null, obj);
+        }, err => cb && cb(err));
+    }
+
+    getChartData() {
+        if (arguments.length === 4) {
+            return Instrument.getChartData(this.instrumentID, arguments[0], arguments[1], arguments[2], arguments[3]);
+        } else {
+            return Instrument.getChartData(this.instrumentID, arguments[0], arguments[1], arguments[2]);
+        }
+    }
+
+    static getChartData(instrumentID, compression) {
+        let cb, timeParams;
+        if (arguments.length === 5) {
+            const dateStart = arguments[2].replace(/\.\d{3}/, "");
+            const dateEnd   = arguments[3].replace(/\.\d{3}/, "");
+            timeParams = `dateStart=${dateStart}&dateEnd=${dateEnd}`;
+            cb = arguments[4];
+        } else {
+            timeParams = `tradingDays=${arguments[2]}`;
+            cb = arguments[3];
+        }
+
+        request({
+            method: "GET",
+            endpoint: `/bars?instrumentID=${instrumentID}&compression=${compression}&${timeParams}`,
+            sessionKey: Sessions.getAny(),
+        }, (data) => {
+            cb && cb(null, data.data);
         }, err => cb && cb(err));
     }
 

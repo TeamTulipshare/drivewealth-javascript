@@ -26,6 +26,14 @@ User.login("e75", "eeeeeee75", (err, user) => {
 
     Instrument.getBySymbol("AAPL", (err, instrument) => {
         console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
+
+        instrument.getChartData(Instrument.CHART_COMPRESSIONS.HOUR, 10, (err, chartData) => {
+            console.log(`There are ${chartData.split("|").length} data points for hourly bars for the last 10 trading days.`);
+        });
+
+        instrument.getQuote((err, quote) => {
+            console.log(`Current bid price for AAPL is $${quote.bid}.`);
+        });
     });
 
     Instrument.getAll((err, instruments) => {
@@ -34,9 +42,5 @@ User.login("e75", "eeeeeee75", (err, user) => {
 
     Instrument.search({ symbol: "AA" }, (err, instruments) => {
         console.log(`There are ${instruments.length} instruments with "AA" in their symbol.`);
-    });
-
-    Instrument.getQuote("AAPL", (err, quote) => {
-        console.log(`Current bid price for AAPL is $${quote.bid}.`);
     });
 });
