@@ -36,8 +36,8 @@ export default class Instrument {
 
     static get CHART_COMPRESSIONS() { return {
         DAY: 0,
-        MINUTE_ONE: 1,
-        MINUTE_FIVE: 4,
+        MINUTE_1: 1,
+        MINUTE_5: 4,
         MINUTE_30: 8,
         HOUR: 9,
         WEEK: 10
@@ -143,8 +143,8 @@ export default class Instrument {
     static getChartData(instrumentID, compression) {
         let cb, timeParams;
         if (arguments.length === 5) {
-            const dateStart = arguments[2].replace(/\.\d{3}/, "");
-            const dateEnd   = arguments[3].replace(/\.\d{3}/, "");
+            const dateStart = arguments[2].toISOString().replace(/\.\d{3}/, "");
+            const dateEnd   = arguments[3].toISOString().replace(/\.\d{3}/, "");
             timeParams = `dateStart=${dateStart}&dateEnd=${dateEnd}`;
             cb = arguments[4];
         } else {
