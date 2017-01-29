@@ -157,7 +157,7 @@ export default class Instrument {
             endpoint: `/bars?instrumentID=${instrumentID}&compression=${compression}&${timeParams}`,
             sessionKey: Sessions.getAny(),
         }, (data) => {
-            cb && cb(null, data.data);
+            cb && cb(null, data.data.split("|"));
         }, err => cb && cb(err));
     }
 

@@ -28,7 +28,7 @@ User.login("e75", "eeeeeee75", (err, user) => {
         console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
 
         instrument.getChartData(Instrument.CHART_COMPRESSIONS.HOUR, 10, (err, chartData) => {
-            console.log(`There are ${chartData.split("|").length} data points for hourly bars for the last 10 trading days.`);
+            console.log(`There are ${chartData.length} data points for hourly bars for the last 10 trading days.`);
         });
 
         instrument.getQuote((err, quote) => {
