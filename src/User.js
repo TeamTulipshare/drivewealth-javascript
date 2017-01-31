@@ -136,6 +136,18 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+    static isUsernameAvailable(username, cb) {
+        request({
+            method: "GET",
+            endpoint: `/users?username=${username}`,
+        }, () => {
+            cb && cb(null, false);
+        }, (err, statusCode) => {
+            if (statusCode === 404) return cb && cb(null, true);
+            cb && cb(err);
+        });
+    }
+
     static create({
         username,
         password,

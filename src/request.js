@@ -31,9 +31,9 @@ export default function request({
         }
 
         if (String(statusCode)[0] === "2" || String(statusCode)[0] === "3") {
-            onSuccess(resBody, resHeaders);
+            onSuccess(resBody, statusCode, resHeaders);
         } else {
-            onError(resBody, resHeaders);
+            onError(resBody, statusCode, resHeaders);
         }
     });
 }
