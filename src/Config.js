@@ -15,9 +15,11 @@ export function setup({
     httpImpl,
     appTypeID,
     appVersion,
+    wlpID = "DW",
 }) {
     Config.env = env;
     Config.httpImpl = httpImpl;
     Config.appTypeID = appTypeID;
     Config.appVersion = appVersion;
+    Config.wlpID = wlpID;
 }

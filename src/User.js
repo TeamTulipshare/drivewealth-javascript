@@ -64,4 +64,41 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+    static create({
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        languageID,
+        referralCode,
+        utmCampaign,
+        utmContent,
+        utmMedium,
+        utmSource,
+        utmTerm,
+    }, cb) {
+        request({
+            method: "POST",
+            endpoint: "/signups/live",
+            body: {
+                username,
+                password,
+                firstName,
+                lastName,
+                emailAddress1: email,
+                languageID,
+                wlpID: Config.wlpID,
+                referralCode,
+                utmCampaign,
+                utmContent,
+                utmMedium,
+                utmSource,
+                utmTerm,
+            },
+        }, (data) => {
+            return User.login(username, password, cb);
+        }, err => cb && cb(err));
+    }
+
 }
