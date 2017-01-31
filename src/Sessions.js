@@ -16,6 +16,10 @@ class Sessions {
     getAny() {
         return this._keys[this._mainUser];
     }
+
+    remove(userID) {
+        delete this._keys[userID];
+    }
 }
 
 export const sessions = new Sessions();

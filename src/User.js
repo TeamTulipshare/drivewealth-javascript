@@ -94,6 +94,17 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+    logout() {
+        request({
+            method: "DELETE",
+            endpoint: `/userSessions/${Sessions.get(this.userID)}`,
+            sessionKey: Sessions.get(this.userID),
+        }, () => {
+            Sessions.remove(this.userID);
+            cb && cb(null);
+        }, err => cb && cb(err));
+    }
+
     static get STATUSES() { return {
         PENDING: 1,
         APPROVED: 2,
