@@ -36,10 +36,6 @@ User.login("e75", "eeeeeee75", (err, user) => {
         });
     });
 
-    Instrument.getAll((err, instruments) => {
-        console.log(`There are ${instruments.length} total instruments.`);
-    });
-
     Instrument.search({ symbol: "AA" }, (err, instruments) => {
         console.log(`There are ${instruments.length} instruments with "AA" in their symbol.`);
     });

@@ -30,6 +30,37 @@ export default class User {
         Account.getListForUserID(this.userID, cb);
     }
 
+    // getSettings(key, cb)
+    // getSettings(cb)
+    getSettings() {
+        if (arguments.length === 1) {
+            this.getAllSettings(arguments[0]);
+        }
+        let cb = arguments[1];
+
+        request({
+            method: "GET",
+            endpoint: `/users/${this.userID}/settings/${arguments[0]}`,
+            sessionKey: Sessions.get(this.userID)
+        }, (data) => {
+            cb && cb(null, data.value);
+        }, err => cb && cb(err));
+    }
+
+    getAllSettings(cb) {
+        request({
+            method: "GET",
+            endpoint: `/users/${this.userID}/settings`,
+            sessionKey: Sessions.get(this.userID)
+        }, (data) => {
+            let formattedData = {};
+            for (let setting of data) {
+                formattedData[setting.key] = setting.value;
+            }
+            cb && cb(null, formattedData);
+        }, err => cb && cb(err));
+    }
+
     static getByUserID(userID, cb) {
         request({
             method: "GET",
