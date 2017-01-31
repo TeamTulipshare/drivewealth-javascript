@@ -30,7 +30,7 @@ export default class Order {
         this.type = data.ordType;
     }
 
-    cancel() {
+    cancel(cb) {
         request({
             method: "DELETE",
             endpoint: `/orders/${this.orderID}`,
