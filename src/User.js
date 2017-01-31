@@ -61,6 +61,29 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+    setSetting(key, value, cb) {
+        request({
+            method: "POST",
+            endpoint: `/users/${this.userID}/settings`,
+            sessionKey: Sessions.get(this.userID),
+            body: {
+                key, value
+            }
+        }, () => {
+            cb && cb(null);
+        }, err => cb && cb(err));
+    }
+
+    unsetSetting(key, cb) {
+        request({
+            method: "DELETE",
+            endpoint: `/users/${this.userID}/settings/${key}`,
+            sessionKey: Sessions.get(this.userID),
+        }, () => {
+            cb && cb(null);
+        }, err => cb && cb(err));
+    }
+
     static getByUserID(userID, cb) {
         request({
             method: "GET",
