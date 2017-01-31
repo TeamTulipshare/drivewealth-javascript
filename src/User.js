@@ -84,6 +84,24 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+    getStatus() {
+        request({
+            method: "GET",
+            endpoint: `/users/${this.userID}/status`,
+            sessionKey: Sessions.get(this.userID)
+        }, (data) => {
+            cb && cb(null, data);
+        }, err => cb && cb(err));
+    }
+
+    static get STATUSES() { return {
+        PENDING: 1,
+        APPROVED: 2,
+        REJECTED: 3,
+        REVOKED: 4,
+        CLOSED: 5,
+    } }
+
     static getByUserID(userID, cb) {
         request({
             method: "GET",
