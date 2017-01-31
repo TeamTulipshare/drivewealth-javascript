@@ -1,5 +1,6 @@
 import request from "./request";
 import Sessions from "./Sessions";
+import Order from "./Order";
 
 export default class Account {
 
@@ -17,6 +18,7 @@ export default class Account {
             "patternDayTrades",
             "status",
             "tradingType",
+            "accountMgmtType",
         ]) {
             this[key] = data[key];
         }
@@ -63,6 +65,17 @@ export default class Account {
         }, (data) => {
             cb && cb(null, data.performance);
         }, err => cb && cb(err));
+    }
+
+    placeOrder(type, data, cb) {
+        const parentDetails = {
+            accountID: this.accountID,
+            accountNo: this.accountNo,
+            accountType: this.accountType,
+            userID: this.userID,
+        };
+
+        return Order.create(type, parentDetails, data, cb);
     }
 
     static get BLOTTER_TYPES() { return {
