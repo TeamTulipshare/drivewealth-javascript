@@ -6,6 +6,7 @@ export default function request({
     sessionKey,
     body,
     addlHeaders = {},
+    host = "api",
 }, onSuccess, onError) {
     let headers = {
         Accept: "application/json"
@@ -20,7 +21,7 @@ export default function request({
         headers[header] = addlHeaders[header];
     }
 
-    endpoint = Config.env + endpoint;
+    endpoint = Config.env[host] + endpoint;
 
     if (headers["Content-Type"] === "application/json") body = JSON.stringify(body);
 

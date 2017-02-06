@@ -6,8 +6,16 @@ export const Config = {
 };
 
 export const ENVIRONMENTS = {
-    UAT: "http://api.drivewealth.io/v1",
-    PROD: "https://api.drivewealth.net/v1",
+    UAT: {
+        api: "http://api.drivewealth.io/v1",
+        apps: "http://apps.drivewealth.io/",
+        reports: "http://reports.drivewealth.io/",
+    },
+    PROD: {
+        api: "https://api.drivewealth.net/v1",
+        apps: "https://apps.drivewealth.com/",
+        reports: "https://reports.drivewealth.com",
+    },
 };
 
 export function setup({
