@@ -3,6 +3,7 @@ import Instrument from "./Instrument";
 import Order from "./Order";
 import User from "./User";
 import { setup, ENVIRONMENTS } from "./Config";
+import request from "./request";
 
 export default {
     ENVIRONMENTS,
@@ -12,5 +13,6 @@ export default {
     Order,
     User,
 
-    setup
+    setup,
+    request,
 };
