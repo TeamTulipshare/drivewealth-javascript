@@ -166,7 +166,7 @@ export default class User {
         lastName,
         email,
         languageID,
-        referralCode,
+        referralCode = Config.referralCode,
         utmCampaign,
         utmContent,
         utmMedium,

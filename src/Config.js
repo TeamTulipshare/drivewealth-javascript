@@ -3,6 +3,7 @@ export const Config = {
     httpImpl: null,
     appTypeID: null,
     appVersion: null,
+    referralCode: null,
 };
 
 export const HOSTS = {
@@ -30,10 +31,12 @@ export function setup({
     appTypeID,
     appVersion,
     wlpID = "DW",
+    referralCode,
 }) {
     Config.env = env;
     Config.httpImpl = httpImpl;
     Config.appTypeID = appTypeID;
     Config.appVersion = appVersion;
     Config.wlpID = wlpID;
+    Config.referralCode = referralCode;
 }
