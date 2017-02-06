@@ -22,6 +22,10 @@ User.login("e75", "eeeeeee75", (err, user) => {
             const pl = performance[performance.length - 1].equity - performance[0].equity;
             console.log(`Your 1-week P/L is $${Math.round(pl * 100) / 100}`);
         });
+
+        accounts[0].getFundingMethods({}, (err, methods) => {
+            console.log(`There are ${methods.length} funding methods for you to choose from.`)
+        });
     });
 
     Instrument.getBySymbol("AAPL", (err, instrument) => {

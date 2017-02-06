@@ -1,4 +1,4 @@
-import { Config } from "./Config";
+import { Config, HOSTS } from "./Config";
 
 export default function request({
     method = "GET",
@@ -6,7 +6,7 @@ export default function request({
     sessionKey,
     body,
     addlHeaders = {},
-    host = "api",
+    host = HOSTS.API,
 }, onSuccess, onError) {
     let headers = {
         Accept: "application/json"
@@ -26,8 +26,8 @@ export default function request({
     if (headers["Content-Type"] === "application/json") body = JSON.stringify(body);
 
     Config.httpImpl(method, endpoint, headers, body, (statusCode, resHeaders, resBody) => {
-        if ( (resHeaders["Content-Type"] === "application/json" || resHeaders["content-type"] === "application/json")
-            && resBody) {
+        const contentType = resHeaders["Content-Type"] || resHeaders["content-type"] || "";
+        if (resBody && contentType.indexOf("application/json") !== -1) {
             resBody = JSON.parse(resBody);
         }
 

@@ -1,6 +1,7 @@
 import request from "./request";
 import Sessions from "./Sessions";
 import Order from "./Order";
+import Funding from "./Funding";
 
 export default class Account {
 
@@ -76,6 +77,12 @@ export default class Account {
         };
 
         return Order.create(type, parentDetails, data, cb);
+    }
+
+    getFundingMethods(data = {}, cb) {
+        data.userID = this.userID;
+        data.accountID = this.accountID;
+        return Funding.getFundingMethods(data, cb);
     }
 
     static get BLOTTER_TYPES() { return {

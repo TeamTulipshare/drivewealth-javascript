@@ -5,16 +5,22 @@ export const Config = {
     appVersion: null,
 };
 
+export const HOSTS = {
+    API: "api",
+    APPS: "apps",
+    REPORTS: "reports"
+};
+
 export const ENVIRONMENTS = {
     UAT: {
-        api: "http://api.drivewealth.io/v1",
-        apps: "http://apps.drivewealth.io/",
-        reports: "http://reports.drivewealth.io/",
+        [HOSTS.API]: "http://api.drivewealth.io/v1",
+        [HOSTS.APPS]: "http://apps.drivewealth.io/",
+        [HOSTS.REPORTS]: "http://reports.drivewealth.io/",
     },
     PROD: {
-        api: "https://api.drivewealth.net/v1",
-        apps: "https://apps.drivewealth.com/",
-        reports: "https://reports.drivewealth.com",
+        [HOSTS.API]: "https://api.drivewealth.net/v1",
+        [HOSTS.APPS]: "https://apps.drivewealth.com/",
+        [HOSTS.REPORTS]: "https://reports.drivewealth.com",
     },
 };
 
