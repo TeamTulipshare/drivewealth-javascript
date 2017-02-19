@@ -22,8 +22,12 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: "babel",
 				query: {
-					compact: false
-				}
+					compact: false,
+					presets: ["es2015"],
+					plugins: [
+						"add-module-exports"
+					]
+				},
 			}
 		]
 	},
