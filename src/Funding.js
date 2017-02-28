@@ -46,7 +46,7 @@ export default class Funding {
             endpoint: `/funding/status`,
             sessionKey: Sessions.get(userID),
         }, (data) => {
-            cb && cb(null, data);
+            cb && cb(null, data.data);
         }, err => cb && cb(err));
     }
 
