@@ -41,9 +41,7 @@ export default class Funding {
         }, err => cb && cb(err));
     }
 
-    static getPastDeposits({
-        userID,
-    }, cb) {
+    static getPastDeposits(userID, cb) {
         request({
             endpoint: `/funding/status`,
             sessionKey: Sessions.get(userID),
