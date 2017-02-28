@@ -1,4 +1,5 @@
 import Account from "./Account";
+import Funding from "./Funding";
 import Instrument from "./Instrument";
 import Order from "./Order";
 import User from "./User";
@@ -10,6 +11,7 @@ export default {
     ENVIRONMENTS,
 
     Account,
+    Funding,
     Instrument,
     Order,
     User,
