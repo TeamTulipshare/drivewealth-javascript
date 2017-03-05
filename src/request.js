@@ -35,9 +35,12 @@ export default function request({
         if (String(statusCode)[0] === "2" || String(statusCode)[0] === "3") {
             onSuccess(resBody, statusCode, resHeaders);
         } else {
-            let error;
-            error = statusCode == 401 ? new DriveWealthSessionError(resBody) : new DriveWealthError(resBody);
-            onError(error, statusCode, resHeaders);
+            let error, errorMessage;
+            if (resBody) {
+                errorMessage = resBody.message || JSON.stringify(resBody);
+            }
+            error = statusCode == 401 ? new DriveWealthSessionError(errorMessage) : new DriveWealthError(errorMessage);
+            onError(error, resBody, statusCode, resHeaders);
         }
     });
 }
