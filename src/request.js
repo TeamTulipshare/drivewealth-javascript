@@ -1,4 +1,5 @@
 import { Config, HOSTS } from "./Config";
+import { DriveWealthError, DriveWealthSessionError } from "./Error";
 
 export default function request({
     method = "GET",
@@ -34,7 +35,9 @@ export default function request({
         if (String(statusCode)[0] === "2" || String(statusCode)[0] === "3") {
             onSuccess(resBody, statusCode, resHeaders);
         } else {
-            onError(resBody, statusCode, resHeaders);
+            let error;
+            error = statusCode == 401 ? new DriveWealthSessionError(resBody) : new DriveWealthError(resBody);
+            onError(error, statusCode, resHeaders);
         }
     });
 }
