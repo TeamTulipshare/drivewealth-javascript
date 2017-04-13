@@ -2,6 +2,7 @@ import request from "./request";
 import Sessions from "./Sessions";
 import Order from "./Order";
 import Funding from "./Funding";
+import Reports from "./Reports";
 
 export default class Account {
 
@@ -83,6 +84,22 @@ export default class Account {
         data.userID = this.userID;
         data.accountID = this.accountID;
         return Funding.getFundingMethods(data, cb);
+    }
+
+    getTransactions(startDate, endDate, cb) {
+        return Reports.getTransactions(this.userID, this.accountNo, startDate, endDate, cb);
+    }
+
+    getPlacedOrders(startDate, endDate, cb) {
+        return Reports.getPlacedOrders(this.userID, this.accountNo, startDate, endDate, cb);
+    }
+
+    getStatements(startDate, endDate, cb) {
+        return Reports.getStatements(this.userID, this.accountID, startDate, endDate, cb);
+    }
+
+    generateDownloadURL(fileKey, cb) {
+        return Reports.getStatements(this.userID, this.accountID, fileKey, cb);
     }
 
     static get BLOTTER_TYPES() { return {

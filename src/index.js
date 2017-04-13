@@ -3,6 +3,7 @@ import Error from "./Error";
 import Funding from "./Funding";
 import Instrument from "./Instrument";
 import Order from "./Order";
+import Reports from "./Reports";
 import User from "./User";
 import Sessions from "./Sessions";
 import { setup, ENVIRONMENTS } from "./Config";
@@ -16,6 +17,7 @@ export default {
     Funding,
     Instrument,
     Order,
+    Reports,
     User,
     Sessions,
 

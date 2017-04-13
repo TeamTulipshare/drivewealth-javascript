@@ -29,7 +29,11 @@ export default function request({
     Config.httpImpl(method, endpoint, headers, body, (statusCode, resHeaders, resBody) => {
         const contentType = resHeaders["Content-Type"] || resHeaders["content-type"] || "";
         if (resBody && contentType.indexOf("application/json") !== -1) {
-            resBody = JSON.parse(resBody);
+            try {
+                resBody = JSON.parse(resBody);
+            } catch (err) {
+                // resBody will remain as is
+            }
         }
 
         if (String(statusCode)[0] === "2" || String(statusCode)[0] === "3") {

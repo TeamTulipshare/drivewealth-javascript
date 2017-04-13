@@ -3,6 +3,7 @@ export const Config = {
     httpImpl: null,
     appTypeID: null,
     appVersion: null,
+    wlpID: null,
     referralCode: null,
 };
 

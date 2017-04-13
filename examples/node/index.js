@@ -26,6 +26,10 @@ User.login("e75", "eeeeeee75", (err, user) => {
         accounts[0].getFundingMethods({}, (err, methods) => {
             console.log(`There are ${methods.length} funding methods for you to choose from.`)
         });
+
+        accounts[0].getTransactions(new Date(2010, 01, 01), new Date(), (err, transactions) => {
+            console.log(`Your account has had ${transactions.length} transactions.`);
+        });
     });
 
     Instrument.getBySymbol("AAPL", (err, instrument) => {
