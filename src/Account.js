@@ -98,6 +98,14 @@ export default class Account {
         return Reports.getStatements(this.userID, this.accountID, startDate, endDate, cb);
     }
 
+    getTaxDocuments(startDate, endDate, cb) {
+        return Reports.getTaxDocuments(this.userID, this.accountID, startDate, endDate, cb);
+    }
+
+    getTradeConfirms(startDate, endDate, cb) {
+        return Reports.getTradeConfirms(this.userID, this.accountID, startDate, endDate, cb);
+    }
+
     generateDownloadURL(fileKey, cb) {
         return Reports.generateDownloadURL(this.userID, this.accountID, fileKey, cb);
     }
