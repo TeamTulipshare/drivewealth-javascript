@@ -99,7 +99,7 @@ export default class Account {
     }
 
     generateDownloadURL(fileKey, cb) {
-        return Reports.getStatements(this.userID, this.accountID, fileKey, cb);
+        return Reports.generateDownloadURL(this.userID, this.accountID, fileKey, cb);
     }
 
     static get BLOTTER_TYPES() { return {
