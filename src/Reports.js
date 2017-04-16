@@ -96,7 +96,7 @@ export default class Reports {
         }, err => cb && cb(err));
     }
 
-    static generateDownloadURL(userID, accountID, fileKey) {
+    static generateDownloadURL(userID, accountID, fileKey, cb) {
         request({
             method: "GET",
             endpoint: `/statements/${accountID}/${fileKey}`,
