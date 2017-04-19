@@ -123,8 +123,8 @@ export default class Instrument {
             for (let rawQuote of data) {
                 const parsedQuote = rawQuote.split(",");
                 obj[parsedQuote[0]] = {
-                    bid: parsedQuote[1],
-                    ask: parsedQuote[2],
+                    bid: Number(parsedQuote[1]),
+                    ask: Number(parsedQuote[2]),
                 };
             }
             if (userPassedOneSymbol) obj = obj[symbol[0]];
