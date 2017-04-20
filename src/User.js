@@ -196,4 +196,42 @@ export default class User {
         }, err => cb && cb(err));
     }
 
+	static update({
+		userID,
+		addressLine1,
+		addressLine2,
+		city,
+		countryID,
+		email,
+		firstName,
+		lastName,
+		languageID,
+		phoneHome,
+		phoneWork,
+		phoneMobile,
+		stateProvince,
+		zipPostalCode
+	}, cb) {
+		request({
+			method: "PUT",
+			endpoint: `/users/${userID}`,
+			body: {
+				addressLine1,
+				addressLine2,
+				city,
+				countryID,
+				emailAddress1: email,
+				firstName,
+				lastName,
+				languageID,
+				phoneHome,
+				phoneWork,
+				phoneMobile,
+				stateProvince,
+				zipPostalCode
+			},
+		}, data => {
+			cb && cb(null, data);
+		}, err => cb && cb(err));
+	}
 }
