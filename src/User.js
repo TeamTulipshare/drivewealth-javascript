@@ -215,6 +215,7 @@ export default class User {
 		request({
 			method: "PUT",
 			endpoint: `/users/${userID}`,
+			sessionKey: Sessions.get(userID),
 			body: {
 				addressLine1,
 				addressLine2,
