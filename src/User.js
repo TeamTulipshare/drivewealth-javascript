@@ -208,7 +208,7 @@ export default class User {
 		languageID,
 		phoneHome,
 		phoneWork,
-		phoneMobile,
+		phone,
 		stateProvince,
 		zipPostalCode
 	}, cb) {
@@ -227,7 +227,7 @@ export default class User {
 				languageID,
 				phoneHome,
 				phoneWork,
-				phoneMobile,
+				phoneMobile: phone,
 				stateProvince,
 				zipPostalCode
 			},
