@@ -211,8 +211,8 @@ export default class User {
 		phone,
 		stateProvince,
 		zipPostalCode
-	}, cb) {
-		request({
+	}) {
+		return request({
 			method: "PUT",
 			endpoint: `/users/${userID}`,
 			sessionKey: Sessions.get(userID),
@@ -231,8 +231,6 @@ export default class User {
 				stateProvince,
 				zipPostalCode
 			},
-		}, data => {
-			cb && cb(null, data);
-		}, err => cb && cb(err));
+		});
 	}
 }
