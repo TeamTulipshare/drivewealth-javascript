@@ -217,13 +217,14 @@ export default class User {
 		languageID,
 		phoneHome,
 		phoneWork,
-		phoneMobile,
+		phone,
 		stateProvince,
 		zipPostalCode
 	}, cb) {
 		request({
 			method: "PUT",
 			endpoint: `/users/${userID}`,
+			sessionKey: Sessions.get(userID),
 			body: {
 				addressLine1,
 				addressLine2,
@@ -235,7 +236,7 @@ export default class User {
 				languageID,
 				phoneHome,
 				phoneWork,
-				phoneMobile,
+				phoneMobile: phone,
 				stateProvince,
 				zipPostalCode
 			},
