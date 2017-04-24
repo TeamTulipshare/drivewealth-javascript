@@ -172,12 +172,7 @@ export default class User {
         utmMedium,
         utmSource,
         utmTerm,
-    }, loginAutomatically = true, cb) {
-        if (!cb) {
-            cb = loginAutomatically;
-            loginAutomatically = true;
-        }
-
+    }, cb) {
         request({
             method: "POST",
             endpoint: "/signups/live",
@@ -197,11 +192,7 @@ export default class User {
                 utmTerm,
             },
         }, (data) => {
-            if (loginAutomatically) {
-                return User.login(username, password, cb);
-            } else {
-                cb && cb(null, data);
-            }
+            return User.login(username, password, cb);
         }, err => cb && cb(err));
     }
 
@@ -220,7 +211,7 @@ export default class User {
 		phone,
 		stateProvince,
 		zipPostalCode
-	}) {
+	}, cb) {
 		return request({
 			method: "PUT",
 			endpoint: `/users/${userID}`,
@@ -240,6 +231,8 @@ export default class User {
 				stateProvince,
 				zipPostalCode
 			},
-		});
+		}, data => {
+			cb && cb(null, data);
+		}, err => cb && cb(err));
 	}
 }
