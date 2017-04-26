@@ -118,6 +118,18 @@ export default class Account {
         ALL: null,
     } };
 
+    static get STATUSES() { return {
+        PENDING: 1,
+        OPEN: 2,
+        OPEN_NO_NEW_TRADES: 3,
+        CLOSED: 9,
+    } };
+
+    static get TYPES() { return {
+        PRACTICE: 1,
+        LIVE: 2,
+    } };
+
     static getListForUserID(userID, cb) {
         request({
             method: "GET",
@@ -125,6 +137,27 @@ export default class Account {
             sessionKey: Sessions.get(userID)
         }, (data) => {
             cb && cb(null, data.map(account => new Account(account)));
+        }, err => cb && cb(err));
+    }
+
+    static create(userID, type, data, cb) {
+        if (type === Account.TYPES.PRACTICE) {
+            data = {
+                userID,
+                responseType: "full",
+                tranAmount: data,
+            };
+        }
+
+        request({
+            method: "POST",
+            endpoint: type === Account.TYPES.PRACTICE
+                ? `/signups/practice`
+                : `/signups/live`,
+            sessionKey: Sessions.get(userID),
+            body: data,
+        }, (data) => {
+            cb && cb(null, data);
         }, err => cb && cb(err));
     }
 
