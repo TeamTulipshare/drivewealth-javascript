@@ -172,7 +172,12 @@ export default class User {
         utmMedium,
         utmSource,
         utmTerm,
-    }, cb) {
+    }, loginAutomatically = true, cb) {
+        if (!cb) {
+            cb = loginAutomatically;
+            loginAutomatically = true;
+        }
+
         request({
             method: "POST",
             endpoint: "/signups/live",
@@ -192,7 +197,11 @@ export default class User {
                 utmTerm,
             },
         }, (data) => {
-            return User.login(username, password, cb);
+            if (loginAutomatically) {
+                return User.login(username, password, cb);
+            } else {
+                cb && cb(null, data);
+            }
         }, err => cb && cb(err));
     }
 
