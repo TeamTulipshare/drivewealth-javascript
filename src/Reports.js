@@ -106,7 +106,7 @@ export default class Reports {
         }, err => cb && cb(err));
     }
 
-    static getSupportedCountries() {
+    static getSupportedCountries(cb) {
         request({
             method: "GET",
             endpoint: `/countries`,
