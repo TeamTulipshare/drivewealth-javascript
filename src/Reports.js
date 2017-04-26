@@ -106,4 +106,13 @@ export default class Reports {
         }, err => cb && cb(err));
     }
 
+    static getSupportedCountries() {
+        request({
+            method: "GET",
+            endpoint: `/countries`,
+        }, (data) => {
+            cb && cb(null, data);
+        }, err => cb && cb(err));
+    }
+
 }
