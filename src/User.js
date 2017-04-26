@@ -84,7 +84,7 @@ export default class User {
         }, err => cb && cb(err));
     }
 
-    getStatus() {
+    getStatus(cb) {
         request({
             method: "GET",
             endpoint: `/users/${this.userID}/status`,
