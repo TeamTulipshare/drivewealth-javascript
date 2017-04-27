@@ -32,6 +32,28 @@ User.login("e75", "eeeeeee75", (err, user) => {
         });
     });
 
+    // user get and set settings
+	user.getSettings("watchlist", (err, settings) => {
+		if (err) throw err;
+		console.log("watchlist get settings", settings);
+	});
+
+	user.setSetting("watchlist", "foo", (err, settings) => {
+		if (err) throw err;
+		console.log("watchlist get settings", settings);
+	});
+
+    // static user get and set settings
+    User.getSettings.bind(user, "watchlist", (err, settings) => {
+    	if (err) throw err;
+    	console.log("watchlist get settings", settings);
+	});
+
+	User.setSetting.bind(user, "watchlist", "bar", (err, settings) => {
+		if (err) throw err;
+		console.log("watchlist set settings", settings);
+	});
+
     Instrument.getBySymbol("AAPL", (err, instrument) => {
         console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
 

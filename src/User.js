@@ -32,7 +32,7 @@ export default class User {
 
     // getSettings(key, cb)
     // getSettings(cb)
-    getSettings() {
+	getSettings() {
         if (arguments.length === 1) {
             this.getAllSettings(arguments[0]);
         }
@@ -46,6 +46,10 @@ export default class User {
             cb && cb(null, data.value);
         }, err => cb && cb(err));
     }
+
+    static getSettings(...args) {
+		this.getSettings(args);
+	}
 
     getAllSettings(cb) {
         request({
@@ -73,6 +77,10 @@ export default class User {
             cb && cb(null);
         }, err => cb && cb(err));
     }
+
+	static setSetting(...args) {
+		this.setSetting(args);
+	}
 
     unsetSetting(key, cb) {
         request({
