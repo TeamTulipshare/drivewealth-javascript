@@ -64,7 +64,11 @@ export default class User {
     }
 
     getAccounts(cb) {
-        Account.getListForUserID(this.userID, cb);
+        return Account.getListForUserID(this.userID, cb);
+    }
+
+	uploadDocument(file, type, cb) {
+        return User.uploadDocument(this.userID, file, type, cb);
     }
 
     // getSettings(userID, cb)
@@ -265,6 +269,34 @@ export default class User {
 				stateProvince,
 				zipPostalCode
 			},
+		}, data => {
+			cb && cb(null, data);
+		}, err => cb && cb(err));
+	}
+
+	static get DOCUMENT_TYPES() { return {
+        PHOTO_ID: "Picture ID",
+		PROOF_OF_ADDRESS: "Proof of address",
+		PHOTO_ID_WITH_PROOF_OF_ADDRESS: "Picture ID_Proof of address",
+    } }
+
+	static uploadDocument(userID, file, type, cb) {
+		if (!(file instanceof File)) {
+			throw new Error(`"file" must be an instance of the File object.`);
+		}
+		const body = new FormData();
+		body.append("token", userID);
+		body.append("documentType", type);
+		body.append("documentImage", file);
+
+		return request({
+			method: "POST",
+			endpoint: `/documents`,
+			sessionKey: Sessions.get(userID),
+			addlHeaders: {
+				"Content-Type": "multipart/form-data",
+			},
+			body,
 		}, data => {
 			cb && cb(null, data);
 		}, err => cb && cb(err));
