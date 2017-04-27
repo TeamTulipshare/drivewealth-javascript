@@ -43,17 +43,6 @@ User.login("e75", "eeeeeee75", (err, user) => {
 		console.log("watchlist get settings", settings);
 	});
 
-    // static user get and set settings
-    User.getSettings.bind(user, "watchlist", (err, settings) => {
-    	if (err) throw err;
-    	console.log("watchlist get settings", settings);
-	});
-
-	User.setSetting.bind(user, "watchlist", "bar", (err, settings) => {
-		if (err) throw err;
-		console.log("watchlist set settings", settings);
-	});
-
     Instrument.getBySymbol("AAPL", (err, instrument) => {
         console.log(`${instrument.name} closed yesterday at ${instrument.priorClose}`);
 
@@ -69,4 +58,19 @@ User.login("e75", "eeeeeee75", (err, user) => {
     Instrument.search({ symbol: "AA" }, (err, instruments) => {
         console.log(`There are ${instruments.length} instruments with "AA" in their symbol.`);
     });
+});
+
+User.getByUserID.bind(null, "3d87196d-56e0-48f2-93ec-c8f878764065", (err, user) => {
+	if (err) throw err;
+
+	// static user get and set settings
+	User.getSettings.bind(user, "watchlist", (err, settings) => {
+		if (err) throw err;
+		console.log("static get settings", settings);
+	});
+
+	User.setSetting.bind(user, "watchlist", "bar", (err, settings) => {
+		if (err) throw err;
+		console.log("static set settings", settings);
+	});
 });
