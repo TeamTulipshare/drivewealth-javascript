@@ -78,3 +78,7 @@ User.getSettings("3d87196d-56e0-48f2-93ec-c8f878764065", "watchlist", (err, sett
 	console.log("static get settings", settings)
 });
 
+// static user set setting by key
+User.setSetting("3d87196d-56e0-48f2-93ec-c8f878764065", "watchlist", "foo", (err, settings) => {
+	console.log("static set settings", settings)
+});

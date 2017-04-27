@@ -27,6 +27,19 @@ const _getAllSettings = (userID, cb) => {
 	}, err => cb && cb(err));
 };
 
+const _setSetting = (userID, key, value, cb) => {
+	request({
+		method: "POST",
+		endpoint: `/users/${userID}/settings`,
+		sessionKey: Sessions.get(userID),
+		body: {
+			key, value
+		}
+	}, () => {
+		cb && cb(null);
+	}, err => cb && cb(err));
+};
+
 export default class User {
 
     constructor(data) {
@@ -71,23 +84,19 @@ export default class User {
     	const [ key, cb ] = arguments;
 
 		if (arguments.length === 1) {
+			// callback becomes second arg when it's undefined
 			_getAllSettings(this.userID, key);
 		} else {
 			_getSettings(this.userID, key, cb);
 		}
 	}
 
+	static setSetting(userID, key, value, cb) {
+    	_setSetting(userID, key, value, cb);
+	}
+
     setSetting(key, value, cb) {
-        request({
-            method: "POST",
-            endpoint: `/users/${this.userID}/settings`,
-            sessionKey: Sessions.get(this.userID),
-            body: {
-                key, value
-            }
-        }, () => {
-            cb && cb(null);
-        }, err => cb && cb(err));
+    	_setSetting(this.userID, key, value, cb);
     }
 
     unsetSetting(key, cb) {
