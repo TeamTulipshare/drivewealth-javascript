@@ -3,6 +3,30 @@ import { Config } from "./Config";
 import Sessions from "./Sessions";
 import Account from "./Account";
 
+const _getSettings = (userID, key, cb) => {
+	request({
+		method: "GET",
+		endpoint: `/users/${userID}/settings/${key}`,
+		sessionKey: Sessions.get(userID)
+	}, (data) => {
+		cb && cb(null, data.value);
+	}, err => cb && cb(err));
+};
+
+const _getAllSettings = (userID, cb) => {
+	request({
+		method: "GET",
+		endpoint: `/users/${userID}/settings`,
+		sessionKey: Sessions.get(userID)
+	}, (data) => {
+		let formattedData = {};
+		for (let setting of data) {
+			formattedData[setting.key] = setting.value;
+		}
+		cb && cb(null, formattedData);
+	}, err => cb && cb(err));
+};
+
 export default class User {
 
     constructor(data) {
@@ -30,40 +54,28 @@ export default class User {
         Account.getListForUserID(this.userID, cb);
     }
 
-    // getSettings(key, cb)
-    // getSettings(cb)
-	getSettings() {
-        if (arguments.length === 1) {
-            this.getAllSettings(arguments[0]);
-        }
-        let cb = arguments[1];
-
-        request({
-            method: "GET",
-            endpoint: `/users/${this.userID}/settings/${arguments[0]}`,
-            sessionKey: Sessions.get(this.userID)
-        }, (data) => {
-            cb && cb(null, data.value);
-        }, err => cb && cb(err));
+    // getSettings(userID, cb)
+    // getSettings(userID, key, cb)
+	static getSettings(userID, key, cb) {
+    	if (!cb) {
+			// callback becomes second arg when it's undefined
+			_getAllSettings(userID, key);
+		} else {
+			_getSettings(userID, key, cb)
+		}
     }
 
-    static getSettings(...args) {
-		this.getSettings(args);
+	// getSettings(key, cb)
+	// getSettings(cb)
+    getSettings() {
+    	const [ key, cb ] = arguments;
+
+		if (arguments.length === 1) {
+			_getAllSettings(this.userID, key);
+		} else {
+			_getSettings(this.userID, key, cb);
+		}
 	}
-
-    getAllSettings(cb) {
-        request({
-            method: "GET",
-            endpoint: `/users/${this.userID}/settings`,
-            sessionKey: Sessions.get(this.userID)
-        }, (data) => {
-            let formattedData = {};
-            for (let setting of data) {
-                formattedData[setting.key] = setting.value;
-            }
-            cb && cb(null, formattedData);
-        }, err => cb && cb(err));
-    }
 
     setSetting(key, value, cb) {
         request({
@@ -77,10 +89,6 @@ export default class User {
             cb && cb(null);
         }, err => cb && cb(err));
     }
-
-	static setSetting(...args) {
-		this.setSetting(args);
-	}
 
     unsetSetting(key, cb) {
         request({

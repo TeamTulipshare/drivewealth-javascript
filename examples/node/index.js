@@ -32,15 +32,22 @@ User.login("e75", "eeeeeee75", (err, user) => {
         });
     });
 
-    // user get and set settings
-	user.getSettings("watchlist", (err, settings) => {
+    // user get all settings
+	user.getSettings((err, settings) => {
 		if (err) throw err;
-		console.log("watchlist get settings", settings);
+		console.log("get all settings ", Object.keys(settings))
 	});
 
+    // user get setting by key
+	user.getSettings("watchlist", (err, settings) => {
+		if (err) throw err;
+		console.log("user get settings", settings);
+	});
+
+	// user set setting by key
 	user.setSetting("watchlist", "foo", (err, settings) => {
 		if (err) throw err;
-		console.log("watchlist get settings", settings);
+		console.log("user set settings", settings);
 	});
 
     Instrument.getBySymbol("AAPL", (err, instrument) => {
@@ -60,17 +67,14 @@ User.login("e75", "eeeeeee75", (err, user) => {
     });
 });
 
-User.getByUserID.bind(null, "3d87196d-56e0-48f2-93ec-c8f878764065", (err, user) => {
-	if (err) throw err;
 
-	// static user get and set settings
-	User.getSettings.bind(user, "watchlist", (err, settings) => {
-		if (err) throw err;
-		console.log("static get settings", settings);
-	});
-
-	User.setSetting.bind(user, "watchlist", "bar", (err, settings) => {
-		if (err) throw err;
-		console.log("static set settings", settings);
-	});
+ // static user get all settings
+User.getSettings("3d87196d-56e0-48f2-93ec-c8f878764065", (err, settings) => {
+	console.log("static get all settings", settings)
 });
+
+// static user get setting by key
+User.getSettings("3d87196d-56e0-48f2-93ec-c8f878764065", "watchlist", (err, settings) => {
+	console.log("static get settings", settings)
+});
+
