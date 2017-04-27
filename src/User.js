@@ -281,9 +281,6 @@ export default class User {
     } }
 
 	static uploadDocument(userID, file, type, cb) {
-		if (!(file instanceof File)) {
-			throw new Error(`"file" must be an instance of the File object.`);
-		}
 		const body = new FormData();
 		body.append("token", userID);
 		body.append("documentType", type);
