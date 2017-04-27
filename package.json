@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript bindings for the DriveWealth API",
   "main": "lib/drivewealth.js",
+  "files": ["lib"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/drivewealth/drivewealth-javascript.git"
