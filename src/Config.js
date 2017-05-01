@@ -4,6 +4,7 @@ export const Config = {
     appTypeID: null,
     appVersion: null,
     wlpID: null,
+    appsPartnerID: null,
     referralCode: null,
 };
 
@@ -32,6 +33,7 @@ export function setup({
     appTypeID,
     appVersion,
     wlpID = "DW",
+    appsPartnerID,
     referralCode,
 }) {
     Config.env = env;
@@ -39,5 +41,6 @@ export function setup({
     Config.appTypeID = appTypeID;
     Config.appVersion = appVersion;
     Config.wlpID = wlpID;
+    Config.appsPartnerID = appsPartnerID || wlpID;
     Config.referralCode = referralCode;
 }
