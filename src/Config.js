@@ -16,12 +16,12 @@ export const HOSTS = {
 export const ENVIRONMENTS = {
     UAT: {
         [HOSTS.API]: "http://api.drivewealth.io/v1",
-        [HOSTS.APPS]: "http://apps.drivewealth.io/",
-        [HOSTS.REPORTS]: "http://reports.drivewealth.io/",
+        [HOSTS.APPS]: "http://apps.drivewealth.io",
+        [HOSTS.REPORTS]: "http://reports.drivewealth.io",
     },
     PROD: {
         [HOSTS.API]: "https://api.drivewealth.net/v1",
-        [HOSTS.APPS]: "https://apps.drivewealth.com/",
+        [HOSTS.APPS]: "https://apps.drivewealth.com",
         [HOSTS.REPORTS]: "https://reports.drivewealth.com",
     },
 };
