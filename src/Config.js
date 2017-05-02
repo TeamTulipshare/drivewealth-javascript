@@ -23,7 +23,7 @@ export const ENVIRONMENTS = {
     PROD: {
         [HOSTS.API]: "https://api.drivewealth.net/v1",
         [HOSTS.APPS]: "https://apps.drivewealth.com",
-        [HOSTS.REPORTS]: "https://reports.drivewealth.com",
+        [HOSTS.REPORTS]: "https://reports.drivewealth.net",
     },
 };
 
