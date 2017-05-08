@@ -22,7 +22,7 @@ export default class Reports {
             sessionKey: Sessions.get(userID),
             body: {},
         }, (data) => {
-            cb && cb(null, data.transaction);
+            cb && cb(null, data.transaction || []);
         }, err => cb && cb(err));
     }
 
