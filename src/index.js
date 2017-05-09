@@ -1,4 +1,5 @@
 import Account from "./Account";
+import Config from "./Config";
 import Error from "./Error";
 import Funding from "./Funding";
 import Instrument from "./Instrument";
@@ -13,6 +14,7 @@ export default {
     ENVIRONMENTS,
 
     Account,
+    Config,
     Error,
     Funding,
     Instrument,
