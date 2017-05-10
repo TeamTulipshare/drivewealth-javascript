@@ -51,8 +51,8 @@ export default class Account {
             cb = arguments[2];
             const [ startDate, endDate ] = arguments;
             queryString += "/dateRange?";
-            queryString += `startDate=${startDate.getFullYear()}${startDate.getMonth() + 1}${startDate.getDate()}`;
-            queryString +=  `&endDate=${startDate.getFullYear()}${startDate.getMonth() + 1}${startDate.getDate()}`;
+            queryString += `startDate=${startDate.getFullYear()}${("0" + (startDate.getMonth() + 1)).slice(-2)}${("0" + startDate.getDate()).slice(-2)}`;
+            queryString +=  `&endDate=${endDate.getFullYear()}${("0" + (endDate.getMonth() + 1)).slice(-2)}${("0" + endDate.getDate()).slice(-2)}`;
         } else if (arguments.length === 2) {
             cb = arguments[1];
             queryString += `/history?period=${arguments[0]}`;

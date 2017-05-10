@@ -4,6 +4,7 @@ export const Config = {
     appTypeID: null,
     appVersion: null,
     wlpID: null,
+    appsPartnerID: null,
     referralCode: null,
 };
 
@@ -16,13 +17,13 @@ export const HOSTS = {
 export const ENVIRONMENTS = {
     UAT: {
         [HOSTS.API]: "http://api.drivewealth.io/v1",
-        [HOSTS.APPS]: "http://apps.drivewealth.io/",
-        [HOSTS.REPORTS]: "http://reports.drivewealth.io/",
+        [HOSTS.APPS]: "http://apps.drivewealth.io",
+        [HOSTS.REPORTS]: "http://reports.drivewealth.io",
     },
     PROD: {
         [HOSTS.API]: "https://api.drivewealth.net/v1",
-        [HOSTS.APPS]: "https://apps.drivewealth.com/",
-        [HOSTS.REPORTS]: "https://reports.drivewealth.com",
+        [HOSTS.APPS]: "https://apps.drivewealth.com",
+        [HOSTS.REPORTS]: "https://reports.drivewealth.net",
     },
 };
 
@@ -32,6 +33,7 @@ export function setup({
     appTypeID,
     appVersion,
     wlpID = "DW",
+    appsPartnerID,
     referralCode,
 }) {
     Config.env = env;
@@ -39,5 +41,6 @@ export function setup({
     Config.appTypeID = appTypeID;
     Config.appVersion = appVersion;
     Config.wlpID = wlpID;
+    Config.appsPartnerID = appsPartnerID || wlpID;
     Config.referralCode = referralCode;
 }

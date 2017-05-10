@@ -21,7 +21,7 @@ export default class Funding {
     } = {}, cb) {
         if (amount && (minAmount || maxAmount)) throw new Error(`"amount" is not compatible with "minAmount" or "maxAmount."`);
 
-        let queryString = `partner=${Config.wlpID}&userID=${userID}&accountID=${accountID}`;
+        let queryString = `partner=${Config.appsPartnerID}&userID=${userID}&accountID=${accountID}`;
         if (language) queryString += `&language=${language}`;
         if (minAmount) queryString += `&minAmount=${minAmount}`;
         if (maxAmount) queryString += `&maxAmount=${maxAmount}`;
