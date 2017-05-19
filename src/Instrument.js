@@ -154,7 +154,7 @@ export default class Instrument {
 
         request({
             method: "GET",
-            endpoint: `/bars?instrumentID=${instrumentID}&compression=${compression}&exch=composite&${timeParams}`,
+            endpoint: `/bars?instrumentID=${instrumentID}&compression=${compression}&${timeParams}`,
             sessionKey: Sessions.getAny(),
         }, (data) => {
             cb && cb(null, data.data.split("|"));
