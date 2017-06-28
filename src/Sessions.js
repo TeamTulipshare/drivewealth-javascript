@@ -6,7 +6,7 @@ class Sessions {
 
     save(userID, sessionKey) {
         this._keys[userID] = sessionKey;
-        if (!this._mainUser) this._mainUser = userID;
+        this._mainUser = userID;
     }
 
     get(userID) {
