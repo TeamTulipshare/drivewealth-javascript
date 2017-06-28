@@ -110,7 +110,7 @@ export default class Order {
                 limitPrice: type === Order.TYPES.LIMIT ? price : undefined,
             },
         }, (data) => {
-            if (!Order.TYPES.MARKET || !waitForFill) return cb && cb(null, data.orderID);
+            if (type !== Order.TYPES.MARKET || !waitForFill) return cb && cb(null, data.orderID);
 
             let poll, retries = fillMaxRetries;
             const checkStatus = () => {
