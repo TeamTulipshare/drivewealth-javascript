@@ -21,6 +21,7 @@ export default class Account {
 			"status",
 			"tradingType",
 			"accountMgmtType",
+			"commissionSchedule",
 		]) {
 			this[key] = data[key];
 		}
