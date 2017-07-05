@@ -34,7 +34,7 @@ export default class Order {
 		}
 		this.rejectionReason = data.ordRejReason;
 		this.status = data.ordStatus;
-		this.type = data.ordType;
+		this.type = data.ordType || data.orderType;
 		this.price = data.stopPrice || data.limitPrice || data.price;
 	}
 
