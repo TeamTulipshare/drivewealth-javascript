@@ -24,6 +24,7 @@ export default class Order {
 			"executedWhen",
 			"grossTradeAmt",
 			"instrumentID",
+			"limitPrice",
 			"leavesQty",
 			"orderNo",
 			"orderQty",
