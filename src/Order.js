@@ -48,6 +48,16 @@ export default class Order {
 		}, err => cb && cb(err));
 	}
 
+	static cancel(orderID, userID, cb) {
+		request({
+			method: "DELETE",
+			endpoint: `/orders/${orderID}`,
+			sessionKey: Sessions.get(userID),
+		}, () => {
+			cb && cb(null);
+		}, err => cb && cb(err));
+	}
+
 	static get SIDES() { return {
 		BUY: "B",
 		SELL: "S",
