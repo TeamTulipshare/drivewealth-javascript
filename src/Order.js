@@ -119,17 +119,94 @@ export default class Order {
 		}, (data) => {
 			if (type !== Order.TYPES.MARKET || !waitForFill) return cb && cb(null, data.orderID);
 
-			let poll, retries = fillMaxRetries;
+			let retries = fillMaxRetries;
 			const checkStatus = () => {
-				fillMaxRetries--;
+				retries--;
 				Order.getByID(data.orderID, userID, (err, order) => {
 					if (err) return cb && cb(err);
-					if (fillMaxRetries <= 0) return cb && cb(null, order);
+					if (retries <= 0) return cb && cb(null, order);
 
 					if (order.status !== Order.STATUSES.NEW && order.status !== Order.STATUSES.PARTIAL_FILL) {
 						return cb && cb(null, order);
 					} else {
 						setTimeout(checkStatus, fillRetryInterval);
+					}
+				});
+			};
+			setTimeout(checkStatus, fillRetryInterval);
+		}, err => cb && cb(err));
+	}
+
+	static createCart({
+		accountID,
+		accountNo,
+		userID,
+		accountType,
+	}, {
+		orders,
+		waitForFill = true,
+		fillRetryInterval = 500,
+		fillMaxRetries = 10,
+	}, cb) {
+		request({
+			method: "POST",
+			endpoint: "/orders",
+			sessionKey: Sessions.get(userID),
+			body: orders.map(order => ({
+				instrumentID: order.instrument.instrumentID || order.instrument.id || order.instrument,
+				accountID,
+				accountNo,
+				userID,
+				accountType,
+				ordType: Order.TYPES.MARKET,
+				side: Order.SIDES.BUY,
+				orderQty: order.qty ? order.qty : undefined,
+				amountCash: order.amountCash ? order.amountCash : undefined,
+				comment: order.comment,
+				autoStop: order.autoStop,
+			})),
+		}, (orderResults) => {
+			const ordersMap = orderResults.reduce(
+				(acc, next, idx) => {
+					return Object.assign({}, acc, {
+						[orders[i].referenceID]: next,
+					});
+				},
+				{},
+			);
+
+			if (!waitForFill) return cb && cb(null, ordersMap);
+
+			const filledOrders = [];
+			let retries = fillMaxRetries;
+			orderResults = orderResults.map((order, idx) => Object.assign({}, order, {
+				referenceID: orders[idx].referenceID,
+			}));
+			const checkStatus = () => {
+				if (retries <= 0) return cb && cb(null, orderResults);
+				retries--;
+
+				Promise.all(
+					orderResults.map(order => new Promise((resolve, reject) => {
+						Order.getByID(order.orderID, (error, statusDetails) => {
+							if (error) return resolve();
+							ordersMap[order.referenceID] = statusDetails;
+							resolve();
+						});
+					}))
+				).then(orderStatuses => {
+					let shouldRetry = false;
+					for (let reference in orderStatuses) {
+						const thisStatus = orderStatuses[reference].status;
+						if (thisStatus === Order.STATUSES.NEW || thisStatus === Order.STATUSES.PARTIAL_FILL) {
+							shouldRetry = true;
+							break;
+						}
+					}
+					if (shouldRetry) {
+						setTimeout(checkStatus, fillRetryInterval);
+					} else {
+						return cb && cb(null, orderResults);
 					}
 				});
 			};
