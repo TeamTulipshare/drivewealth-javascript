@@ -24,19 +24,18 @@ export default class Order {
 			"executedWhen",
 			"grossTradeAmt",
 			"instrumentID",
-			"limitPrice",
 			"leavesQty",
 			"orderNo",
 			"orderQty",
 			"side",
 			"autoStop",
-			"stopPrice",
 		]) {
 			this[key] = data[key];
 		}
 		this.rejectionReason = data.ordRejReason;
 		this.status = data.ordStatus;
 		this.type = data.ordType;
+		this.price = data.stopPrice || data.limitPrice || data.price;
 	}
 
 	cancel(cb) {
