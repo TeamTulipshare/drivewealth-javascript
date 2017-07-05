@@ -30,6 +30,7 @@ export default class Order {
 			"orderQty",
 			"side",
 			"autoStop",
+			"stopPrice",
 		]) {
 			this[key] = data[key];
 		}
