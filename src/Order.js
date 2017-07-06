@@ -101,7 +101,7 @@ export default class Order {
 		autoStop,
 		price,
 		waitForFill = true,
-		fillRetryInterval = 500,
+		fillRetryInterval = 1000,
 	}, cb) {
 		if (amountCash && qty) throw new Error(`"qty" and "amountCash" are mutually exclusive.`);
 		if (type !== Order.TYPES.MARKET && !price) throw new Error(`Limit and stop orders require a "price."`);
