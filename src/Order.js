@@ -34,7 +34,8 @@ export default class Order {
 		}
 		this.rejectionReason = data.ordRejReason;
 		this.status = data.ordStatus;
-		this.type = data.ordType;
+		this.type = data.ordType || data.orderType;
+		this.price = data.stopPrice || data.limitPrice || data.price;
 	}
 
 	cancel(cb) {
@@ -42,6 +43,16 @@ export default class Order {
 			method: "DELETE",
 			endpoint: `/orders/${this.orderID}`,
 			sessionKey: Sessions.get(this.userID),
+		}, () => {
+			cb && cb(null);
+		}, err => cb && cb(err));
+	}
+
+	static cancel(orderID, userID, cb) {
+		request({
+			method: "DELETE",
+			endpoint: `/orders/${orderID}`,
+			sessionKey: Sessions.get(userID),
 		}, () => {
 			cb && cb(null);
 		}, err => cb && cb(err));
@@ -90,8 +101,7 @@ export default class Order {
 		autoStop,
 		price,
 		waitForFill = true,
-		fillRetryInterval = 500,
-		fillMaxRetries = 10,
+		fillRetryInterval = 1000,
 	}, cb) {
 		if (amountCash && qty) throw new Error(`"qty" and "amountCash" are mutually exclusive.`);
 		if (type !== Order.TYPES.MARKET && !price) throw new Error(`Limit and stop orders require a "price."`);
@@ -117,7 +127,10 @@ export default class Order {
 				limitPrice: type === Order.TYPES.LIMIT ? price : undefined,
 			},
 		}, (data) => {
-			if (type !== Order.TYPES.MARKET || !waitForFill) return cb && cb(null, data.orderID);
+
+			let fillMaxRetries = type === Order.TYPES.MARKET ? 10 : 1;
+
+			if (!waitForFill) return cb && cb(null, data.orderID);
 
 			let retries = fillMaxRetries;
 			const checkStatus = () => {
@@ -284,5 +297,4 @@ export default class Order {
 			byOrder,
 		};
 	}
-
 }
