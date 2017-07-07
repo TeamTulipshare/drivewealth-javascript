@@ -38,6 +38,13 @@ export default class Account {
 			endpoint: `/users/${this.userID}/accountSummary/${this.accountID}${type ? '/' + type : ""}`,
 			sessionKey: Sessions.get(this.userID)
 		}, (data) => {
+
+			if (data.orders) {
+				data.orders = data.orders.map(function (order) {
+					return new Order(order);
+				});
+			}
+
 			cb && cb(null, type ? data[type] : data);
 		}, err => cb && cb(err));
 	}
