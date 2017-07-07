@@ -102,6 +102,7 @@ export default class Order {
 		price,
 		waitForFill = true,
 		fillRetryInterval = 1000,
+		fillMaxRetries = 10,
 	}, cb) {
 		if (amountCash && qty) throw new Error(`"qty" and "amountCash" are mutually exclusive.`);
 		if (type !== Order.TYPES.MARKET && !price) throw new Error(`Limit and stop orders require a "price."`);
@@ -127,9 +128,7 @@ export default class Order {
 				limitPrice: type === Order.TYPES.LIMIT ? price : undefined,
 			},
 		}, (data) => {
-
-			let fillMaxRetries = type === Order.TYPES.MARKET ? 10 : 1;
-
+			if (type !== Order.TYPES.MARKET) fillMaxRetries = 1;
 			if (!waitForFill) return cb && cb(null, data.orderID);
 
 			let retries = fillMaxRetries;
