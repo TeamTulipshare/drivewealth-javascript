@@ -181,7 +181,7 @@ export default class Order {
 			const ordersMap = orderResults.reduce(
 				(acc, next, idx) => {
 					return Object.assign({}, acc, {
-						[orders[i].referenceID]: next,
+						[orders[idx].referenceID]: next,
 					});
 				},
 				{},
