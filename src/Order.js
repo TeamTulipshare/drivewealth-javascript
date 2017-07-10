@@ -29,6 +29,7 @@ export default class Order {
 			"orderQty",
 			"side",
 			"autoStop",
+			"symbol",
 		]) {
 			this[key] = data[key];
 		}
