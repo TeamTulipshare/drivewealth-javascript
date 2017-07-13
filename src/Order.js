@@ -201,7 +201,7 @@ export default class Order {
 
 				Promise.all(
 					orderResults.map(order => new Promise((resolve, reject) => {
-						Order.getByID(order.orderID, (error, statusDetails) => {
+						Order.getByID(order.orderID, userID, (error, statusDetails) => {
 							if (error) return resolve();
 							ordersMap[order.referenceID] = statusDetails;
 							resolve();
@@ -211,7 +211,10 @@ export default class Order {
 					let shouldRetry = false;
 					for (let reference in orderStatuses) {
 						const thisStatus = orderStatuses[reference].status;
-						if (thisStatus === Order.STATUSES.NEW || thisStatus === Order.STATUSES.PARTIAL_FILL) {
+						if (!thisStatus
+							|| thisStatus === Order.STATUSES.NEW
+							|| thisStatus === Order.STATUSES.PARTIAL_FILL
+						) {
 							shouldRetry = true;
 							break;
 						}
