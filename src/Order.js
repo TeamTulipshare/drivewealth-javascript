@@ -207,10 +207,10 @@ export default class Order {
 							resolve();
 						});
 					}))
-				).then(orderStatuses => {
+				).then(() => {
 					let shouldRetry = false;
-					for (let reference in orderStatuses) {
-						const thisStatus = orderStatuses[reference].status;
+					for (let reference in ordersMap) {
+						const thisStatus = ordersMap[reference].status;
 						if (!thisStatus
 							|| thisStatus === Order.STATUSES.NEW
 							|| thisStatus === Order.STATUSES.PARTIAL_FILL
@@ -222,7 +222,7 @@ export default class Order {
 					if (shouldRetry) {
 						setTimeout(checkStatus, fillRetryInterval);
 					} else {
-						return cb && cb(null, orderResults);
+						return cb && cb(null, ordersMap);
 					}
 				});
 			};
