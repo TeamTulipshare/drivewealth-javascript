@@ -15,8 +15,10 @@
   },
   "homepage": "https://github.com/drivewealth/drivewealth-javascript",
   "scripts": {
+    "start": "npm-run-all --parallel test:watch build:watch",
     "test": "mocha",
-    "test:watch": "mocha -w"
+    "test:watch": "mocha -w",
+    "build:watch": "gulp watch"
   },
   "author": "John Shammas",
   "license": "ISC",
@@ -37,6 +39,7 @@
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
     "mocha": "^3.4.2",
+    "npm-run-all": "^4.0.2",
     "request": "^2.79.0",
     "webpack": "^1.14.0",
     "webpack-stream": "^3.2.0"

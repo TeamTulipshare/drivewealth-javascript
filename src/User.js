@@ -43,7 +43,7 @@ const _setSetting = (userID, key, value, cb) => {
 export default class User {
 
     constructor(data) {
-        for (let key of [
+		for (let key of [
             "countryID",
             "emailAddress",
             "firstName",
@@ -58,10 +58,17 @@ export default class User {
             "usCitizen",
             "lastLoginWhen",
             "citizenship",
+			"addressLine1",
+			"addressLine2",
+			"city",
+			"stateProvince",
+			"zipPostalCode",
         ]) {
             this[key] = data[key];
         }
-    }
+        
+        this.fullName = data.firstName + " " + data.lastName;
+	}
 
     getAccounts(cb) {
         return Account.getListForUserID(this.userID, cb);
