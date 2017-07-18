@@ -5,6 +5,8 @@ import Order from "./Order";
 import Funding from "./Funding";
 import Reports from "./Reports";
 
+import type { OrderParentDetails } from "./Order";
+
 export type CommissionSchedule = {
 	baseRate: number,
 	baseShares: number,
@@ -12,7 +14,14 @@ export type CommissionSchedule = {
 	fractionalRate: number,
 	shareAmountRounding: number,
 	subscription: boolean,
-	basketSchedule: {[qty: number]: number},
+	basketSchedule: {
+		baseShares: number,
+		excessRate: number,
+		schedule: Array<{
+			basketSize: number,
+			basketPrice: number,
+		}>,
+	},
 	passThroughFees: boolean,
 };
 
@@ -157,8 +166,8 @@ export default class Account {
 	/**
 	 * @instance
 	 */
-	placeOrder(type: string, data: Object): Promise<Object> {
-		const parentDetails = {
+	placeOrder(type: string, data: Object): Promise<string | Object> {
+		const parentDetails: OrderParentDetails = {
 			accountID: this.accountID,
 			accountNo: this.accountNo,
 			accountType: this.accountType,
