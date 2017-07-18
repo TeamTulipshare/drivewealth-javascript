@@ -4,9 +4,6 @@ import { assert } from "chai";
 import drivewealth from "../lib/drivewealth";
 const { User, Account } = P.promisifyAll(drivewealth);
 
-const SECONDS = 1000;
-window.jasmine.DEFAULT_TIMEOUT_INTERVAL = SECONDS * 1000;
-
 let user;
 
 beforeAll(() => {
@@ -28,8 +25,7 @@ beforeAll(() => {
 	.catch(expectNull);
 });
 
-// remove .skip and increase the DEFAULT_TIMEOUT_INTERVAL to test
-describe.skip("Credit cards", () => {
+describe("Credit cards", () => {
 	
 	test("should list all credit cards (static)", () => {
 		
@@ -54,8 +50,15 @@ describe.skip("Credit cards", () => {
 	
 	test("should remove a credit card", () => {
 		
-		return User.listCreditCardsAsync()
-		.then(creditCards => User.removeCreditCardAsync(creditCards[0].cardID))
+		return user.listCreditCardsAsync()
+		.then(creditCards => creditCards.length > 0 && user.removeCreditCardAsync(creditCards[0].cardID))
+		.catch(expectNull);
+	});
+	
+	test("should remove a credit card (static)", () => {
+		
+		return User.listCreditCardsAsync(user.userID)
+		.then(creditCards => creditCards.length > 0 && User.removeCreditCardAsync(user.userID, creditCards[0].cardID))
 		.catch(expectNull);
 	});
 });
