@@ -15,21 +15,28 @@
   },
   "homepage": "https://github.com/drivewealth/drivewealth-javascript",
   "scripts": {
-    "start": "npm-run-all --parallel test:watch build:watch",
-    "test": "mocha",
-    "test:watch": "mocha -w",
+    "start": "npm-run-all --sequential build --parallel test:watch build:watch",
+    "build": "gulp build",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll",
     "build:watch": "gulp watch"
   },
   "author": "John Shammas",
   "license": "ISC",
+  "jest": {
+    "bail": false,
+    "verbose": true
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.2.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.22.0",
-    "chai": "^4.0.2",
+    "bluebird": "^3.5.0",
+    "chai": "^4.1.0",
     "eslint": "^3.14.1",
     "extendable-error-class": "^0.1.1",
     "gulp": "^3.9.1",
@@ -38,8 +45,9 @@
     "gulp-sourcemaps": "^2.4.0",
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
-    "mocha": "^3.4.2",
+    "jest": "^20.0.4",
     "npm-run-all": "^4.0.2",
+    "regenerator-runtime": "^0.10.5",
     "request": "^2.79.0",
     "webpack": "^1.14.0",
     "webpack-stream": "^3.2.0"

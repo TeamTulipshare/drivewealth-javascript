@@ -64,4 +64,4 @@ gulp.task("build-httpImpls-web", function() {
 		}));
 });
 
-gulp.task("watch", ["build"], () => gulp.watch(["src/**", "examples/**"], ["build"]));
+gulp.task("watch", () => gulp.watch(["src/**", "examples/**"], ["build"]));

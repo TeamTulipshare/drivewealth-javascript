@@ -3,43 +3,6 @@ import { Config } from "./Config";
 import Sessions from "./Sessions";
 import Account from "./Account";
 
-const _getSettings = (userID, key, cb) => {
-	request({
-		method: "GET",
-		endpoint: `/users/${userID}/settings/${key}`,
-		sessionKey: Sessions.get(userID)
-	}, (data) => {
-		cb && cb(null, data.value);
-	}, err => cb && cb(err));
-};
-
-const _getAllSettings = (userID, cb) => {
-	request({
-		method: "GET",
-		endpoint: `/users/${userID}/settings`,
-		sessionKey: Sessions.get(userID)
-	}, (data) => {
-		let formattedData = {};
-		for (let setting of data) {
-			formattedData[setting.key] = setting.value;
-		}
-		cb && cb(null, formattedData);
-	}, err => cb && cb(err));
-};
-
-const _setSetting = (userID, key, value, cb) => {
-	request({
-		method: "POST",
-		endpoint: `/users/${userID}/settings`,
-		sessionKey: Sessions.get(userID),
-		body: {
-			key, value
-		}
-	}, () => {
-		cb && cb(null);
-	}, err => cb && cb(err));
-};
-
 export default class User {
 
     constructor(data) {
@@ -305,4 +268,96 @@ export default class User {
 			cb && cb(null, data);
 		}, err => cb && cb(err));
 	}
+	
+	listCreditCards(cb) {
+    	return _listCreditCards(this.userID, cb);
+	}
+	
+	static listCreditCards(userID, cb) {
+    	return _listCreditCards(userID, cb);
+	}
+	
+	addCreditCard(cardToken, cb) {
+		return _addCreditCard(this.userID, cardToken, cb);
+	}
+	
+	static addCreditCard(userID, cardToken, cb) {
+		return _addCreditCard(userID, cardToken, cb);
+	}
+	
+	removeCreditCard(cardID, cb) {
+ 		return _removeCreditCard(this.userID, cardID, cb);
+	}
+	
+	static removeCreditCard(userID, cardID, cb) {
+		return _removeCreditCard(userID, cardID, cb);
+	}
+}
+
+function _listCreditCards(userID, cb) {
+	return request({
+		method: "GET",
+		endpoint: `/users/${userID}/credit-cards`,
+		sessionKey: Sessions.get(userID)
+	}, data => {
+		cb && cb(null, data);
+	}, err => cb && cb(err));
+}
+
+function _addCreditCard(userID, cardToken, cb) {
+	return request({
+		method: "POST",
+		endpoint: `/users/${userID}/credit-cards`,
+		sessionKey: Sessions.get(userID),
+		body: { cardToken }
+	}, data => {
+		cb && cb(null, data);
+	}, err => cb && cb(err));
+}
+
+function _removeCreditCard(userID, cardID, cb) {
+	return request({
+		method: "DELETE",
+		endpoint: `/users/${userID}/credit-cards/${cardID}`,
+		sessionKey: Sessions.get(userID)
+	}, data => {
+		cb && cb(null, data);
+	}, err => cb && cb(err));
+}
+
+function _getSettings (userID, key, cb) {
+	request({
+		method: "GET",
+		endpoint: `/users/${userID}/settings/${key}`,
+		sessionKey: Sessions.get(userID),
+	}, (data) => {
+		cb && cb(null, data.value);
+	}, err => cb && cb(err));
+}
+
+function _getAllSettings (userID, cb) {
+	request({
+		method: "GET",
+		endpoint: `/users/${userID}/settings`,
+		sessionKey: Sessions.get(userID),
+	}, (data) => {
+		let formattedData = {};
+		for (let setting of data) {
+			formattedData[setting.key] = setting.value;
+		}
+		cb && cb(null, formattedData);
+	}, err => cb && cb(err));
+}
+
+function _setSetting (userID, key, value, cb) {
+	request({
+		method: "POST",
+		endpoint: `/users/${userID}/settings`,
+		sessionKey: Sessions.get(userID),
+		body: {
+			key, value,
+		},
+	}, () => {
+		cb && cb(null);
+	}, err => cb && cb(err));
 }

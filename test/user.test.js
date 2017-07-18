@@ -1,145 +1,117 @@
-const drivewealth = require("../lib/drivewealth");
-const { User, Account } = drivewealth;
+import P from "bluebird";
+import { assert } from "chai";
 
-const { expect, assert } = require("chai");
+import drivewealth from "../lib/drivewealth";
+const { User, Account } = P.promisifyAll(drivewealth);
 
-describe("User", function () {
+const SECONDS = 1000;
+window.jasmine.DEFAULT_TIMEOUT_INTERVAL = SECONDS * 1000;
+
+let user;
+
+beforeAll(() => {
 	
-	let loggedInUser;
-	const username = "timur";
-	
-	before(function (done) {
-		
-		drivewealth.setup({
-			env: drivewealth.ENVIRONMENTS.UAT,
-			httpImpl: require("../lib/httpImpls/request.js"),
-			appTypeID: "2000",
-			appVersion: "1.0",
-		});
-		
-		User.login(username, "password123", function (err, user) {
-			
-			loggedInUser = user;
-			
-			done();
-		});
+	drivewealth.setup({
+		env: drivewealth.ENVIRONMENTS.UAT,
+		httpImpl: require("../lib/httpImpls/request.js"),
+		appTypeID: "2000",
+		appVersion: "1.0",
 	});
 	
-	it("should log in the correct user", function () {
+	return User.loginAsync("timurt", "passw0rd")
+	.then(loggedInUser => {
 		
-		expect(loggedInUser.username).to.equal(username);
+		expect(loggedInUser).toHaveProperty("userID");
+		
+		user = loggedInUser;
+	});
+});
+
+// remove .skip and increase the DEFAULT_TIMEOUT_INTERVAL to test
+describe.skip("Credit cards", () => {
+	
+	test("should list all credit cards (static)", () => {
+		
+		return User.listCreditCardsAsync(user.userID)
+		.then(creditCards => {
+			assert(Array.isArray(creditCards));
+		})
+		.catch(expectNull);
 	});
 	
-	it("should have the required fields", function () {
+	test("should add a new credit card", () => {
 		
-		expect(loggedInUser).to.have.keys(
-			"countryID",
-			"emailAddress",
-			"firstName",
-			"languageID",
-			"lastName",
-			"phoneNumber",
-			"referralCode",
-			"userID",
-			"username",
-			"wlpID",
-			"status",
-			"usCitizen",
-			"lastLoginWhen",
-			"citizenship",
-			"fullName",
-			"addressLine1",
-			"addressLine2",
-			"city",
-			"stateProvince",
-			"zipPostalCode",
-		);
+		return user.addCreditCardAsync("tok_visa")
+		.catch(expectNull);
 	});
 	
-	it("should have a full name", function () {
+	test("should add a new credit card (static)", () => {
 		
-		const fullName = loggedInUser.firstName + " " + loggedInUser.lastName;
-		
-		expect(loggedInUser.fullName).to.equal(fullName);
+		return User.addCreditCardAsync(user.userID, "tok_visa")
+		.catch(expectNull);
 	});
 	
-	describe("Account", function () {
+	test("should remove a credit card", () => {
 		
-		it("should return an array of accounts", function (done) {
-			
-			loggedInUser.getAccounts(function (err, accounts) {
-				
-				expect(err).to.equal(null);
-				
-				assert(Array.isArray(accounts));
-				
-				done();
-			});
-		});
+		return User.listCreditCardsAsync()
+		.then(creditCards => User.removeCreditCardAsync(creditCards[0].cardID))
+		.catch(expectNull);
+	});
+});
+
+describe("Account", () => {
+	
+	let account;
+	
+	beforeAll(() => user.getAccountsAsync()
+	.then(accounts => {
 		
-		describe("Blotter", function () {
+		assert(Array.isArray(accounts));
+		
+		account = accounts[0];
+	}));
+	
+	test("should return the blotter", () => {
+		
+		return account.getBlotterAsync()
+		.then(blotter => {
 			
-			let selectedAccount;
+			expect(blotter).toHaveProperty("accountID");
+			expect(blotter).toHaveProperty("accountNo");
+			expect(blotter).toHaveProperty("cash");
+			expect(blotter).toHaveProperty("equity");
+			expect(blotter).toHaveProperty("transactions");
+		})
+		.catch(expectNull);
+	});
+	
+	test("should return the cash section of the blotter", () => {
+		
+		return account.getBlotterAsync(Account.BLOTTER_TYPES.CASH)
+		.then(cash => {
+			expect(cash).toHaveProperty("cashAvailableForTrade");
+		})
+		.catch(expectNull);
+	});
+	
+	test("should return formatted order objects", () => {
+		
+		return account.getBlotterAsync(Account.BLOTTER_TYPES.ORDERS)
+		.then(orders => {
 			
-			before(function (done) {
+			assert(Array.isArray(orders));
+			
+			if (orders.length > 0) {
 				
-				loggedInUser.getAccounts(function (err, accounts) {
-					
-					selectedAccount = accounts[0];
-					
-					done();
-				});
-			});
-			
-			it("should return the blotter", function (done) {
+				const order = orders[0];
 				
-				selectedAccount.getBlotter(function (err, blotter) {
-					
-					expect(err).to.equal(null);
-					
-					expect(blotter).to.have.keys(
-						"accountID",
-						"accountNo",
-						"cash",
-						"equity",
-						"lastUpdated",
-						"margin",
-						"orders",
-						"tradingType",
-						"transactions",
-					);
-					
-					done();
-				});
-			});
-			
-			it("should return the cash section of the blotter", function (done) {
-				
-				selectedAccount.getBlotter(Account.BLOTTER_TYPES.CASH, function (err, cash) {
-					
-					expect(err).to.equal(null);
-					
-					expect(cash).to.include.keys("cashAvailableForTrade");
-					
-					done();
-				});
-			});
-			
-			it("should return formatted order objects", function (done) {
-				
-				selectedAccount.getBlotter(Account.BLOTTER_TYPES.ORDERS, function (err, orders) {
-					
-					expect(err).to.equal(null);
-					
-					assert(Array.isArray(orders));
-					
-					if (orders.length > 0) {
-						expect(orders[0]).to.include.keys("price", "type");
-					}
-					
-					done();
-				});
-			});
+				expect(order).toHaveProperty("price");
+				expect(order).toHaveProperty("type");
+			}
 		});
 	});
 });
+
+const expectNull = err => {
+	expect(err).toBeNull();
+};
