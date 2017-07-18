@@ -1,3 +1,4 @@
+/* @flow */
 import { Config, HOSTS } from "./Config";
 import { DriveWealthError, DriveWealthSessionError } from "./Error";
 
@@ -20,8 +21,15 @@ export default function request({
 	body,
 	addlHeaders = {},
 	host = HOSTS.API,
+}: {
+	method?: string,
+	endpoint: string,
+	sessionKey?: string,
+	body?: any,
+	addlHeaders?: {[header: string]: string},
+	host?: string,
 }) {
-	const headers = {
+	const headers: {[header: string]: string} = {
 		Accept: "application/json",
 	};
 	if (method === "POST" || method === "PUT" || method === "PATCH") {

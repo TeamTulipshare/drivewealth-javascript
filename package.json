@@ -18,7 +18,8 @@
 	"start": "npm-run-all --parallel test:watch build:watch",
 	"test": "mocha",
 	"test:watch": "mocha -w",
-	"build:watch": "gulp watch"
+	"build:watch": "gulp watch",
+	"flow": "flow check"
   },
   "author": "John Shammas",
   "license": "ISC",

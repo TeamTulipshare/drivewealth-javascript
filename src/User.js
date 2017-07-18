@@ -1,3 +1,4 @@
+/* @flow */
 import request from "./request";
 import { Config } from "./Config";
 import Sessions from "./Sessions";
@@ -9,31 +10,29 @@ import Account from "./Account";
  * @param {object} data - See response at {@link http://developer.drivewealth.com/docs/get-user}
  */
 class User {
-	constructor(data) {
-		for (const key of [
-			"countryID",
-			"emailAddress",
-			"firstName",
-			"languageID",
-			"lastName",
-			"phoneNumber",
-			"referralCode",
-			"userID",
-			"username",
-			"wlpID",
-			"status",
-			"usCitizen",
-			"lastLoginWhen",
-			"citizenship",
-			"addressLine1",
-			"addressLine2",
-			"city",
-			"stateProvince",
-			"zipPostalCode",
-		]) {
-			this[key] = data[key];
-		}
+	countryID: string;
+	emailAddress: string;
+	firstName: string;
+	languageID: string;
+	lastName: string;
+	phoneNumber: string;
+	referralCode: string;
+	userID: string;
+	username: string;
+	wlpID: string;
+	status: string;
+	usCitizen: boolean;
+	lastLoginWhen: string;
+	citizenship: string;
+	addressLine1: string;
+	addressLine2: string;
+	city: string;
+	stateProvince: string;
+	zipPostalCode: string;
+	fullName: string;
 
+	constructor(data: Object) {
+		Object.assign(this, data);
 		this.fullName = data.firstName + " " + data.lastName;
 	}
 
@@ -87,7 +86,7 @@ class User {
 	 * @param  {string} key
 	 * @return {Promise<string>}
 	 */
-	static getSettings(userID) {
+	static getSettings(userID: string) {
 		const key = arguments[1];
 		if (!key) {
 			return request({
@@ -159,7 +158,7 @@ class User {
 	/**
 	 * @description See response at {@link http://developer.drivewealth.com/docs/user-status}
 	 */
-	getStatus(): Promise<object> {
+	getStatus(): Promise<Object> {
 		return request({
 			method: "GET",
 			endpoint: `/users/${this.userID}/status`,
@@ -219,7 +218,7 @@ class User {
 	 * @static
 	 */
 	static isUsernameAvailable(username: string): Promise<boolean> {
-		request({
+		return request({
 			method: "GET",
 			endpoint: `/users?username=${username}`,
 		}).then(
@@ -248,7 +247,7 @@ class User {
 		utmMedium,
 		utmSource,
 		utmTerm,
-	}, loginAutomatically: boolean = true): Promise<undefined | User> {
+	}, loginAutomatically: boolean = true): Promise<void | User> {
 		return request({
 			method: "POST",
 			endpoint: "/signups/live",
