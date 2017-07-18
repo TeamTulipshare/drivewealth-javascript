@@ -24,7 +24,8 @@ beforeAll(() => {
 		expect(loggedInUser).toHaveProperty("userID");
 		
 		user = loggedInUser;
-	});
+	})
+	.catch(expectNull);
 });
 
 // remove .skip and increase the DEFAULT_TIMEOUT_INTERVAL to test
@@ -63,13 +64,17 @@ describe("Account", () => {
 	
 	let account;
 	
-	beforeAll(() => user.getAccountsAsync()
-	.then(accounts => {
+	beforeAll(() => {
 		
-		assert(Array.isArray(accounts));
-		
-		account = accounts[0];
-	}));
+		return user.getAccountsAsync()
+		.then(accounts => {
+			
+			assert(Array.isArray(accounts));
+			
+			account = accounts[0];
+		})
+		.catch(expectNull);
+	});
 	
 	test("should return the blotter", () => {
 		
@@ -108,7 +113,8 @@ describe("Account", () => {
 				expect(order).toHaveProperty("price");
 				expect(order).toHaveProperty("type");
 			}
-		});
+		})
+		.catch(expectNull);
 	});
 });
 
