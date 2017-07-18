@@ -233,7 +233,6 @@ export default class Order {
 	// each order is:
 	// { side, qty, marketPrice, referenceID }
 	// commission schedule is:
-	// { baseRate, baseShares, excessRate, fractionalRate, shareAmountRounding, subscription, basketSchedule, passThroughFees }
 	static estimateCommission(orders, commissionSchedule) {
 		orders = Array.isArray(orders) ? orders : [orders];
 		let total = 0;
