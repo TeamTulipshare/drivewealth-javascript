@@ -1,0 +1,34 @@
+{
+	"plugins": [
+	  "flowtype"
+	],
+	"extends" : [
+	  "airbnb-base",
+	  "plugin:flowtype/recommended"
+	],
+  "rules": {
+	"arrow-parens": 0, // Does not work with Flow generic types.
+	"consistent-return": 0,
+	"flowtype/no-types-missing-file-annotation": 0,
+	"global-require": 0, // Used by webpack-isomorphic-tools and React Native.
+	"guard-for-in": 0,
+	"import/first": 0, // Este sorts by atom/sort-lines natural order.
+	"import/no-duplicates": 2,
+	"import/prefer-default-export": 0, // No. Actions can have just one action.
+	"indent": [1, "tab", { "SwitchCase": 1 }],
+	"max-len": [1, 100, { "ignoreComments": true }],
+	"no-continue": 0,
+	"no-confusing-arrow": 0, // This rule is super confusing.
+	"no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848
+	"no-nested-ternary": 0, // It's nice for JSX.
+	"no-param-reassign": 0, // We love param reassignment. Naming is hard.
+	"no-restricted-syntax": 0,
+	"no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
+	"no-tabs": 0,
+	"no-unused-vars": ["error", { ignoreRestSiblings: true, args: "none" }],
+	"prefer-rest-params": 0,
+	"prefer-template": 0,
+	"quotes": [1, "double"],
+	"radix": 0
+  }
+}
