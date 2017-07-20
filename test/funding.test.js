@@ -9,5 +9,9 @@ beforeAll(async () => {
 });
 
 test("return an array of subscription options", async () => {
-	expect(await Funding.getPricingAsync(user.userID)).toBeDefined();
+
+	const pricing = await Funding.getPricingAsync(user.userID);
+
+	expect(pricing).toBeDefined();
+	expect(pricing[0]).toHaveProperty("amount");
 });

@@ -62,11 +62,11 @@ describe("subscriptions", () => {
 		cards.map(({ cardID }) => user.removeCreditCardAsync(cardID));
 	});
 
-	test("add a subscription with an existing credit card", async () => {
+	test.skip("add a subscription with an existing credit card", async () => {
 		expect(await account.addSubscriptionAsync({ planID, paymentID })).toBeDefined();
 	});
 
-	test("static add a subscription to an account", async () => {
+	test.skip("static add a subscription to an account", async () => {
 		expect(
 			await Account.addSubscriptionAsync({
 				userID: user.userID,
