@@ -30,6 +30,7 @@ export default class Order {
 			"side",
 			"autoStop",
 			"symbol",
+			"effectivePrice",
 		]) {
 			this[key] = data[key];
 		}
