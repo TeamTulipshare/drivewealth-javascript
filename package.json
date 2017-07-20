@@ -17,8 +17,9 @@
   "scripts": {
     "start": "npm-run-all --sequential build --parallel test:watch build:watch",
     "build": "gulp build",
-    "test": "jest --coverage",
-    "test:watch": "jest --watchAll",
+    "test": "jest -i",
+    "coverage": "jest --coverage -i",
+    "test:watch": "jest --watch -i",
     "build:watch": "gulp watch"
   },
   "author": "John Shammas",
@@ -36,7 +37,6 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.22.0",
     "bluebird": "^3.5.0",
-    "chai": "^4.1.0",
     "eslint": "^3.14.1",
     "extendable-error-class": "^0.1.1",
     "gulp": "^3.9.1",

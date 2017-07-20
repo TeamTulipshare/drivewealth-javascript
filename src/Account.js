@@ -169,4 +169,34 @@ export default class Account {
 		}, err => cb && cb(err));
 	}
 
+	addSubscription (options, cb) {
+		addSubscription(Object.assign({}, options, {
+			userID: this.userID,
+			accountID: this.accountID,
+		}), cb);
+	}
+
+	static addSubscription (options, cb) {
+		addSubscription(options, cb);
+	}
+
+}
+
+function addSubscription ({
+	userID,
+	accountID,
+	planID,
+	paymentID,
+}, cb) {
+	request({
+		method: "POST",
+		endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
+		sessionKey: Sessions.get(userID),
+		body: {
+			planID,
+			[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
+		},
+	}, data => {
+		cb && cb(null, data);
+	}, err => cb && cb(err));
 }

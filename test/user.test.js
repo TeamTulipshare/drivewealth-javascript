@@ -1,126 +1,40 @@
 import P from "bluebird";
-import { assert } from "chai";
 
-import drivewealth from "../lib/drivewealth";
-const { User, Account } = P.promisifyAll(drivewealth);
+const User = P.promisifyAll(require("../lib/drivewealth").User);
 
 let user;
 
-beforeAll(() => {
-	
-	drivewealth.setup({
-		env: drivewealth.ENVIRONMENTS.UAT,
-		httpImpl: require("../lib/httpImpls/request.js"),
-		appTypeID: "2000",
-		appVersion: "1.0",
-	});
-	
-	return User.loginAsync("timurt", "passw0rd")
-	.then(loggedInUser => {
-		
-		expect(loggedInUser).toHaveProperty("userID");
-		
-		user = loggedInUser;
-	})
-	.catch(expectNull);
+beforeAll(async () => {
+	user = await require("./setup").default;
 });
 
 describe("Credit cards", () => {
-	
-	test("should list all credit cards (static)", () => {
-		
-		return User.listCreditCardsAsync(user.userID)
-		.then(creditCards => {
-			assert(Array.isArray(creditCards));
-		})
-		.catch(expectNull);
+
+	test("list all credit cards", async () => {
+		expect(await user.listCreditCardsAsync()).toBeDefined();
 	});
-	
-	test("should add a new credit card", () => {
-		
-		return user.addCreditCardAsync("tok_visa")
-		.catch(expectNull);
+
+	test("static list all credit cards", async () => {
+		expect(await User.listCreditCardsAsync(user.userID)).toBeDefined();
 	});
-	
-	test("should add a new credit card (static)", () => {
-		
-		return User.addCreditCardAsync(user.userID, "tok_visa")
-		.catch(expectNull);
+
+	test("add a new credit card", async () => {
+		expect(await user.addCreditCardAsync("tok_visa")).toBeDefined();
 	});
-	
-	test("should remove a credit card", () => {
-		
+
+	test("static add a new credit card", async () => {
+		expect(
+			await User.addCreditCardAsync(user.userID, "tok_visa"),
+		).toBeDefined();
+	});
+
+	test("remove a credit card", () => {
 		return user.listCreditCardsAsync()
-		.then(creditCards => creditCards.length > 0 && user.removeCreditCardAsync(creditCards[0].cardID))
-		.catch(expectNull);
+		.then(cards => user.removeCreditCardAsync(cards[0].cardID));
 	});
-	
-	test("should remove a credit card (static)", () => {
-		
+
+	test("static remove a credit card", () => {
 		return User.listCreditCardsAsync(user.userID)
-		.then(creditCards => creditCards.length > 0 && User.removeCreditCardAsync(user.userID, creditCards[0].cardID))
-		.catch(expectNull);
+		.then(cards => User.removeCreditCardAsync(user.userID, cards[0].cardID));
 	});
 });
-
-describe("Account", () => {
-	
-	let account;
-	
-	beforeAll(() => {
-		
-		return user.getAccountsAsync()
-		.then(accounts => {
-			
-			assert(Array.isArray(accounts));
-			
-			account = accounts[0];
-		})
-		.catch(expectNull);
-	});
-	
-	test("should return the blotter", () => {
-		
-		return account.getBlotterAsync()
-		.then(blotter => {
-			
-			expect(blotter).toHaveProperty("accountID");
-			expect(blotter).toHaveProperty("accountNo");
-			expect(blotter).toHaveProperty("cash");
-			expect(blotter).toHaveProperty("equity");
-			expect(blotter).toHaveProperty("transactions");
-		})
-		.catch(expectNull);
-	});
-	
-	test("should return the cash section of the blotter", () => {
-		
-		return account.getBlotterAsync(Account.BLOTTER_TYPES.CASH)
-		.then(cash => {
-			expect(cash).toHaveProperty("cashAvailableForTrade");
-		})
-		.catch(expectNull);
-	});
-	
-	test("should return formatted order objects", () => {
-		
-		return account.getBlotterAsync(Account.BLOTTER_TYPES.ORDERS)
-		.then(orders => {
-			
-			assert(Array.isArray(orders));
-			
-			if (orders.length > 0) {
-				
-				const order = orders[0];
-				
-				expect(order).toHaveProperty("price");
-				expect(order).toHaveProperty("type");
-			}
-		})
-		.catch(expectNull);
-	});
-});
-
-const expectNull = err => {
-	expect(err).toBeNull();
-};
