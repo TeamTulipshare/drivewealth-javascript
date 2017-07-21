@@ -6,22 +6,23 @@ import Order from "./Order";
 import Reports from "./Reports";
 import User from "./User";
 import Sessions from "./Sessions";
-import { Config, setup, ENVIRONMENTS } from "./Config";
+import { Config, setup, ENVIRONMENTS, HOSTS } from "./Config";
 import request from "./request";
 
 export default {
-    ENVIRONMENTS,
+	ENVIRONMENTS,
+	HOSTS,
 
-    Account,
-    Config,
-    Error,
-    Funding,
-    Instrument,
-    Order,
-    Reports,
-    User,
-    Sessions,
+	Account,
+	Config,
+	Error,
+	Funding,
+	Instrument,
+	Order,
+	Reports,
+	User,
+	Sessions,
 
-    setup,
-    request,
+	setup,
+	request,
 };
