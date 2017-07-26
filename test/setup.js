@@ -17,7 +17,7 @@ export default (() => {
 		appVersion: "1.0",
 	});
 
-	return User.login("timurt", "passw0rd")
+	return User.login(process.env.username, process.env.password)
 		.then(loggedInUser => {
 			expect(loggedInUser).toHaveProperty("userID");
 			user = loggedInUser;
