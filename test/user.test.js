@@ -15,23 +15,19 @@ describe("Credit cards", () => {
 		expect(await User.listCreditCards(user.userID)).toBeDefined();
 	});
 
-	test("add a new credit card", async () => {
-		expect(await user.addCreditCard("tok_visa")).toBeDefined();
+	test("add and remove a credit card", async () => {
+		const { cardID } = await user.addCreditCard("tok_visa");
+
+		expect(cardID).toBeDefined();
+
+		expect(await user.removeCreditCard(cardID)).toBeUndefined();
 	});
 
-	test("static add a new credit card", async () => {
-		expect(
-			await User.addCreditCard(user.userID, "tok_visa"),
-		).toBeDefined();
+	test("static add and remove a credit card", async () => {
+		const { cardID } = await User.addCreditCard(user.userID, "tok_visa");
+
+		expect(cardID).toBeDefined();
+
+		expect(await User.removeCreditCard(user.userID, cardID)).toBeUndefined();
 	});
-
-	test("remove a credit card", () =>
-		user.listCreditCards()
-			.then(cards => user.removeCreditCard(cards[0].cardID)),
-	);
-
-	test("static remove a credit card", () =>
-		User.listCreditCards(user.userID)
-			.then(cards => User.removeCreditCard(user.userID, cards[0].cardID)),
-	);
 });

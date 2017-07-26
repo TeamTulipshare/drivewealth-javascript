@@ -46,11 +46,7 @@ describe("subscriptions", () => {
 		paymentID = cardID;
 	});
 
-	afterAll(async () => {
-		const cards = await user.listCreditCards();
-
-		cards.map(({ cardID }) => user.removeCreditCard(cardID));
-	});
+	afterAll(() => user.removeCreditCard(paymentID));
 
 	test("get an account's subscription", async () => {
 		expect(
