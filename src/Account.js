@@ -276,7 +276,6 @@ export default class Account {
 		planID: string,
 		paymentID: string,
 	}): Promise<Object> {
-
 		const params = {
 			method,
 			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
@@ -322,7 +321,7 @@ export default class Account {
 		return Account.changeSubscription("DELETE", options);
 	}
 
-	extractIDs (options) {
+	extractIDs(options: Object): Object {
 		return Object.assign({}, options, {
 			userID: this.userID,
 			accountID: this.accountID,
