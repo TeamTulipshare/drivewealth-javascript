@@ -6,9 +6,13 @@ import Order from "./Order";
 import Reports from "./Reports";
 import User from "./User";
 import Sessions from "./Sessions";
+import { Config, setup, ENVIRONMENTS, HOSTS } from "./Config";
 import request from "./request";
 
 export default {
+	ENVIRONMENTS,
+	HOSTS,
+
 	Account,
 	Config,
 	Error,
@@ -19,5 +23,6 @@ export default {
 	User,
 	Sessions,
 
+	setup,
 	request,
 };

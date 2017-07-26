@@ -260,4 +260,101 @@ export default class Account {
 			body: data,
 		}).then(({ body }) => body);
 	}
+
+	/**
+	 * @param {string} method
+	 * @param {object} options
+	 */
+	static changeSubscription(method: string, {
+		userID,
+		accountID,
+		planID,
+		paymentID,
+	}: {
+		userID: string,
+		accountID: string,
+		planID: string,
+		paymentID: string,
+	}): Promise<Object> {
+
+		const params = {
+			method,
+			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
+			sessionKey: Sessions.get(userID),
+			body: method.startsWith("P") && {
+				planID,
+				[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
+			},
+		};
+
+		return request(
+			Object.keys(params)
+				.filter(key => params[key])
+				.reduce((x, y) => Object.assign({}, x, { [y]: params[y] }), {}),
+		).then(({ body }) => body);
+	}
+
+	/**
+	 * @static
+	 */
+	static getSubscription(options: Object): Promise<Object> {
+		return Account.changeSubscription("GET", options);
+	}
+
+	/**
+	 * @static
+	 */
+	static addSubscription(options: Object): Promise<Object> {
+		return Account.changeSubscription("POST", options);
+	}
+
+	/**
+	 * @static
+	 */
+	static updateSubscription(options: Object): Promise<Object> {
+		return Account.changeSubscription("PUT", options);
+	}
+
+	/**
+	 * @static
+	 */
+	static cancelSubscription(options: Object): Promise<Object> {
+		return Account.changeSubscription("DELETE", options);
+	}
+
+	extractIDs (options) {
+		return Object.assign({}, options, {
+			userID: this.userID,
+			accountID: this.accountID,
+		});
+	}
+
+	/**
+	 * @instance
+	 */
+	getSubscription(): Promise<Object> {
+		return Account.getSubscription(this.extractIDs());
+	}
+
+	/**
+	 * @instance
+	 */
+	addSubscription(options: Object): Promise<Object> {
+		return Account.addSubscription(this.extractIDs(options));
+	}
+
+	/**
+	 * @instance
+	 */
+	updateSubscription(options: Object): Promise<Object> {
+		return Account.updateSubscription(this.extractIDs(options));
+	}
+
+	/**
+	 * @instance
+	 */
+	cancelSubscription(): Promise<Object> {
+		return Account.cancelSubscription(this.extractIDs());
+	}
+
 }

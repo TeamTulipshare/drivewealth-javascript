@@ -64,6 +64,7 @@ export default class Order {
 	status: string;
 	type: number;
 	price: ?number;
+	effectivePrice: ?number;
 
 	constructor(data: Object) {
 		Object.assign(this, data);

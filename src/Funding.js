@@ -50,4 +50,23 @@ export default class Funding {
         }, err => cb && cb(err));
     }
 
+	static getPricing (userID, cb) {
+		return request({
+			endpoint: "/funding/ach/subscription-plans",
+			sessionKey: Sessions.get(userID),
+		}, data => {
+			const pricing = data.data.map(function (pricing) {
+				return [].concat(pricing)
+				.sort((x, y) => x.amount - y.amount)
+				.map(price => Object.assign(
+					{},
+					price,
+					{ amount: Number(price.amount / 100) },
+				));
+			})[0];
+
+			cb && cb(null, pricing);
+		}, err => cb && cb(err));
+	}
+
 }

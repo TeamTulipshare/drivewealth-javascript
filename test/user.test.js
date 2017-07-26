@@ -1,145 +1,40 @@
-const drivewealth = require("../lib/drivewealth");
-const { User, Account } = drivewealth;
+import P from "bluebird";
 
-const { expect, assert } = require("chai");
+const User = P.promisifyAll(require("../lib/drivewealth").User);
 
-describe("User", function () {
-	
-	let loggedInUser;
-	const username = "timur";
-	
-	before(function (done) {
-		
-		drivewealth.setup({
-			env: drivewealth.ENVIRONMENTS.UAT,
-			httpImpl: require("../lib/httpImpls/request.js"),
-			appTypeID: "2000",
-			appVersion: "1.0",
-		});
-		
-		User.login(username, "password123", function (err, user) {
-			
-			loggedInUser = user;
-			
-			done();
-		});
+let user;
+
+beforeAll(async () => {
+	user = await require("./setup").default;
+});
+
+describe("Credit cards", () => {
+
+	test("list all credit cards", async () => {
+		expect(await user.listCreditCardsAsync()).toBeDefined();
 	});
-	
-	it("should log in the correct user", function () {
-		
-		expect(loggedInUser.username).to.equal(username);
+
+	test("static list all credit cards", async () => {
+		expect(await User.listCreditCardsAsync(user.userID)).toBeDefined();
 	});
-	
-	it("should have the required fields", function () {
-		
-		expect(loggedInUser).to.have.keys(
-			"countryID",
-			"emailAddress",
-			"firstName",
-			"languageID",
-			"lastName",
-			"phoneNumber",
-			"referralCode",
-			"userID",
-			"username",
-			"wlpID",
-			"status",
-			"usCitizen",
-			"lastLoginWhen",
-			"citizenship",
-			"fullName",
-			"addressLine1",
-			"addressLine2",
-			"city",
-			"stateProvince",
-			"zipPostalCode",
-		);
+
+	test("add a new credit card", async () => {
+		expect(await user.addCreditCardAsync("tok_visa")).toBeDefined();
 	});
-	
-	it("should have a full name", function () {
-		
-		const fullName = loggedInUser.firstName + " " + loggedInUser.lastName;
-		
-		expect(loggedInUser.fullName).to.equal(fullName);
+
+	test("static add a new credit card", async () => {
+		expect(
+			await User.addCreditCardAsync(user.userID, "tok_visa"),
+		).toBeDefined();
 	});
-	
-	describe("Account", function () {
-		
-		it("should return an array of accounts", function (done) {
-			
-			loggedInUser.getAccounts(function (err, accounts) {
-				
-				expect(err).to.equal(null);
-				
-				assert(Array.isArray(accounts));
-				
-				done();
-			});
-		});
-		
-		describe("Blotter", function () {
-			
-			let selectedAccount;
-			
-			before(function (done) {
-				
-				loggedInUser.getAccounts(function (err, accounts) {
-					
-					selectedAccount = accounts[0];
-					
-					done();
-				});
-			});
-			
-			it("should return the blotter", function (done) {
-				
-				selectedAccount.getBlotter(function (err, blotter) {
-					
-					expect(err).to.equal(null);
-					
-					expect(blotter).to.have.keys(
-						"accountID",
-						"accountNo",
-						"cash",
-						"equity",
-						"lastUpdated",
-						"margin",
-						"orders",
-						"tradingType",
-						"transactions",
-					);
-					
-					done();
-				});
-			});
-			
-			it("should return the cash section of the blotter", function (done) {
-				
-				selectedAccount.getBlotter(Account.BLOTTER_TYPES.CASH, function (err, cash) {
-					
-					expect(err).to.equal(null);
-					
-					expect(cash).to.include.keys("cashAvailableForTrade");
-					
-					done();
-				});
-			});
-			
-			it("should return formatted order objects", function (done) {
-				
-				selectedAccount.getBlotter(Account.BLOTTER_TYPES.ORDERS, function (err, orders) {
-					
-					expect(err).to.equal(null);
-					
-					assert(Array.isArray(orders));
-					
-					if (orders.length > 0) {
-						expect(orders[0]).to.include.keys("price", "type");
-					}
-					
-					done();
-				});
-			});
-		});
+
+	test("remove a credit card", () => {
+		return user.listCreditCardsAsync()
+		.then(cards => user.removeCreditCardAsync(cards[0].cardID));
+	});
+
+	test("static remove a credit card", () => {
+		return User.listCreditCardsAsync(user.userID)
+		.then(cards => User.removeCreditCardAsync(user.userID, cards[0].cardID));
 	});
 });
