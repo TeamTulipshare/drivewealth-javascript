@@ -6,6 +6,9 @@
 	  "airbnb-base",
 	  "plugin:flowtype/recommended"
 	],
+	"env": {
+		"jest": true,
+	},
   "rules": {
 	"arrow-parens": 0, // Does not work with Flow generic types.
 	"consistent-return": 0,

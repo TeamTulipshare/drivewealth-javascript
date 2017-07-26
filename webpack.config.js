@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const pkg = require("./package.json");
+
 const banner = `
 	${pkg.name} - ${pkg.description}
 	Author: ${pkg.author}
@@ -12,7 +13,7 @@ module.exports = {
 	output: {
 		library: "drivewealth",
 		libraryTarget: "umd",
-		filename: `drivewealth.js`,
+		filename: "drivewealth.js",
 	},
 	devtool: "#inline-source-map",
 	module: {
@@ -27,6 +28,7 @@ module.exports = {
 					plugins: [
 						"add-module-exports",
 						"transform-flow-strip-types",
+						"transform-class-properties",
 					],
 				},
 			},
