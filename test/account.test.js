@@ -62,6 +62,21 @@ describe("subscriptions", () => {
 		cards.map(({ cardID }) => user.removeCreditCardAsync(cardID));
 	});
 
+	test("get an account's subscription", async () => {
+		expect(
+			await account.getSubscriptionAsync()
+		).toBeDefined();
+	});
+
+	test("static get an account's subscription", async () => {
+		expect(
+			await Account.getSubscriptionAsync({
+				userID: user.userID,
+				accountID: account.accountID,
+			})
+		).toBeDefined();
+	});
+
 	test.skip("add a subscription to an account", async () => {
 		expect(
 			await account.addSubscriptionAsync({

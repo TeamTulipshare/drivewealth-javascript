@@ -180,7 +180,7 @@ export default class Account {
 			method,
 			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
 			sessionKey: Sessions.get(userID),
-			body: method !== "DELETE" && {
+			body: method.startsWith("P") && {
 				planID,
 				[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
 			},
@@ -197,6 +197,10 @@ export default class Account {
 				cb && cb(err);
 			},
 		);
+	}
+
+	static getSubscription (options, cb) {
+		Account.changeSubscription("GET", options, cb);
 	}
 
 	static addSubscription (options, cb) {
@@ -216,6 +220,10 @@ export default class Account {
 			userID: this.userID,
 			accountID: this.accountID,
 		});
+	}
+
+	getSubscription (cb) {
+		Account.getSubscription(this.extractIDs(), cb);
 	}
 
 	addSubscription (options, cb) {
