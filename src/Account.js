@@ -169,34 +169,65 @@ export default class Account {
 		}, err => cb && cb(err));
 	}
 
-	addSubscription (options, cb) {
-		addSubscription(Object.assign({}, options, {
-			userID: this.userID,
-			accountID: this.accountID,
-		}), cb);
+	static changeSubscription (method, {
+		userID,
+		accountID,
+		planID,
+		paymentID,
+	}, cb) {
+
+		const params = {
+			method,
+			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
+			sessionKey: Sessions.get(userID),
+			body: method !== "DELETE" && {
+				planID,
+				[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
+			},
+		};
+
+		request(
+			Object.keys(params)
+			.filter(key => params[key])
+			.reduce((x, y) => Object.assign({}, x, { [y]: params[y] }), {}),
+			data => {
+				cb && cb(null, data);
+			},
+			err => {
+				cb && cb(err);
+			},
+		);
 	}
 
 	static addSubscription (options, cb) {
-		addSubscription(options, cb);
+		Account.changeSubscription("POST", options, cb);
 	}
 
-}
+	static updateSubscription (options, cb) {
+		Account.changeSubscription("PUT", options, cb);
+	}
 
-function addSubscription ({
-	userID,
-	accountID,
-	planID,
-	paymentID,
-}, cb) {
-	request({
-		method: "POST",
-		endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
-		sessionKey: Sessions.get(userID),
-		body: {
-			planID,
-			[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
-		},
-	}, data => {
-		cb && cb(null, data);
-	}, err => cb && cb(err));
+	static cancelSubscription (options, cb) {
+		Account.changeSubscription("DELETE", options, cb);
+	}
+
+	extractIDs (options) {
+		return Object.assign({}, options, {
+			userID: this.userID,
+			accountID: this.accountID,
+		});
+	}
+
+	addSubscription (options, cb) {
+		Account.addSubscription(this.extractIDs(options), cb);
+	}
+
+	updateSubscription (options, cb) {
+		Account.updateSubscription(this.extractIDs(options), cb);
+	}
+
+	cancelSubscription (cb) {
+		Account.cancelSubscription(this.extractIDs(), cb);
+	}
+
 }

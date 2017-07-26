@@ -24,7 +24,7 @@ test("return the blotter", async () => {
 
 test("should return the cash section of the blotter", async () => {
 	expect(
-		await account.getBlotterAsync(Account.BLOTTER_TYPES.CASH)
+		await account.getBlotterAsync(Account.BLOTTER_TYPES.CASH),
 	).toHaveProperty("cashAvailableForTrade");
 });
 
@@ -62,8 +62,13 @@ describe("subscriptions", () => {
 		cards.map(({ cardID }) => user.removeCreditCardAsync(cardID));
 	});
 
-	test.skip("add a subscription with an existing credit card", async () => {
-		expect(await account.addSubscriptionAsync({ planID, paymentID })).toBeDefined();
+	test.skip("add a subscription to an account", async () => {
+		expect(
+			await account.addSubscriptionAsync({
+				planID,
+				paymentID,
+			}),
+		).toBeDefined();
 	});
 
 	test.skip("static add a subscription to an account", async () => {
@@ -76,4 +81,35 @@ describe("subscriptions", () => {
 			}),
 		).toBeDefined();
 	});
+
+	test("update subscription settings", async () => {
+		expect(
+			await account.updateSubscriptionAsync({ planID, paymentID }),
+		).toBeDefined();
+	});
+
+	test("static update subscription settings", async () => {
+		expect(
+			await Account.updateSubscriptionAsync({
+				userID: user.userID,
+				accountID: account.accountID,
+				planID,
+				paymentID,
+			}),
+		).toBeDefined();
+	});
+
+	test("cancel a subscription", async () => {
+		expect(await account.cancelSubscriptionAsync()).toBeDefined();
+	});
+
+	test("static cancel a subscription", async () => {
+		expect(
+			await Account.cancelSubscriptionAsync({
+				userID: user.userID,
+				accountID: account.accountID,
+			}),
+		).toBeDefined();
+	});
+
 });
