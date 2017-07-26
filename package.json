@@ -22,7 +22,8 @@
 	"test:watch": "jest --watch -i",
 	"build:watch": "gulp watch",
 	"flow": "flow check",
-	"documentation:watch": "documentation serve src/** --watch --github"
+	"documentation:watch": "documentation serve src/** --watch --github",
+	"documentation": "documentation build src/** --github -f md -o reference.md"
   },
   "author": "John Shammas",
   "license": "ISC",

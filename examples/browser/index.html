@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Demo</title>
-    </head>
-    <body>
-        <script src="../../lib/drivewealth.js"></script>
-        <script src="../../lib/httpImpls/fetch.js"></script>
-        <script>
-            drivewealth.setup({
-                env: drivewealth.ENVIRONMENTS.UAT,
-                httpImpl: dw_fetch,
-                appTypeID: "2000",
-                appVersion: "1.0",
-            });
+	<head>
+		<meta charset="utf-8">
+		<title>Demo</title>
+	</head>
+	<body>
+		<script src="../../lib/drivewealth.js"></script>
+		<script src="../../lib/httpImpls/fetch.js"></script>
+		<script>
+			drivewealth.setup({
+				env: drivewealth.ENVIRONMENTS.UAT,
+				httpImpl: dw_fetch,
+				appTypeID: "2000",
+				appVersion: "1.0",
+			});
 
-            drivewealth.User.login("e75", "eeeeeee75", function (err, user) {
-                if (err) console.error(err);
-                document.body.innerText += ("Welcome Mr. " + user.lastName);
+			drivewealth.User.login("e75", "eeeeeee75").then(user => {
+				document.body.innerText += ("Welcome Mr. " + user.lastName);
 
-                user.getAccounts(function (err, accounts) {
-                    accounts[0].getBlotter(drivewealth.Account.BLOTTER_TYPES.CASH, function (err, cash) {
-                        document.body.innerText += ("\nNice, you have $" + cash.cashAvailableForTrade + " of buying power.");
+				user.getAccounts().then(accounts => {
+					accounts[0].getBlotter(drivewealth.Account.BLOTTER_TYPES.CASH).then(cash => {
+						document.body.innerText += ("\nNice, you have $" + cash.cashAvailableForTrade + " of buying power.");
 
-                        drivewealth.Instrument.getBySymbol("AAPL", function (err, instrument) {
-                            document.body.innerText += ("\n" + instrument.name + " will probably perform well!");
-                        });
-                    });
-                });
-            });
-        </script>
-    </body>
+						drivewealth.Instrument.getBySymbol("AAPL").then(instrument => {
+							document.body.innerText += ("\n" + instrument.name + " will probably perform well!");
+						});
+					});
+				});
+			});
+		</script>
+	</body>
 </html>

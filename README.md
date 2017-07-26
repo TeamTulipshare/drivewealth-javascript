@@ -1,9 +1,9 @@
-# drivewealth-javascript
+# drivewealth-javascript [![Build Status](https://travis-ci.org/DriveWealth/drivewealth-javascript.svg?branch=master)](https://travis-ci.org/DriveWealth/drivewealth-javascript)
 
 JavaScript bindings for the DriveWealth API
 
 [Usage](#usage)  
-[API Reference](https://github.com/DriveWealth/drivewealth-javascript/wiki)  
+[API Reference](https://github.com/DriveWealth/drivewealth-javascript/blob/master/reference.md)  
 [Examples](https://github.com/DriveWealth/drivewealth-javascript/tree/master/examples)
 
 ## Usage
@@ -30,7 +30,7 @@ import drivewealth from "drivewealth";
 
 // RequireJS
 requirejs.config({
-    paths: { drivewealth: "path/to/drivewealth" }
+	paths: { drivewealth: "path/to/drivewealth" }
 });
 define(["drivewealth"], function(drivewealth) { ... })
 
@@ -45,8 +45,8 @@ You'll need to call the setup function to initialize the library. In this call, 
 
 ```javascript
 drivewealth.setup({
-    env: drivewealth.ENVIRONMENTS.UAT,
-    httpImpl: require("node_modules/drivewealth/lib/httpImpls/request.js")
+	env: drivewealth.ENVIRONMENTS.UAT,
+	httpImpl: require("node_modules/drivewealth/lib/httpImpls/request.js")
 });
 ```
 
@@ -54,6 +54,6 @@ drivewealth.setup({
 
 ```javascript
 drivewealth.User.login("john.smith", "passw0rd", (err, user) => {
-    console.info(`Welcome ${user.firstName}!`)
+	console.info(`Welcome ${user.firstName}!`)
 });
 ```
