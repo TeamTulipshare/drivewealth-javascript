@@ -1,6 +1,4 @@
-import P from "bluebird";
-
-const Funding = P.promisifyAll(require("../lib/drivewealth").Funding);
+const Funding = require("../lib/drivewealth").Funding;
 
 let user;
 
@@ -9,8 +7,7 @@ beforeAll(async () => {
 });
 
 test("return an array of subscription options", async () => {
-
-	const pricing = await Funding.getPricingAsync(user.userID);
+	const pricing = await Funding.getSubscriptionPlans(user.userID);
 
 	expect(pricing).toBeDefined();
 	expect(pricing[0]).toHaveProperty("amount");

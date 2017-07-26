@@ -1,6 +1,4 @@
-import P from "bluebird";
-
-const User = P.promisifyAll(require("../lib/drivewealth").User);
+const User = require("../lib/drivewealth").User;
 
 let user;
 
@@ -9,32 +7,31 @@ beforeAll(async () => {
 });
 
 describe("Credit cards", () => {
-
 	test("list all credit cards", async () => {
-		expect(await user.listCreditCardsAsync()).toBeDefined();
+		expect(await user.listCreditCards()).toBeDefined();
 	});
 
 	test("static list all credit cards", async () => {
-		expect(await User.listCreditCardsAsync(user.userID)).toBeDefined();
+		expect(await User.listCreditCards(user.userID)).toBeDefined();
 	});
 
 	test("add a new credit card", async () => {
-		expect(await user.addCreditCardAsync("tok_visa")).toBeDefined();
+		expect(await user.addCreditCard("tok_visa")).toBeDefined();
 	});
 
 	test("static add a new credit card", async () => {
 		expect(
-			await User.addCreditCardAsync(user.userID, "tok_visa"),
+			await User.addCreditCard(user.userID, "tok_visa"),
 		).toBeDefined();
 	});
 
-	test("remove a credit card", () => {
-		return user.listCreditCardsAsync()
-		.then(cards => user.removeCreditCardAsync(cards[0].cardID));
-	});
+	test("remove a credit card", () =>
+		user.listCreditCards()
+			.then(cards => user.removeCreditCard(cards[0].cardID)),
+	);
 
-	test("static remove a credit card", () => {
-		return User.listCreditCardsAsync(user.userID)
-		.then(cards => User.removeCreditCardAsync(user.userID, cards[0].cardID));
-	});
+	test("static remove a credit card", () =>
+		User.listCreditCards(user.userID)
+			.then(cards => User.removeCreditCard(user.userID, cards[0].cardID)),
+	);
 });

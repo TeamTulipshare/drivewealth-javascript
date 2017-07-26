@@ -368,7 +368,7 @@ class User {
 	 * @static
 	 */
 	static addCreditCard(userID: string, cardToken: string): Promise<Object> {
-		return _addCreditCard(userID, cardToken, cb);
+		return _addCreditCard(userID, cardToken);
 	}
 
 	/**

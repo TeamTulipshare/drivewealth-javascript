@@ -148,7 +148,7 @@ export default class Reports {
 	/**
 	 * @static
 	 */
-	static getSupportedCountries(cb) {
+	static getSupportedCountries() {
 		return request({
 			method: "GET",
 			endpoint: "/countries",
