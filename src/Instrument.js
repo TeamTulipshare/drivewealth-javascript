@@ -49,7 +49,7 @@ export default class Instrument {
 
         request({
             method: "GET",
-            endpoint: `/instruments?symbol${symbols.length > 1 ? "s" : ""}=${symbols.join(',')}`,
+            endpoint: `/instruments?symbols=${symbols.join(',')}`,
             sessionKey: Sessions.getAny(),
         }, (data) => {
             data = data.map(ins => new Instrument(ins));
