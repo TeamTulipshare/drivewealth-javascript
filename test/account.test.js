@@ -1,13 +1,12 @@
 import { Account } from "../lib/drivewealth";
 
-let user, account;
+let user;
+let account;
 
 beforeAll(async () => {
 	user = await require("./setup").default;
 
-	const accounts = await user.getAccounts();
-
-	account = accounts[0];
+	[account] = await user.getAccounts();
 });
 
 test("return the blotter", async () => {
