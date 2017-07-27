@@ -1,7 +1,6 @@
-const Account = require("../lib/drivewealth").Account;
+import { Account } from "../lib/drivewealth";
 
-let account;
-let user;
+let user, account;
 
 beforeAll(async () => {
 	user = await require("./setup").default;

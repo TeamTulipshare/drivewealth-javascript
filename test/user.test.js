@@ -1,4 +1,4 @@
-const User = require("../lib/drivewealth").User;
+import { User } from "../lib/drivewealth";
 
 let user;
 
@@ -7,15 +7,15 @@ beforeAll(async () => {
 });
 
 describe("Credit cards", () => {
-	test("list all credit cards", async () => {
-		expect(await user.listCreditCards()).toBeDefined();
+	test("get a user's credit cards", async () => {
+		expect(await user.getCreditCards()).toBeDefined();
 	});
 
-	test("static list all credit cards", async () => {
-		expect(await User.listCreditCards(user.userID)).toBeDefined();
+	test("static get credit cards", async () => {
+		expect(await User.getCreditCards(user.userID)).toBeDefined();
 	});
 
-	test("add and remove a credit card", async () => {
+	test("add and remove a user's credit card", async () => {
 		const { cardID } = await user.addCreditCard("tok_visa");
 
 		expect(cardID).toBeDefined();
@@ -23,11 +23,15 @@ describe("Credit cards", () => {
 		expect(await user.removeCreditCard(cardID)).toBeUndefined();
 	});
 
-	test("static add and remove a credit card", async () => {
+	test("static add and remove credit card", async () => {
 		const { cardID } = await User.addCreditCard(user.userID, "tok_visa");
 
 		expect(cardID).toBeDefined();
 
 		expect(await User.removeCreditCard(user.userID, cardID)).toBeUndefined();
 	});
+
+	test("credit cards list should be empty", async () => {
+		expect(await user.getCreditCards()).toBe(expect.arrayContaining([]));
+	})
 });

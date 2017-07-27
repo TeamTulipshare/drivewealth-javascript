@@ -1,4 +1,4 @@
-const Funding = require("../lib/drivewealth").Funding;
+import { Funding } from "../lib/drivewealth";
 
 let user;
 
