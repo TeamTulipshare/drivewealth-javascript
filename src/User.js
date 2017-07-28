@@ -346,14 +346,14 @@ class User {
 	/**
 	 * @instance
 	 */
-	listCreditCards(): Promise<Array<Object>> {
-		return User.listCreditCards(this.userID);
+	getCreditCards(): Promise<Array<Object>> {
+		return User.getCreditCards(this.userID);
 	}
 
 	/**
 	 * @static
 	 */
-	static listCreditCards(userID: string): Promise<Array<Object>> {
+	static getCreditCards(userID: string): Promise<Array<Object>> {
 		return request({
 			method: "GET",
 			endpoint: `/users/${userID}/credit-cards`,

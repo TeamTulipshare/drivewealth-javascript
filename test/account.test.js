@@ -1,14 +1,12 @@
-const Account = require("../lib/drivewealth").Account;
+import { Account } from "../lib/drivewealth";
 
-let account;
 let user;
+let account;
 
 beforeAll(async () => {
 	user = await require("./setup").default;
 
-	const accounts = await user.getAccounts();
-
-	account = accounts[0];
+	[account] = await user.getAccounts();
 });
 
 test("return the blotter", async () => {
@@ -46,11 +44,7 @@ describe("subscriptions", () => {
 		paymentID = cardID;
 	});
 
-	afterAll(async () => {
-		const cards = await user.listCreditCards();
-
-		cards.map(({ cardID }) => user.removeCreditCard(cardID));
-	});
+	afterAll(() => user.removeCreditCard(paymentID));
 
 	test("get an account's subscription", async () => {
 		expect(

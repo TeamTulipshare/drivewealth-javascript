@@ -184,11 +184,17 @@ export default class Order {
 		if (amountCash && qty) {
 			throw new Error("\"qty\" and \"amountCash\" are mutually exclusive.");
 		}
-		if (type !== Order.TYPES.MARKET && !price) {
-			throw new Error("Limit and stop orders require a \"price.\"");
-		}
-		if (type !== Order.TYPES.MARKET && autoStop) {
-			throw new Error("\"autoStop\" is only allowed for market orders.");
+
+		if (type !== Order.TYPES.MARKET) {
+			fillMaxRetries = 2;
+
+			if (!price) {
+				throw new Error("Limit and stop orders require a \"price.\"");
+			}
+
+			if (autoStop) {
+				throw new Error("\"autoStop\" is only allowed for market orders.");
+			}
 		}
 
 		return request({
@@ -211,7 +217,6 @@ export default class Order {
 				limitPrice: type === Order.TYPES.LIMIT ? price : undefined,
 			},
 		}).then(({ body }) => {
-			if (type !== Order.TYPES.MARKET) fillMaxRetries = 1;
 			if (!waitForFill) return body.orderID;
 
 			return new Promise((resolve, reject) => {
@@ -219,6 +224,10 @@ export default class Order {
 				const checkStatus = () => {
 					retries -= 1;
 					Order.getByID(body.orderID).then(order => {
+						if (order.ordRejReason !== undefined) {
+							return reject(order.ordRejReason);
+						}
+
 						if (retries <= 0) return resolve(order);
 
 						if (
