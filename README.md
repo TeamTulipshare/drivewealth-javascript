@@ -53,7 +53,7 @@ drivewealth.setup({
 #### Step 4: Use
 
 ```javascript
-drivewealth.User.login("john.smith", "passw0rd", (err, user) => {
+drivewealth.User.login("john.smith", "passw0rd").then(user => {
 	console.info(`Welcome ${user.firstName}!`)
 });
 ```

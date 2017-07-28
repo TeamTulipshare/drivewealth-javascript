@@ -347,101 +347,56 @@ class User {
 	 * @instance
 	 */
 	listCreditCards(): Promise<Array<Object>> {
-		return _listCreditCards(this.userID);
+		return User.listCreditCards(this.userID);
 	}
 
 	/**
 	 * @static
 	 */
 	static listCreditCards(userID: string): Promise<Array<Object>> {
-		return _listCreditCards(userID);
+		return request({
+			method: "GET",
+			endpoint: `/users/${userID}/credit-cards`,
+			sessionKey: Sessions.get(userID),
+		}).then(({ body }) => body);
 	}
 
 	/**
 	 * @instance
 	 */
 	addCreditCard(cardToken: string): Promise<Object> {
-		return _addCreditCard(this.userID, cardToken);
+		return User.addCreditCard(this.userID, cardToken);
 	}
 
 	/**
 	 * @static
 	 */
 	static addCreditCard(userID: string, cardToken: string): Promise<Object> {
-		return _addCreditCard(userID, cardToken);
+		return request({
+			method: "POST",
+			endpoint: `/users/${userID}/credit-cards`,
+			sessionKey: Sessions.get(userID),
+			body: { cardToken },
+		}).then(({ body }) => body);
 	}
 
 	/**
 	 * @instance
 	 */
 	removeCreditCard(cardID: string): Promise<void> {
-		 return _removeCreditCard(this.userID, cardID);
+		return User.removeCreditCard(this.userID, cardID);
 	}
 
 	/**
 	 * @static
 	 */
 	static removeCreditCard(userID: string, cardID: string): Promise<void> {
-		return _removeCreditCard(userID, cardID);
+		return request({
+			method: "DELETE",
+			endpoint: `/users/${userID}/credit-cards/${cardID}`,
+			sessionKey: Sessions.get(userID),
+		}).then(() => undefined);
 	}
-}
-
-function _listCreditCards(userID: string) {
-	return request({
-		method: "GET",
-		endpoint: `/users/${userID}/credit-cards`,
-		sessionKey: Sessions.get(userID),
-	}).then(({ body }) => body);
-}
-
-function _addCreditCard(userID: string, cardToken: string) {
-	return request({
-		method: "POST",
-		endpoint: `/users/${userID}/credit-cards`,
-		sessionKey: Sessions.get(userID),
-		body: { cardToken },
-	}).then(({ body }) => body);
-}
-
-function _removeCreditCard(userID: string, cardID: string) {
-	return request({
-		method: "DELETE",
-		endpoint: `/users/${userID}/credit-cards/${cardID}`,
-		sessionKey: Sessions.get(userID),
-	}).then(() => undefined);
-}
-
-function _getSettings(userID: string, key: string) {
-	return request({
-		method: "GET",
-		endpoint: `/users/${userID}/settings/${key}`,
-		sessionKey: Sessions.get(userID),
-	}).then(({ body }) => body);
-}
-
-function _getAllSettings(userID: string) {
-	return request({
-		method: "GET",
-		endpoint: `/users/${userID}/settings`,
-		sessionKey: Sessions.get(userID),
-	}).then(data => {
-		let formattedData = {};
-		for (let setting of data) {
-			formattedData[setting.key] = setting.value;
-		}
-		return formattedData;
-	});
-}
-
-function _setSetting(userID: string, key: string, value: string) {
-	return request({
-		method: "POST",
-		endpoint: `/users/${userID}/settings`,
-		sessionKey: Sessions.get(userID),
-		body: {
-			key, value,
-		},
-	}).then(() => undefined);
 }
 
 export default User;
