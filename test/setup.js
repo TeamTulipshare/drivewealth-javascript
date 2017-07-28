@@ -19,7 +19,10 @@ export default (() => {
 		appVersion: "1.0",
 	});
 
-	return User.login(process.env.username, process.env.password)
+	return User.login(
+		process.env.username || "timurt",
+		process.env.password || "passw0rd",
+	)
 		.then(loggedInUser => {
 			window.jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * SECONDS;
 			expect(loggedInUser).toHaveProperty("userID");
