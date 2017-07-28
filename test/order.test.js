@@ -1,56 +1,79 @@
 import { Order } from "../lib/drivewealth";
 
 let user;
-let account;
+let account; // has ~800k+ bp
+let account2; // has ~2k bp
 
 beforeAll(async () => {
 	user = await require("./setup").default;
 
-	[account] = await user.getAccounts();
+	[account, account2] = await user.getAccounts();
 });
 
 describe("Create Order", () => {
 	afterEach(async () => {
-		const [acc] = await user.getAccounts();
+		const [acc1, acc2] = await user.getAccounts();
 
-		const [order] = acc.orders;
+		const orders = [].concat(acc1.orders).concat(acc2.orders);
 
-		if (order) {
-			await Order.cancel(order.orderID);
-		}
+		await orders.map(order => Order.cancel(order.orderID));
 	});
 
 	describe("Market", () => {
 		test("Buy", async () => {
 			const { accountID, accountNo, accountType, userID } = account;
 
-			expect(await Order.create(
+			expect(
+				await Order.create(
+					Order.TYPES.MARKET,
+					{ accountID, accountNo, accountType, userID },
+					{
+						order: {
+							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+							side: Order.SIDES.BUY,
+							amountCash: 500,
+						},
+					},
+				),
+			).toHaveProperty("createdWhen");
+		});
+
+		test("Buy error", async () => {
+			expect.assertions(1);
+
+			const { accountID, accountNo, accountType, userID } = account2;
+
+			return Order.create(
 				Order.TYPES.MARKET,
 				{ accountID, accountNo, accountType, userID },
 				{
 					order: {
 						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
 						side: Order.SIDES.BUY,
-						amountCash: 500,
+						amountCash: 5000,
 					},
 				},
-			)).toHaveProperty("createdWhen");
+			).catch(e => {
+				expect(e).toBeDefined();
+			});
 		});
 
 		test("Sell", async () => {
 			const { accountID, accountNo, accountType, userID } = account;
 
-			expect(await Order.create(
-				Order.TYPES.MARKET,
-				{ accountID, accountNo, accountType, userID },
-				{
-					order: {
-						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
-						side: Order.SIDES.SELL,
-						amountCash: 100,
+			expect(
+				await Order.create(
+					Order.TYPES.MARKET,
+					{ accountID, accountNo, accountType, userID },
+					{
+						order: {
+							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+							side: Order.SIDES.SELL,
+							amountCash: 100,
+						},
 					},
-				},
-			)).toHaveProperty("createdWhen");
+				),
+			).toHaveProperty("createdWhen");
 		});
 	});
 
@@ -70,6 +93,27 @@ describe("Create Order", () => {
 					},
 				},
 			)).toHaveProperty("createdWhen");
+		});
+
+		test("Buy error", () => {
+			expect.assertions(1);
+
+			const { accountID, accountNo, accountType, userID } = account2;
+
+			return Order.create(
+				Order.TYPES.LIMIT,
+				{ accountID, accountNo, accountType, userID },
+				{
+					order: {
+						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+						side: Order.SIDES.BUY,
+						price: 5000,
+						qty: 1,
+					},
+				},
+			).catch(e => {
+				expect(e).toBeDefined();
+			});
 		});
 
 		test("Sell", async () => {
@@ -109,6 +153,8 @@ describe("Create Order", () => {
 		});
 
 		test("Buy error", () => {
+			expect.assertions(1);
+
 			const { accountID, accountNo, accountType, userID } = account;
 
 			return Order.create(
@@ -130,18 +176,20 @@ describe("Create Order", () => {
 		test("Sell", async () => {
 			const { accountID, accountNo, accountType, userID } = account;
 
-			expect(await Order.create(
-				Order.TYPES.STOP,
-				{ accountID, accountNo, accountType, userID },
-				{
-					order: {
-						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
-						side: Order.SIDES.SELL,
-						price: 100,
-						qty: 1,
+			expect(
+				await Order.create(
+					Order.TYPES.STOP,
+					{ accountID, accountNo, accountType, userID },
+					{
+						order: {
+							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+							side: Order.SIDES.SELL,
+							price: 100,
+							qty: 1,
+						},
 					},
-				},
-			)).toHaveProperty("createdWhen");
+				),
+			).toHaveProperty("createdWhen");
 		});
 	});
 });

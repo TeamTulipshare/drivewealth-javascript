@@ -17,7 +17,7 @@
   "scripts": {
 	"start": "npm-run-all --sequential build --parallel test:watch build:watch",
 	"build": "gulp build",
-	"test": "jest -i",
+	"test": "npm run build && jest -i",
 	"coverage": "jest --coverage -i",
 	"test:watch": "jest --watch -i",
 	"build:watch": "gulp watch",
