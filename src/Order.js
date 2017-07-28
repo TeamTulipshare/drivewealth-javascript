@@ -224,22 +224,18 @@ export default class Order {
 				const checkStatus = () => {
 					retries -= 1;
 					Order.getByID(body.orderID).then(order => {
-						if (order.ordRejReason !== undefined) {
-							return reject(order.ordRejReason);
+						if (order.rejectionReason !== undefined) {
+							return reject(order.rejectionReason);
 						}
 
-						if (retries <= 0) return resolve(order);
+						const isFilled = order.status !== Order.STATUSES.NEW &&
+							order.status !== Order.STATUSES.PARTIAL_FILL;
 
-						if (
-							order.status !== Order.STATUSES.NEW
-							&& order.status !== Order.STATUSES.PARTIAL_FILL
-						) {
+						if (retries <= 0 || isFilled) {
 							return resolve(order);
 						}
 						setTimeout(checkStatus, fillRetryInterval);
-					}, error => {
-						reject(error);
-					});
+					}, reject);
 				};
 				setTimeout(checkStatus, fillRetryInterval);
 			});
