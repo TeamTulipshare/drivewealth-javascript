@@ -82,7 +82,7 @@
     -   [getStatus](#getstatus)
     -   [logout](#logout)
     -   [uploadDocument](#uploaddocument)
-    -   [listCreditCards](#listcreditcards)
+    -   [getCreditCards](#getcreditcards)
     -   [addCreditCard](#addcreditcard)
     -   [removeCreditCard](#removecreditcard)
     -   [STATUSES](#statuses-2)
@@ -96,13 +96,13 @@
     -   [create](#create-2)
     -   [update](#update)
     -   [uploadDocument](#uploaddocument-1)
-    -   [listCreditCards](#listcreditcards-1)
+    -   [getCreditCards](#getcreditcards-1)
     -   [addCreditCard](#addcreditcard-1)
     -   [removeCreditCard](#removecreditcard-1)
 
 ## Account
 
-[src/Account.js:33-359](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L33-L359 "Source code on GitHub")
+[src/Account.js:33-353](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L33-L353 "Source code on GitHub")
 
 An account belonging to a User. Use the constructor if you have a flat JSON object that you would like to access instance methods on.
 
@@ -112,7 +112,7 @@ An account belonging to a User. Use the constructor if you have a flat JSON obje
 
 ### getBlotter
 
-[src/Account.js:102-104](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L102-L104 "Source code on GitHub")
+[src/Account.js:102-104](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L102-L104 "Source code on GitHub")
 
 **Parameters**
 
@@ -122,18 +122,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPerformance
 
-[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L133-L135 "Source code on GitHub")
-
-**Parameters**
-
--   `startDate` **[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
--   `endDate` **[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
-
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
-
-### getPerformance
-
-[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L133-L135 "Source code on GitHub")
+[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L133-L135 "Source code on GitHub")
 
 **Parameters**
 
@@ -143,15 +132,26 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPerformance
 
-[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L133-L135 "Source code on GitHub")
+[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L133-L135 "Source code on GitHub")
 
 Get today's performance
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
 
+### getPerformance
+
+[src/Account.js:133-135](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L133-L135 "Source code on GitHub")
+
+**Parameters**
+
+-   `startDate` **[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
+-   `endDate` **[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
+
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
+
 ### placeOrder
 
-[src/Account.js:169-178](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L169-L178 "Source code on GitHub")
+[src/Account.js:169-178](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L169-L178 "Source code on GitHub")
 
 **Parameters**
 
@@ -162,7 +162,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getFundingMethods
 
-[src/Account.js:183-187](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L183-L187 "Source code on GitHub")
+[src/Account.js:183-187](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L183-L187 "Source code on GitHub")
 
 **Parameters**
 
@@ -172,7 +172,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getTransactions
 
-[src/Account.js:192-194](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L192-L194 "Source code on GitHub")
+[src/Account.js:192-194](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L192-L194 "Source code on GitHub")
 
 **Parameters**
 
@@ -183,7 +183,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPlacedOrders
 
-[src/Account.js:199-201](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L199-L201 "Source code on GitHub")
+[src/Account.js:199-201](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L199-L201 "Source code on GitHub")
 
 **Parameters**
 
@@ -194,7 +194,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getStatements
 
-[src/Account.js:206-208](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L206-L208 "Source code on GitHub")
+[src/Account.js:206-208](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L206-L208 "Source code on GitHub")
 
 **Parameters**
 
@@ -205,7 +205,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getTaxDocuments
 
-[src/Account.js:213-215](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L213-L215 "Source code on GitHub")
+[src/Account.js:213-215](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L213-L215 "Source code on GitHub")
 
 **Parameters**
 
@@ -216,7 +216,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getTradeConfirms
 
-[src/Account.js:220-222](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L220-L222 "Source code on GitHub")
+[src/Account.js:220-222](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L220-L222 "Source code on GitHub")
 
 **Parameters**
 
@@ -227,23 +227,23 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### generateDownloadURL
 
-[src/Account.js:227-229](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L227-L229 "Source code on GitHub")
+[src/Account.js:227-229](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L227-L229 "Source code on GitHub")
 
 **Parameters**
 
 -   `fileKey` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>>** 
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 
 ### getSubscription
 
-[src/Account.js:334-336](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L334-L336 "Source code on GitHub")
+[src/Account.js:328-330](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L328-L330 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
 
 ### addSubscription
 
-[src/Account.js:341-343](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L341-L343 "Source code on GitHub")
+[src/Account.js:335-337](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L335-L337 "Source code on GitHub")
 
 **Parameters**
 
@@ -253,7 +253,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### updateSubscription
 
-[src/Account.js:348-350](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L348-L350 "Source code on GitHub")
+[src/Account.js:342-344](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L342-L344 "Source code on GitHub")
 
 **Parameters**
 
@@ -263,13 +263,13 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### cancelSubscription
 
-[src/Account.js:355-357](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L355-L357 "Source code on GitHub")
+[src/Account.js:349-351](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L349-L351 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
 
 ### BLOTTER_TYPES
 
-[src/Account.js:63-69](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L63-L69 "Source code on GitHub")
+[src/Account.js:63-69](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L63-L69 "Source code on GitHub")
 
 Type: {}
 
@@ -283,7 +283,7 @@ Type: {}
 
 ### STATUSES
 
-[src/Account.js:80-85](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L80-L85 "Source code on GitHub")
+[src/Account.js:80-85](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L80-L85 "Source code on GitHub")
 
 Type: {}
 
@@ -296,7 +296,7 @@ Type: {}
 
 ### TYPES
 
-[src/Account.js:94-97](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L94-L97 "Source code on GitHub")
+[src/Account.js:94-97](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L94-L97 "Source code on GitHub")
 
 Type: {}
 
@@ -307,7 +307,7 @@ Type: {}
 
 ### getBlotter
 
-[src/Account.js:109-121](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L109-L121 "Source code on GitHub")
+[src/Account.js:109-121](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L109-L121 "Source code on GitHub")
 
 **Parameters**
 
@@ -319,7 +319,19 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPerformance
 
-[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L147-L164 "Source code on GitHub")
+[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L147-L164 "Source code on GitHub")
+
+**Parameters**
+
+-   `userID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `accountID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `period` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
+
+### getPerformance
+
+[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L147-L164 "Source code on GitHub")
 
 **Parameters**
 
@@ -332,19 +344,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPerformance
 
-[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L147-L164 "Source code on GitHub")
-
-**Parameters**
-
--   `userID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `accountID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `period` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
-
-### getPerformance
-
-[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L147-L164 "Source code on GitHub")
+[src/Account.js:147-164](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L147-L164 "Source code on GitHub")
 
 Get today's performance
 
@@ -357,7 +357,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getListForUserID
 
-[src/Account.js:234-240](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L234-L240 "Source code on GitHub")
+[src/Account.js:234-240](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L234-L240 "Source code on GitHub")
 
 **Parameters**
 
@@ -367,7 +367,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### create
 
-[src/Account.js:245-262](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L245-L262 "Source code on GitHub")
+[src/Account.js:245-262](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L245-L262 "Source code on GitHub")
 
 **Parameters**
 
@@ -377,7 +377,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### changeSubscription
 
-[src/Account.js:268-294](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L268-L294 "Source code on GitHub")
+[src/Account.js:268-288](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L268-L288 "Source code on GitHub")
 
 **Parameters**
 
@@ -392,7 +392,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getSubscription
 
-[src/Account.js:299-301](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L299-L301 "Source code on GitHub")
+[src/Account.js:293-295](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L293-L295 "Source code on GitHub")
 
 **Parameters**
 
@@ -402,7 +402,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### addSubscription
 
-[src/Account.js:306-308](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L306-L308 "Source code on GitHub")
+[src/Account.js:300-302](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L300-L302 "Source code on GitHub")
 
 **Parameters**
 
@@ -412,7 +412,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### updateSubscription
 
-[src/Account.js:313-315](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L313-L315 "Source code on GitHub")
+[src/Account.js:307-309](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L307-L309 "Source code on GitHub")
 
 **Parameters**
 
@@ -422,7 +422,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### cancelSubscription
 
-[src/Account.js:320-322](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Account.js#L320-L322 "Source code on GitHub")
+[src/Account.js:314-316](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Account.js#L314-L316 "Source code on GitHub")
 
 **Parameters**
 
@@ -432,11 +432,11 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ## Config
 
-[src/Config.js:4-12](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Config.js#L4-L12 "Source code on GitHub")
+[src/Config.js:4-12](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Config.js#L4-L12 "Source code on GitHub")
 
 ### HOSTS
 
-[src/Config.js:23-27](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Config.js#L23-L27 "Source code on GitHub")
+[src/Config.js:23-27](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Config.js#L23-L27 "Source code on GitHub")
 
 Servers to send a request to
 
@@ -448,7 +448,7 @@ Servers to send a request to
 
 ### ENVIRONMENTS
 
-[src/Config.js:37-48](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Config.js#L37-L48 "Source code on GitHub")
+[src/Config.js:37-48](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Config.js#L37-L48 "Source code on GitHub")
 
 Servers to send a request to
 
@@ -459,13 +459,13 @@ Servers to send a request to
 
 ## Funding
 
-[src/Funding.js:9-102](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Funding.js#L9-L102 "Source code on GitHub")
+[src/Funding.js:9-102](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Funding.js#L9-L102 "Source code on GitHub")
 
 Static class for retrieving funding information.
 
 ### ALLOWED_TYPES
 
-[src/Funding.js:18-22](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Funding.js#L18-L22 "Source code on GitHub")
+[src/Funding.js:18-22](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Funding.js#L18-L22 "Source code on GitHub")
 
 **Properties**
 
@@ -475,7 +475,7 @@ Static class for retrieving funding information.
 
 ### getFundingMethods
 
-[src/Funding.js:27-69](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Funding.js#L27-L69 "Source code on GitHub")
+[src/Funding.js:27-69](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Funding.js#L27-L69 "Source code on GitHub")
 
 **Parameters**
 
@@ -492,7 +492,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPastDeposits
 
-[src/Funding.js:74-79](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Funding.js#L74-L79 "Source code on GitHub")
+[src/Funding.js:74-79](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Funding.js#L74-L79 "Source code on GitHub")
 
 **Parameters**
 
@@ -500,7 +500,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getSubscriptionPlans
 
-[src/Funding.js:84-101](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Funding.js#L84-L101 "Source code on GitHub")
+[src/Funding.js:84-101](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Funding.js#L84-L101 "Source code on GitHub")
 
 **Parameters**
 
@@ -508,7 +508,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ## Instrument
 
-[src/Instrument.js:15-201](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L15-L201 "Source code on GitHub")
+[src/Instrument.js:15-207](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L15-L207 "Source code on GitHub")
 
 Use the constructor if you have a flat JSON object that you would like to access instance methods on.
 
@@ -518,13 +518,13 @@ Use the constructor if you have a flat JSON object that you would like to access
 
 ### getQuote
 
-[src/Instrument.js:129-131](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L129-L131 "Source code on GitHub")
+[src/Instrument.js:129-131](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L129-L131 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Quote>** 
 
 ### getChartData
 
-[src/Instrument.js:169-175](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L169-L175 "Source code on GitHub")
+[src/Instrument.js:171-181](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L171-L181 "Source code on GitHub")
 
 **Parameters**
 
@@ -534,7 +534,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getChartData
 
-[src/Instrument.js:169-175](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L169-L175 "Source code on GitHub")
+[src/Instrument.js:171-181](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L171-L181 "Source code on GitHub")
 
 **Parameters**
 
@@ -543,7 +543,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### TRADE_STATUSES
 
-[src/Instrument.js:47-51](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L47-L51 "Source code on GitHub")
+[src/Instrument.js:47-51](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L47-L51 "Source code on GitHub")
 
 Type: {}
 
@@ -555,7 +555,7 @@ Type: {}
 
 ### CHART_COMPRESSIONS
 
-[src/Instrument.js:64-71](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L64-L71 "Source code on GitHub")
+[src/Instrument.js:64-71](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L64-L71 "Source code on GitHub")
 
 Type: {}
 
@@ -570,7 +570,7 @@ Type: {}
 
 ### getBySymbol
 
-[src/Instrument.js:76-87](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L76-L87 "Source code on GitHub")
+[src/Instrument.js:76-87](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L76-L87 "Source code on GitHub")
 
 **Parameters**
 
@@ -580,7 +580,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getByID
 
-[src/Instrument.js:92-98](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L92-L98 "Source code on GitHub")
+[src/Instrument.js:92-98](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L92-L98 "Source code on GitHub")
 
 **Parameters**
 
@@ -591,7 +591,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getAll
 
-[src/Instrument.js:103-109](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L103-L109 "Source code on GitHub")
+[src/Instrument.js:103-109](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L103-L109 "Source code on GitHub")
 
 **Parameters**
 
@@ -601,7 +601,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### search
 
-[src/Instrument.js:114-124](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L114-L124 "Source code on GitHub")
+[src/Instrument.js:114-124](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L114-L124 "Source code on GitHub")
 
 **Parameters**
 
@@ -611,7 +611,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getQuote
 
-[src/Instrument.js:136-160](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L136-L160 "Source code on GitHub")
+[src/Instrument.js:136-162](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L136-L162 "Source code on GitHub")
 
 **Parameters**
 
@@ -621,19 +621,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getChartData
 
-[src/Instrument.js:184-199](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L184-L199 "Source code on GitHub")
-
-**Parameters**
-
--   `instrumentID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `compression` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `tradingDays` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
-
-### getChartData
-
-[src/Instrument.js:184-199](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Instrument.js#L184-L199 "Source code on GitHub")
+[src/Instrument.js:190-205](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L190-L205 "Source code on GitHub")
 
 **Parameters**
 
@@ -644,9 +632,21 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
 
+### getChartData
+
+[src/Instrument.js:190-205](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Instrument.js#L190-L205 "Source code on GitHub")
+
+**Parameters**
+
+-   `instrumentID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `compression` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `tradingDays` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
+
 ## Order
 
-[src/Order.js:44-423](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L44-L423 "Source code on GitHub")
+[src/Order.js:44-428](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L44-L428 "Source code on GitHub")
 
 An order created for an Account. Use the constructor if you have a flat JSON object that you would like to access instance methods on.
 
@@ -656,13 +656,13 @@ An order created for an Account. Use the constructor if you have a flat JSON obj
 
 ### cancel
 
-[src/Order.js:124-126](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L124-L126 "Source code on GitHub")
+[src/Order.js:124-126](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L124-L126 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>** 
 
 ### SIDES
 
-[src/Order.js:84-87](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L84-L87 "Source code on GitHub")
+[src/Order.js:84-87](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L84-L87 "Source code on GitHub")
 
 Type: {}
 
@@ -673,7 +673,7 @@ Type: {}
 
 ### TYPES
 
-[src/Order.js:97-101](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L97-L101 "Source code on GitHub")
+[src/Order.js:97-101](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L97-L101 "Source code on GitHub")
 
 Type: {}
 
@@ -685,7 +685,7 @@ Type: {}
 
 ### STATUSES
 
-[src/Order.js:113-119](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L113-L119 "Source code on GitHub")
+[src/Order.js:113-119](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L113-L119 "Source code on GitHub")
 
 Type: {}
 
@@ -699,7 +699,7 @@ Type: {}
 
 ### cancel
 
-[src/Order.js:131-137](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L131-L137 "Source code on GitHub")
+[src/Order.js:131-137](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L131-L137 "Source code on GitHub")
 
 **Parameters**
 
@@ -709,7 +709,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getByID
 
-[src/Order.js:142-148](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L142-L148 "Source code on GitHub")
+[src/Order.js:142-148](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L142-L148 "Source code on GitHub")
 
 **Parameters**
 
@@ -719,7 +719,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### create
 
-[src/Order.js:156-238](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L156-L238 "Source code on GitHub")
+[src/Order.js:156-243](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L156-L243 "Source code on GitHub")
 
 **Parameters**
 
@@ -745,7 +745,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### createCart
 
-[src/Order.js:245-332](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L245-L332 "Source code on GitHub")
+[src/Order.js:250-337](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L250-L337 "Source code on GitHub")
 
 **Parameters**
 
@@ -764,7 +764,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### estimateCommission
 
-[src/Order.js:337-422](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Order.js#L337-L422 "Source code on GitHub")
+[src/Order.js:342-427](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Order.js#L342-L427 "Source code on GitHub")
 
 **Parameters**
 
@@ -775,13 +775,13 @@ Returns **{total: [number](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 
 ## Reports
 
-[src/Reports.js:10-158](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L10-L158 "Source code on GitHub")
+[src/Reports.js:10-158](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L10-L158 "Source code on GitHub")
 
 Static class for retrieving account reports.
 
 ### getTransactions
 
-[src/Reports.js:14-37](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L14-L37 "Source code on GitHub")
+[src/Reports.js:14-37](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L14-L37 "Source code on GitHub")
 
 **Parameters**
 
@@ -794,7 +794,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getPlacedOrders
 
-[src/Reports.js:42-65](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L42-L65 "Source code on GitHub")
+[src/Reports.js:42-65](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L42-L65 "Source code on GitHub")
 
 **Parameters**
 
@@ -807,7 +807,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getStatements
 
-[src/Reports.js:70-87](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L70-L87 "Source code on GitHub")
+[src/Reports.js:70-87](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L70-L87 "Source code on GitHub")
 
 **Parameters**
 
@@ -820,7 +820,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getTradeConfirms
 
-[src/Reports.js:92-109](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L92-L109 "Source code on GitHub")
+[src/Reports.js:92-109](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L92-L109 "Source code on GitHub")
 
 **Parameters**
 
@@ -833,7 +833,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getTaxDocuments
 
-[src/Reports.js:114-131](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L114-L131 "Source code on GitHub")
+[src/Reports.js:114-131](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L114-L131 "Source code on GitHub")
 
 **Parameters**
 
@@ -846,7 +846,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### generateDownloadURL
 
-[src/Reports.js:136-146](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L136-L146 "Source code on GitHub")
+[src/Reports.js:136-146](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L136-L146 "Source code on GitHub")
 
 **Parameters**
 
@@ -858,11 +858,11 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getSupportedCountries
 
-[src/Reports.js:151-156](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/Reports.js#L151-L156 "Source code on GitHub")
+[src/Reports.js:151-156](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/Reports.js#L151-L156 "Source code on GitHub")
 
 ## request
 
-[src/request.js:17-78](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/request.js#L17-L78 "Source code on GitHub")
+[src/request.js:17-78](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/request.js#L17-L78 "Source code on GitHub")
 
 Normally, it is unnecessary to use this function and this is for internal use only. Call request() if you need to make a custom API call that is not covered by another function.
 
@@ -880,7 +880,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ## User
 
-[src/User.js:12-387](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L12-L387 "Source code on GitHub")
+[src/User.js:12-400](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L12-L400 "Source code on GitHub")
 
 A user object. Use the constructor if you have a flat JSON object that you would like to access instance methods on.
 
@@ -890,21 +890,13 @@ A user object. Use the constructor if you have a flat JSON object that you would
 
 ### getAccounts
 
-[src/User.js:74-76](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L74-L76 "Source code on GitHub")
+[src/User.js:74-76](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L74-L76 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Account](#account)>>** 
 
 ### getSettings
 
-[src/User.js:121-124](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L121-L124 "Source code on GitHub")
-
-Get all settings
-
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
-
-### getSettings
-
-[src/User.js:121-124](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L121-L124 "Source code on GitHub")
+[src/User.js:121-124](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L121-L124 "Source code on GitHub")
 
 Get setting value
 
@@ -914,9 +906,17 @@ Get setting value
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 
+### getSettings
+
+[src/User.js:121-124](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L121-L124 "Source code on GitHub")
+
+Get all settings
+
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
+
 ### setSetting
 
-[src/User.js:143-145](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L143-L145 "Source code on GitHub")
+[src/User.js:143-145](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L143-L145 "Source code on GitHub")
 
 **Parameters**
 
@@ -927,7 +927,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### unsetSetting
 
-[src/User.js:150-156](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L150-L156 "Source code on GitHub")
+[src/User.js:150-156](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L150-L156 "Source code on GitHub")
 
 **Parameters**
 
@@ -937,7 +937,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getStatus
 
-[src/User.js:161-167](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L161-L167 "Source code on GitHub")
+[src/User.js:161-167](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L161-L167 "Source code on GitHub")
 
 See response at <http://developer.drivewealth.com/docs/user-status>
 
@@ -945,13 +945,13 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### logout
 
-[src/User.js:172-180](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L172-L180 "Source code on GitHub")
+[src/User.js:172-180](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L172-L180 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>** 
 
 ### uploadDocument
 
-[src/User.js:320-322](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L320-L322 "Source code on GitHub")
+[src/User.js:320-322](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L320-L322 "Source code on GitHub")
 
 **Parameters**
 
@@ -960,15 +960,15 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>** 
 
-### listCreditCards
+### getCreditCards
 
-[src/User.js:349-351](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L349-L351 "Source code on GitHub")
+[src/User.js:349-351](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L349-L351 "Source code on GitHub")
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>>** 
 
 ### addCreditCard
 
-[src/User.js:363-365](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L363-L365 "Source code on GitHub")
+[src/User.js:367-369](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L367-L369 "Source code on GitHub")
 
 **Parameters**
 
@@ -978,7 +978,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### removeCreditCard
 
-[src/User.js:377-379](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L377-L379 "Source code on GitHub")
+[src/User.js:386-388](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L386-L388 "Source code on GitHub")
 
 **Parameters**
 
@@ -988,7 +988,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### STATUSES
 
-[src/User.js:49-55](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L49-L55 "Source code on GitHub")
+[src/User.js:49-55](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L49-L55 "Source code on GitHub")
 
 Type: {}
 
@@ -1002,7 +1002,7 @@ Type: {}
 
 ### DOCUMENT_TYPES
 
-[src/User.js:65-69](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L65-L69 "Source code on GitHub")
+[src/User.js:65-69](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L65-L69 "Source code on GitHub")
 
 Type: {}
 
@@ -1014,19 +1014,7 @@ Type: {}
 
 ### getSettings
 
-[src/User.js:89-110](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L89-L110 "Source code on GitHub")
-
-Get all settings
-
-**Parameters**
-
--   `userID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
-
-### getSettings
-
-[src/User.js:89-110](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L89-L110 "Source code on GitHub")
+[src/User.js:89-110](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L89-L110 "Source code on GitHub")
 
 Get setting value
 
@@ -1037,9 +1025,21 @@ Get setting value
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 
+### getSettings
+
+[src/User.js:89-110](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L89-L110 "Source code on GitHub")
+
+Get all settings
+
+**Parameters**
+
+-   `userID` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>>** 
+
 ### setSetting
 
-[src/User.js:129-138](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L129-L138 "Source code on GitHub")
+[src/User.js:129-138](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L129-L138 "Source code on GitHub")
 
 **Parameters**
 
@@ -1051,7 +1051,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### getByUserID
 
-[src/User.js:185-191](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L185-L191 "Source code on GitHub")
+[src/User.js:185-191](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L185-L191 "Source code on GitHub")
 
 **Parameters**
 
@@ -1061,7 +1061,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### login
 
-[src/User.js:196-215](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L196-L215 "Source code on GitHub")
+[src/User.js:196-215](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L196-L215 "Source code on GitHub")
 
 **Parameters**
 
@@ -1072,7 +1072,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### isUsernameAvailable
 
-[src/User.js:220-230](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L220-L230 "Source code on GitHub")
+[src/User.js:220-230](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L220-L230 "Source code on GitHub")
 
 **Parameters**
 
@@ -1082,7 +1082,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### create
 
-[src/User.js:237-274](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L237-L274 "Source code on GitHub")
+[src/User.js:237-274](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L237-L274 "Source code on GitHub")
 
 **Parameters**
 
@@ -1105,7 +1105,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### update
 
-[src/User.js:279-315](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L279-L315 "Source code on GitHub")
+[src/User.js:279-315](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L279-L315 "Source code on GitHub")
 
 **Parameters**
 
@@ -1127,7 +1127,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### uploadDocument
 
-[src/User.js:327-344](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L327-L344 "Source code on GitHub")
+[src/User.js:327-344](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L327-L344 "Source code on GitHub")
 
 **Parameters**
 
@@ -1137,9 +1137,9 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>** 
 
-### listCreditCards
+### getCreditCards
 
-[src/User.js:356-358](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L356-L358 "Source code on GitHub")
+[src/User.js:356-362](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L356-L362 "Source code on GitHub")
 
 **Parameters**
 
@@ -1149,7 +1149,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### addCreditCard
 
-[src/User.js:370-372](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L370-L372 "Source code on GitHub")
+[src/User.js:374-381](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L374-L381 "Source code on GitHub")
 
 **Parameters**
 
@@ -1160,7 +1160,7 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### removeCreditCard
 
-[src/User.js:384-386](https://github.com/DriveWealth/drivewealth-javascript/blob/ec0e53529f1543a409106736160f82c05dadc711/src/User.js#L384-L386 "Source code on GitHub")
+[src/User.js:393-399](https://github.com/DriveWealth/drivewealth-javascript/blob/a5a413637b52fec090deabe34bf31ec0de26973e/src/User.js#L393-L399 "Source code on GitHub")
 
 **Parameters**
 
