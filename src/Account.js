@@ -224,7 +224,7 @@ export default class Account {
 	/**
 	 * @instance
 	 */
-	generateDownloadURL(fileKey: string): Promise<Array<Object>> {
+	generateDownloadURL(fileKey: string): Promise<string> {
 		return Reports.generateDownloadURL(this.userID, this.accountID, fileKey);
 	}
 
@@ -276,21 +276,15 @@ export default class Account {
 		planID: string,
 		paymentID: string,
 	}): Promise<Object> {
-		const params = {
+		return request({
 			method,
 			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
 			sessionKey: Sessions.get(userID),
-			body: method.startsWith("P") && {
+			body: !method.startsWith("P") ? undefined : {
 				planID,
 				[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
 			},
-		};
-
-		return request(
-			Object.keys(params)
-				.filter(key => params[key])
-				.reduce((x, y) => Object.assign({}, x, { [y]: params[y] }), {}),
-		).then(({ body }) => body);
+		}).then(({ body }) => body);
 	}
 
 	/**

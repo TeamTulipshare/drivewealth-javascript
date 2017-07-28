@@ -133,7 +133,9 @@ export default class Instrument {
 	/**
 	 * @static
 	 */
-	static getQuote(symbol: string | Instrument | Array<string> | Array<Instrument>): Promise<Quote | {[symbol: string]: Quote}> {
+	static getQuote(
+		symbol: string | Instrument | Array<string> | Array<Instrument>,
+	): Promise<Quote | {[symbol: string]: Quote}> {
 		const symbols: Array<string> = (Array.isArray(symbol) ? symbol : [symbol])
 			.map(sym => sym instanceof Instrument ? sym.symbol : sym);
 
@@ -168,10 +170,14 @@ export default class Instrument {
 	 */
 	getChartData(compression: number) {
 		if (arguments.length === 3) {
-			return Instrument.getChartData(this.instrumentID, compression, arguments[1], arguments[2]);
-		} else {
-			return Instrument.getChartData(this.instrumentID, compression, arguments[1]);
+			return Instrument.getChartData(
+				this.instrumentID,
+				compression,
+				arguments[1],
+				arguments[2],
+			);
 		}
+		return Instrument.getChartData(this.instrumentID, compression, arguments[1]);
 	}
 
 	/**
