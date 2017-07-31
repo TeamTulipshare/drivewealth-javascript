@@ -235,7 +235,12 @@ export default class Order {
 							return resolve(order);
 						}
 						setTimeout(checkStatus, fillRetryInterval);
-					}, reject);
+					}, error => {
+						if (error.body.code === 404 && retries > 0) {
+							return setTimeout(checkStatus, fillRetryInterval);
+						}
+						return reject(error);
+					});
 				};
 				setTimeout(checkStatus, fillRetryInterval);
 			});
