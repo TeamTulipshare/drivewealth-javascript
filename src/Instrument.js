@@ -134,7 +134,8 @@ export default class Instrument {
 	 * @static
 	 */
 	static getQuote(
-		symbol: string | Instrument | Array<string> | Array<Instrument>,
+		symbol: string | Instrument | Array<string | Instrument>,
+	// $FlowFixMe
 	): Promise<Quote | {[symbol: string]: Quote}> {
 		const symbols: Array<string> = (Array.isArray(symbol) ? symbol : [symbol])
 			.map(sym => sym instanceof Instrument ? sym.symbol : sym);

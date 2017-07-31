@@ -315,7 +315,7 @@ export default class Account {
 		return Account.changeSubscription("DELETE", options);
 	}
 
-	extractIDs(options: Object): Object {
+	extractIDs(options?: Object): Object {
 		return Object.assign({}, options, {
 			userID: this.userID,
 			accountID: this.accountID,
