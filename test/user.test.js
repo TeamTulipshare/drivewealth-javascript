@@ -7,6 +7,12 @@ beforeAll(async () => {
 });
 
 describe("Credit cards", () => {
+	afterAll(() => {
+		test("credit cards were removed", async () => {
+			expect(await user.getCreditCards()).toEqual([]);
+		});
+	});
+
 	describe("instance", () => {
 		test("get", async () => {
 			expect(await user.getCreditCards()).toBeDefined();
@@ -20,10 +26,6 @@ describe("Credit cards", () => {
 			const [card] = await user.getCreditCards();
 
 			expect(await user.removeCreditCard(card.cardID)).toBeUndefined();
-		});
-
-		test("credit cards were removed", async () => {
-			expect(await user.getCreditCards()).toEqual([]);
 		});
 	});
 
@@ -40,10 +42,6 @@ describe("Credit cards", () => {
 			const [card] = await User.getCreditCards(user.userID);
 
 			expect(await User.removeCreditCard(user.userID, card.cardID)).toBeUndefined();
-		});
-
-		test("credit cards were removed", async () => {
-			expect(await User.getCreditCards(user.userID)).toEqual([]);
 		});
 	});
 });

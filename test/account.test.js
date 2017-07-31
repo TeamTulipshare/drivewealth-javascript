@@ -18,9 +18,7 @@ test("return the blotter", async () => {
 });
 
 test("should return the cash section of the blotter", async () => {
-	expect(
-		await account.getBlotter(Account.BLOTTER_TYPES.CASH),
-	).toHaveProperty("cashAvailableForTrade");
+	expect(await account.getBlotter(Account.BLOTTER_TYPES.CASH)).toHaveProperty("cashAvailableForTrade");
 });
 
 test("should return formatted order objects", async () => {
@@ -47,9 +45,7 @@ describe("subscriptions", () => {
 	afterAll(() => user.removeCreditCard(paymentID));
 
 	test("get an account's subscription", async () => {
-		expect(
-			await account.getSubscription(),
-		).toBeDefined();
+		expect(await account.getSubscription()).toBeDefined();
 	});
 
 	test("static get an account's subscription", async () => {
@@ -82,9 +78,7 @@ describe("subscriptions", () => {
 	});
 
 	test("update subscription settings", async () => {
-		expect(
-			await account.updateSubscription({ planID, paymentID }),
-		).toBeDefined();
+		expect(await account.updateSubscription({ planID, paymentID })).toBeDefined();
 	});
 
 	test("static update subscription settings", async () => {
