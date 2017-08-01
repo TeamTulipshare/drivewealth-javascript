@@ -1,3 +1,4 @@
+import assert from "assert";
 import { Account } from "../lib/drivewealth";
 
 let user;
@@ -26,10 +27,12 @@ test("should return the cash section of the blotter", async () => {
 test("should return formatted order objects", async () => {
 	const orders = await account.getBlotter(Account.BLOTTER_TYPES.ORDERS);
 
-	expect(Array.isArray(orders)).toBeTruthy();
+	assert(Array.isArray(orders));
 
 	if (orders.length > 0) {
+
 		const [order] = orders;
+
 		expect(order).toHaveProperty("type");
 	}
 });
@@ -40,6 +43,7 @@ describe("subscriptions", () => {
 
 	beforeAll(async () => {
 		const { cardID } = await user.addCreditCard("tok_visa");
+
 		paymentID = cardID;
 	});
 

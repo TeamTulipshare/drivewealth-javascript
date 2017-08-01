@@ -1,3 +1,4 @@
+import assert from "assert";
 import { User } from "../lib/drivewealth";
 
 let user;
@@ -7,7 +8,9 @@ beforeAll(async () => {
 });
 
 test("getAccounts", async () => {
-	expect(Array.isArray(await user.getAccounts())).toBeTruthy();
+	assert(Array.isArray(
+		await user.getAccounts(),
+	));
 });
 
 describe("Settings", () => {
@@ -59,9 +62,9 @@ describe("Credit Cards", () => {
 	});
 
 	test("getCreditCards", async () => {
-		expect(Array.isArray(
+		assert(Array.isArray(
 			await user.getCreditCards(),
-		)).toBeTruthy();
+		));
 	});
 
 	test("addCreditCard", async () => {

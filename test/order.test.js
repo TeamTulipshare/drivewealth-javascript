@@ -100,18 +100,20 @@ describe("Create Order", () => {
 		test("Sell", async () => {
 			const { accountID, accountNo, accountType, userID } = account;
 
-			expect(await Order.create(
-				Order.TYPES.LIMIT,
-				{ accountID, accountNo, accountType, userID },
-				{
-					order: {
-						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
-						side: Order.SIDES.SELL,
-						price: 100,
-						qty: 1,
+			expect(
+				await Order.create(
+					Order.TYPES.LIMIT,
+					{ accountID, accountNo, accountType, userID },
+					{
+						order: {
+							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+							side: Order.SIDES.SELL,
+							price: 100,
+							qty: 1,
+						},
 					},
-				},
-			)).toHaveProperty("createdWhen");
+				),
+			).toHaveProperty("createdWhen");
 		});
 
 		test("Insufficient funds error", () => {
