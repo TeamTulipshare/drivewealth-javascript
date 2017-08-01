@@ -1,12 +1,9 @@
 import { Order } from "../lib/drivewealth";
 
-let user;
 let account; // has ~800k+ bp
 let account2; // has ~2k bp
 
 beforeAll(async () => {
-	user = await require("./setup").default;
-
 	[account, account2] = await user.getAccounts();
 });
 

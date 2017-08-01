@@ -1,17 +1,6 @@
 import { User, setup, ENVIRONMENTS } from "../lib/drivewealth";
 
-const SECONDS = 20;
-
-// cache the user across tests
-let user = null;
-
-/*
-  Setup for single user and return the current user
- */
-export default (() => {
-	if (user !== null) {
-		return Promise.resolve(user);
-	}
+beforeAll(() => {
 
 	setup({
 		env: ENVIRONMENTS.UAT,
@@ -24,11 +13,10 @@ export default (() => {
 		process.env.username || "timurt",
 		process.env.password || "passw0rd",
 	)
-		.then(loggedInUser => {
-			window.jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * SECONDS;
-			expect(loggedInUser).toHaveProperty("userID");
-			user = loggedInUser;
-			return loggedInUser;
-		})
-		.catch(console.error);
-})();
+	.then(user => {
+		window.user = user;
+	})
+	.catch(console.error);
+});
+
+afterAll(() => user.logout().catch(console.error));

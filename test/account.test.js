@@ -1,21 +1,22 @@
 import assert from "assert";
 import { Account } from "../lib/drivewealth";
 
-let user;
 let account;
 
 beforeAll(async () => {
-	user = await require("./setup").default;
-
 	[account] = await user.getAccounts();
 });
 
 test("return the blotter", async () => {
-	const blotter = await account.getBlotter();
-
-	expect(blotter).toHaveProperty("cash");
-	expect(blotter).toHaveProperty("equity");
-	expect(blotter).toHaveProperty("transactions");
+	expect(Object.keys(
+		await account.getBlotter(),
+	)).toEqual(
+		expect.arrayContaining([
+			"cash",
+			"equity",
+			"transactions",
+		]),
+	);
 });
 
 test("should return the cash section of the blotter", async () => {

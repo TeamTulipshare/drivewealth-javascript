@@ -17,9 +17,8 @@
   "scripts": {
 	"start": "npm-run-all --sequential build --parallel test:watch build:watch",
 	"build": "gulp build",
-	"test": "npm run build && jest -i",
-	"coverage": "jest --coverage -i",
-	"test:watch": "jest --watchAll -i",
+	"test": "npm run build && jest --coverage -i",
+	"test:watch": "jest --watch -i",
 	"build:watch": "gulp watch",
 	"flow": "flow check",
 	"documentation:watch": "documentation serve src/** --watch --github",
@@ -29,7 +28,8 @@
   "license": "ISC",
   "jest": {
 	"bail": true,
-	"verbose": true
+	"verbose": true,
+	"setupTestFrameworkScriptFile": "./test/setup.js"
   },
   "devDependencies": {
 	"babel": "^6.5.2",

@@ -69,17 +69,17 @@ class User {
 	};
 
 	/**
-	 * @instance
-	 */
-	getAccounts(): Promise<Array<Account>> {
-		return Account.getListForUserID(this.userID);
-	}
-
-	/**
 	 * @static
 	 */
 	static getAccounts(userID: string): Promise<Array<Account>> {
 		return Account.getListForUserID(userID);
+	}
+
+	/**
+	 * @instance
+	 */
+	getAccounts(): Promise<Array<Account>> {
+		return Account.getListForUserID(this.userID);
 	}
 
 	/**
@@ -149,15 +149,19 @@ class User {
 		return User.setSetting(this.userID, key, value);
 	}
 
+	static unsetSetting(userID: string, key: string) : Promise<void> {
+		return request({
+			method: "DELETE",
+			endpoint: `/users/${userID}/settings/${key}`,
+			sessionKey: Sessions.get(userID),
+		}).then(() => undefined);
+	}
+
 	/**
 	 * @instance
 	 */
 	unsetSetting(key: string): Promise<void> {
-		return request({
-			method: "DELETE",
-			endpoint: `/users/${this.userID}/settings/${key}`,
-			sessionKey: Sessions.get(this.userID),
-		}).then(() => undefined);
+		return User.unsetSetting(this.userID, key);
 	}
 
 	/**
@@ -172,16 +176,23 @@ class User {
 	}
 
 	/**
-	 * @instance
+	 *  @static
 	 */
-	logout(): Promise<void> {
+	static logout(userID: string): Promise<void> {
 		return request({
 			method: "DELETE",
-			endpoint: `/userSessions/${Sessions.get(this.userID)}`,
-			sessionKey: Sessions.get(this.userID),
+			endpoint: `/userSessions/${Sessions.get(userID)}`,
+			sessionKey: Sessions.get(userID),
 		}).then(() => {
 			Sessions.remove(this.userID);
 		});
+	}
+
+	/**
+	 * @instance
+	 */
+	logout(): Promise<void> {
+		return User.logout(this.userID);
 	}
 
 	/**
