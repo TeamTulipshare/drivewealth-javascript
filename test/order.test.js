@@ -38,7 +38,25 @@ describe("Create Order", () => {
 			).toHaveProperty("createdWhen");
 		});
 
-		test("Buy error", async () => {
+		test("Sell", async () => {
+			const { accountID, accountNo, accountType, userID } = account;
+
+			expect(
+				await Order.create(
+					Order.TYPES.MARKET,
+					{ accountID, accountNo, accountType, userID },
+					{
+						order: {
+							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+							side: Order.SIDES.SELL,
+							amountCash: 100,
+						},
+					},
+				),
+			).toHaveProperty("createdWhen");
+		});
+
+		test("Insufficient funds error", async () => {
 			expect.assertions(1);
 
 			const { accountID, accountNo, accountType, userID } = account2;
@@ -56,24 +74,6 @@ describe("Create Order", () => {
 			).catch(e => {
 				expect(e).toBeDefined();
 			});
-		});
-
-		test("Sell", async () => {
-			const { accountID, accountNo, accountType, userID } = account;
-
-			expect(
-				await Order.create(
-					Order.TYPES.MARKET,
-					{ accountID, accountNo, accountType, userID },
-					{
-						order: {
-							instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
-							side: Order.SIDES.SELL,
-							amountCash: 100,
-						},
-					},
-				),
-			).toHaveProperty("createdWhen");
 		});
 	});
 
@@ -97,7 +97,24 @@ describe("Create Order", () => {
 			).toHaveProperty("createdWhen");
 		});
 
-		test("Buy error", () => {
+		test("Sell", async () => {
+			const { accountID, accountNo, accountType, userID } = account;
+
+			expect(await Order.create(
+				Order.TYPES.LIMIT,
+				{ accountID, accountNo, accountType, userID },
+				{
+					order: {
+						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
+						side: Order.SIDES.SELL,
+						price: 100,
+						qty: 1,
+					},
+				},
+			)).toHaveProperty("createdWhen");
+		});
+
+		test("Insufficient funds error", () => {
 			expect.assertions(1);
 
 			const { accountID, accountNo, accountType, userID } = account2;
@@ -116,23 +133,6 @@ describe("Create Order", () => {
 			).catch(e => {
 				expect(e).toBeDefined();
 			});
-		});
-
-		test("Sell", async () => {
-			const { accountID, accountNo, accountType, userID } = account;
-
-			expect(await Order.create(
-				Order.TYPES.LIMIT,
-				{ accountID, accountNo, accountType, userID },
-				{
-					order: {
-						instrument: "4312a85c-b50d-4adb-93ba-cc7973243a53",
-						side: Order.SIDES.SELL,
-						price: 100,
-						qty: 1,
-					},
-				},
-			)).toHaveProperty("createdWhen");
 		});
 	});
 
@@ -156,7 +156,7 @@ describe("Create Order", () => {
 			).toHaveProperty("createdWhen");
 		});
 
-		test("Buy error", () => {
+		test("Price too close to nbbo error", () => {
 			expect.assertions(1);
 
 			const { accountID, accountNo, accountType, userID } = account;
