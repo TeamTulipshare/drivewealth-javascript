@@ -1,6 +1,7 @@
 /* @flow */
 import request from "./request";
 import Sessions from "./Sessions";
+import { DriveWealthError } from "./Error";
 
 import type { CommissionSchedule } from "./Account";
 import type Instrument from "./Instrument";
@@ -144,7 +145,14 @@ export default class Order {
 			method: "GET",
 			endpoint: `/orders/${orderID}`,
 			sessionKey: Sessions.getAny(),
-		}).then(({ body }) => new Order(body));
+		}).then(({ body, statusCode, headers }) => {
+			if (body.ordRejReason !== undefined) {
+				return Promise.reject(
+					new DriveWealthError(body.ordRejReason, body, statusCode, headers),
+				);
+			}
+			return new Order(body);
+		});
 	}
 
 	/**
@@ -224,10 +232,6 @@ export default class Order {
 				const checkStatus = () => {
 					retries -= 1;
 					Order.getByID(body.orderID).then(order => {
-						if (order.rejectionReason !== undefined) {
-							return reject(order.rejectionReason);
-						}
-
 						const isFilled = order.status !== Order.STATUSES.NEW &&
 							order.status !== Order.STATUSES.PARTIAL_FILL;
 
