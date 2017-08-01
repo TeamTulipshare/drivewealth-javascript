@@ -93,7 +93,7 @@ class User {
 	 * @param  {string} key
 	 * @return {Promise<string>}
 	 */
-	static getSettings(userID: string, key: string) {
+	static getSettings(userID: string, key?: string) {
 		if (!key) {
 			return request({
 				method: "GET",
@@ -124,7 +124,7 @@ class User {
 	 * @param  {string} key
 	 * @return {Promise<string>}
 	 */
-	getSettings(key: string) {
+	getSettings(key?: string) {
 		return User.getSettings(this.userID, key);
 	}
 
