@@ -1,6 +1,6 @@
 import { User, setup, ENVIRONMENTS } from "../lib/drivewealth";
 
-const SECONDS = 15;
+const SECONDS = 20;
 
 // cache the user across tests
 let user = null;
@@ -12,6 +12,7 @@ export default (() => {
 	if (user !== null) {
 		return Promise.resolve(user);
 	}
+
 	setup({
 		env: ENVIRONMENTS.UAT,
 		httpImpl: require("../lib/httpImpls/request.js"),

@@ -18,7 +18,9 @@ test("return the blotter", async () => {
 });
 
 test("should return the cash section of the blotter", async () => {
-	expect(await account.getBlotter(Account.BLOTTER_TYPES.CASH)).toHaveProperty("cashAvailableForTrade");
+	expect(
+		await account.getBlotter(Account.BLOTTER_TYPES.CASH),
+	).toHaveProperty("cashAvailableForTrade");
 });
 
 test("should return formatted order objects", async () => {
@@ -38,7 +40,6 @@ describe("subscriptions", () => {
 
 	beforeAll(async () => {
 		const { cardID } = await user.addCreditCard("tok_visa");
-
 		paymentID = cardID;
 	});
 
@@ -48,60 +49,15 @@ describe("subscriptions", () => {
 		expect(await account.getSubscription()).toBeDefined();
 	});
 
-	test("static get an account's subscription", async () => {
-		expect(
-			await Account.getSubscription({
-				userID: user.userID,
-				accountID: account.accountID,
-			}),
-		).toBeDefined();
-	});
-
 	test.skip("add a subscription to an account", async () => {
-		expect(
-			await account.addSubscription({
-				planID,
-				paymentID,
-			}),
-		).toBeDefined();
-	});
-
-	test.skip("static add a subscription to an account", async () => {
-		expect(
-			await Account.addSubscription({
-				userID: user.userID,
-				accountID: account.accountID,
-				planID,
-				paymentID,
-			}),
-		).toBeDefined();
+		expect(await account.addSubscription({ planID, paymentID })).toBeDefined();
 	});
 
 	test("update subscription settings", async () => {
 		expect(await account.updateSubscription({ planID, paymentID })).toBeDefined();
 	});
 
-	test("static update subscription settings", async () => {
-		expect(
-			await Account.updateSubscription({
-				userID: user.userID,
-				accountID: account.accountID,
-				planID,
-				paymentID,
-			}),
-		).toBeDefined();
-	});
-
 	test("cancel a subscription", async () => {
 		expect(await account.cancelSubscription()).toBeDefined();
-	});
-
-	test("static cancel a subscription", async () => {
-		expect(
-			await Account.cancelSubscription({
-				userID: user.userID,
-				accountID: account.accountID,
-			}),
-		).toBeDefined();
 	});
 });

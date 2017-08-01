@@ -76,18 +76,24 @@ class User {
 	}
 
 	/**
+	 * @static
+	 */
+	static getAccounts(userID: string): Promise<Array<Account>> {
+		return Account.getListForUserID(userID);
+	}
+
+	/**
 	 * Get all settings
 	 * @param  {string} userID
 	 * @return {Promise<Object.<string, string>>}
 	 */
 	/**
-	 * Get setting value
+	 * Get setting value by key
 	 * @param  {string} userID
 	 * @param  {string} key
 	 * @return {Promise<string>}
 	 */
-	static getSettings(userID: string) {
-		const key = arguments[1];
+	static getSettings(userID: string, key: string) {
 		if (!key) {
 			return request({
 				method: "GET",
@@ -118,8 +124,7 @@ class User {
 	 * @param  {string} key
 	 * @return {Promise<string>}
 	 */
-	getSettings() {
-		const [key] = arguments;
+	getSettings(key: string) {
 		return User.getSettings(this.userID, key);
 	}
 

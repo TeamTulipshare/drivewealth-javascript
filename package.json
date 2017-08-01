@@ -19,7 +19,7 @@
 	"build": "gulp build",
 	"test": "npm run build && jest -i",
 	"coverage": "jest --coverage -i",
-	"test:watch": "jest --watch -i",
+	"test:watch": "jest --watchAll -i",
 	"build:watch": "gulp watch",
 	"flow": "flow check",
 	"documentation:watch": "documentation serve src/** --watch --github",
@@ -28,7 +28,7 @@
   "author": "John Shammas",
   "license": "ISC",
   "jest": {
-	"bail": false,
+	"bail": true,
 	"verbose": true
   },
   "devDependencies": {
