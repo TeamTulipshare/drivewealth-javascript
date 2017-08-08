@@ -1,6 +1,10 @@
 import { User, setup, ENVIRONMENTS } from "../lib/drivewealth";
 
+const SECONDS = 15;
+
 beforeAll(() => {
+
+	window.jasmine.DEFAULT_TIMEOUT_INTERVAL = SECONDS * 1000;
 
 	setup({
 		env: ENVIRONMENTS.UAT,

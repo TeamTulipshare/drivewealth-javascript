@@ -184,7 +184,7 @@ class User {
 			endpoint: `/userSessions/${Sessions.get(userID)}`,
 			sessionKey: Sessions.get(userID),
 		}).then(() => {
-			Sessions.remove(this.userID);
+			Sessions.remove(userID);
 		});
 	}
 
@@ -204,6 +204,13 @@ class User {
 			endpoint: `/users/${userID}`,
 			sessionKey: Sessions.get(userID),
 		}).then(({ body }) => new User(body));
+	}
+
+	/**
+	 * @instance
+	 */
+	get(): Promise<User> {
+		return User.getByUserID(this.userID);
 	}
 
 	/**
@@ -307,7 +314,7 @@ class User {
 		phone,
 		stateProvince,
 		zipPostalCode,
-	}) {
+	}): Promise<void> {
 		return request({
 			method: "PUT",
 			endpoint: `/users/${userID}`,
@@ -327,14 +334,17 @@ class User {
 				stateProvince,
 				zipPostalCode,
 			},
-		}).then(({ body }) => body);
+		}).then(() => undefined);
 	}
 
 	/**
 	 * @instance
 	 */
-	uploadDocument(file: File, type: string): Promise<void> {
-		return User.uploadDocument(this.userID, file, type);
+	update(data: Object): Promise<void> {
+		return User.update(Object.assign({}, data, {
+			userID: this.userID,
+			email: data.email || this.emailAddress,
+		}));
 	}
 
 	/**
@@ -357,6 +367,13 @@ class User {
 			},
 			body,
 		}).then(() => undefined);
+	}
+
+	/**
+	 * @instance
+	 */
+	uploadDocument(file: File, type: string): Promise<void> {
+		return User.uploadDocument(this.userID, file, type);
 	}
 
 	/**

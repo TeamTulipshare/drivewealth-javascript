@@ -61,23 +61,48 @@ describe("User", () => {
 		);
 	});
 
-	describe("Credit Cards", () => {
-		test("getCreditCards", async () => {
-			assert(Array.isArray(
-				await user.getCreditCards(),
-			));
-		});
+	test("logout");
 
-		test("addCreditCard", async () => {
-			expect(await user.addCreditCard("tok_visa")).toBeDefined();
-		});
+	test("get", async () => {
+		expect(await user.get()).toBeDefined();
+	});
 
-		test("removeCreditCard", async () => {
-			const [card] = await user.getCreditCards();
+	test("login");
 
-			expect(
-				await user.removeCreditCard(card.cardID),
-			).toBeUndefined();
-		});
+	test("isUsernameAvailable", async () => {
+		expect(await User.isUsernameAvailable(user.username)).toBe(false);
+		expect(await User.isUsernameAvailable(Math.random().toString())).toBe(true);
+	});
+
+	test("create");
+
+	test("update", async () => {
+		const city = Math.random().toString();
+
+		expect(await user.update({ city })).toBeUndefined();
+
+		const updatedUser = await user.get();
+
+		expect(updatedUser.city).toBe(city);
+	});
+
+	test("uploadDocument");
+
+	test("getCreditCards", async () => {
+		assert(Array.isArray(
+			await user.getCreditCards(),
+		));
+	});
+
+	test("addCreditCard", async () => {
+		expect(await user.addCreditCard("tok_visa")).toBeDefined();
+	});
+
+	test("removeCreditCard", async () => {
+		const [card] = await user.getCreditCards();
+
+		expect(
+			await user.removeCreditCard(card.cardID),
+		).toBeUndefined();
 	});
 });
