@@ -32,19 +32,6 @@ describe("User", () => {
 
 			expect(await user.getSettings(key)).toBe(value);
 		});
-
-		test("Remove a setting", () => {
-			expect.assertions(2);
-
-			return user.unsetSetting(key)
-			.then(res => {
-				expect(res).toBeUndefined();
-			})
-			.then(() => user.getSettings(key))
-			.catch(e => {
-				expect(e).toBeDefined();
-			});
-		});
 	});
 
 	test("getStatus", async () => {
