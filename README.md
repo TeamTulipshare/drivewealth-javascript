@@ -1,4 +1,4 @@
-# drivewealth-javascript [![Build Status](https://travis-ci.org/DriveWealth/drivewealth-javascript.svg?branch=master)](https://travis-ci.org/DriveWealth/drivewealth-javascript)
+# drivewealth-client [![Build Status](https://travis-ci.org/DriveWealth/drivewealth-javascript.svg?branch=master)](https://travis-ci.org/DriveWealth/drivewealth-javascript)
 
 JavaScript bindings for the DriveWealth API
 
@@ -10,11 +10,10 @@ JavaScript bindings for the DriveWealth API
 
 #### Step 1: Install
 
-Install using your favorite package manager (or [download from Github](https://github.com/DriveWealth/drivewealth-javascript/tree/master/lib)):
+Install using npm (or [download from Github](https://github.com/DriveWealth/drivewealth-javascript/tree/master/lib)):
 
 ```bash
-$ npm i --save drivewealth
-$ bower install --save drivewealth
+$ npm i --save drivewealth-client
 ```
 
 #### Step 2: Include
@@ -23,19 +22,19 @@ This library works in a variety of environments:
 
 ```javascript
 // Node.js, Browserify
-const drivewealth = require("drivewealth");
+const drivewealth = require("drivewealth-client");
 
 // Babel
-import drivewealth from "drivewealth";
+import drivewealth from "drivewealth-client";
 
 // RequireJS
 requirejs.config({
-	paths: { drivewealth: "path/to/drivewealth" }
+	paths: { drivewealth: "path/to/drivewealth-client" }
 });
 define(["drivewealth"], function(drivewealth) { ... })
 
 // Browser
-<script src="path/to/drivewealth.js"></script>
+<script src="path/to/drivewealth-client.js"></script>
 console.log(drivewealth);
 ```
 
@@ -46,7 +45,7 @@ You'll need to call the setup function to initialize the library. In this call, 
 ```javascript
 drivewealth.setup({
 	env: drivewealth.ENVIRONMENTS.UAT,
-	httpImpl: require("node_modules/drivewealth/lib/httpImpls/request.js")
+	httpImpl: require("node_modules/drivewealth-client/lib/httpImpls/request.js")
 });
 ```
 

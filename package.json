@@ -1,5 +1,5 @@
 {
-  "name": "drivewealth-javascript",
+  "name": "drivewealth-client",
   "version": "1.0.0",
   "description": "JavaScript bindings for the DriveWealth API",
   "main": "lib/drivewealth.js",
