@@ -94,7 +94,7 @@ export default class Funding {
 						price,
 						{ amount: Number(price.amount / 100) },
 					)),
-			)[0];
+			);
 
 			return pricing;
 		});
