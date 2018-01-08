@@ -315,9 +315,10 @@ export default class Order {
 
 					Promise.all(
 						orderResults.map(order => new Promise((resolve, reject) => {
-							Order.getByID(order.orderID, userID, (error, statusDetails) => {
-								if (error) return resolve();
-								ordersMap[order.referenceID] = statusDetails;
+							Order.getByID(order.orderID, userID).then(order => {
+								ordersMap[order.referenceID] = order;
+								resolve();
+							}, error => {
 								resolve();
 							});
 						})),
