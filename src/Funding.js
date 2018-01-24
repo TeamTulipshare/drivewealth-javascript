@@ -86,15 +86,13 @@ export default class Funding {
 			endpoint: "/funding/ach/subscription-plans",
 			sessionKey: Sessions.get(userID),
 		}).then(({ body }) => {
-			const pricing = body.data.map((pricing) =>
-				[].concat(pricing)
-					.sort((x, y) => x.amount - y.amount)
-					.map(price => Object.assign(
-						{},
-						price,
-						{ amount: Number(price.amount / 100) },
-					)),
-			)[0];
+			const pricing = [].concat(body.data)
+				.sort((x, y) => x.amount - y.amount)
+				.map(price => Object.assign(
+					{},
+					price,
+					{ amount: Number(price.amount / 100) },
+				));
 
 			return pricing;
 		});
