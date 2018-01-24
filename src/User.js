@@ -430,6 +430,31 @@ class User {
 			sessionKey: Sessions.get(userID),
 		}).then(() => undefined);
 	}
+
+	/**
+	 * @static
+	 */
+	static forgotPassword(username: string): Promise<string> {
+		return request({
+			method: "POST",
+			endpoint: "/users/passwords",
+		}).then(body => body.passwordResetID);
+	}
+
+	/**
+	 * @static
+	 */
+	static resetPassword(passwordResetID: string, code: string, password: string): Promise<void> {
+		return request({
+			method: "PUT",
+			endpoint: `/users/passwords/${passwordResetID}`,
+			body: {
+				code,
+				passwordResetID,
+				password,
+			},
+		});
+	}
 }
 
 export default User;
