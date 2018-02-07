@@ -438,7 +438,10 @@ class User {
 		return request({
 			method: "POST",
 			endpoint: "/users/passwords",
-		}).then(body => body.passwordResetID);
+			body: {
+				username,
+			},
+		}).then(({ body }) => body.passwordResetID);
 	}
 
 	/**
