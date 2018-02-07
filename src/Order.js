@@ -310,13 +310,13 @@ export default class Order {
 					referenceID: orders[idx].referenceID,
 				}));
 				const checkStatus = () => {
-					if (retries <= 0) return resolve(orderResults);
+					if (retries <= 0) return resolve(ordersMap);
 					retries -= 1;
 
 					Promise.all(
 						orderResults.map(order => new Promise((resolve, reject) => {
-							Order.getByID(order.orderID, userID).then(order => {
-								ordersMap[order.referenceID] = order;
+							Order.getByID(order.orderID).then(orderCurrent => {
+								ordersMap[order.referenceID] = orderCurrent;
 								resolve();
 							}, error => {
 								resolve();
