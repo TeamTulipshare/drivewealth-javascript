@@ -319,13 +319,16 @@ export default class Order {
 								ordersMap[order.referenceID] = orderCurrent;
 								resolve();
 							}, error => {
+								if (error.body && error.body.ordRejReason) {
+									ordersMap[order.referenceID] = new Order(error.body);
+								}
 								resolve();
 							});
 						})),
 					).then(() => {
 						let shouldRetry = false;
 						for (const reference in ordersMap) {
-							const thisStatus = ordersMap[reference].status;
+							const thisStatus = ordersMap[reference].ordStatus;
 							if (!thisStatus
 								|| thisStatus === Order.STATUSES.NEW
 								|| thisStatus === Order.STATUSES.PARTIAL_FILL
