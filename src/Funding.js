@@ -22,6 +22,22 @@ export default class Funding {
 	};
 
 	/**
+	 * @name DEPOSIT_FREQUENCIES
+	 * @memberof Funding
+	 * @constant
+	 * @property {string} BIWEEKLY
+	 * @property {string} MONTHLY_FIRST
+	 * @property {string} MONTHLY_MIDDLE
+	 * @property {string} QUARTERLY
+	 */
+	static DEPOSIT_FREQUENCIES = {
+		BIWEEKLY: "BIWEEKLY",
+		MONTHLY_FIRST: "MONTHLY_FIRST",
+		MONTHLY_MIDDLE: "MONTHLY_MIDDLE",
+		QUARTERLY: "QUARTERLY",
+	};
+
+	/**
 	 * @param {object} options
 	 */
 	static getFundingMethods({
@@ -96,5 +112,58 @@ export default class Funding {
 
 			return pricing;
 		});
+	}
+
+	/**
+	 * @static
+	 */
+	static getRecurringDeposit(id: string) {
+		return request({
+			endpoint: `/funding/ach/recurring-deposits/${id}`,
+			sessionKey: Sessions.getAny(),
+		}).then(({ body }) => body);
+	}
+
+	/**
+	 * @static
+	 */
+	static getRecurringDepositsForUser(userID: string) {
+		return request({
+			endpoint: `/users/${userID}/recurring-deposits`,
+			sessionKey: Sessions.get(userID),
+		}).then(({ body }) => body);
+	}
+
+	/**
+	 * @static
+	 */
+	static getRecurringDepositsForAccount(userID: string, accountID: string) {
+		return request({
+			endpoint: `/users/${userID}/accounts/${accountID}/recurring-deposits`,
+			sessionKey: Sessions.get(userID),
+		}).then(({ body }) => body);
+	}
+
+	/**
+	 * @static
+	 */
+	static updateRecurringDeposit(depositID: string, data: Object): Promise<Object> {
+		return request({
+			method: "PATCH",
+			endpoint: `/funding/ach/recurring-deposits/${depositID}`,
+			sessionKey: Sessions.getAny(),
+			body: data,
+		}).then(({ body }) => body);
+	}
+
+	/**
+	 * @static
+	 */
+	static deleteRecurringDeposit(depositID: string): Promise<void> {
+		return request({
+			method: "DELETE",
+			endpoint: `/funding/ach/recurring-deposits/${depositID}`,
+			sessionKey: Sessions.getAny(),
+		}).then(() => undefined);
 	}
 }
