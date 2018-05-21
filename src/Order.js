@@ -6,7 +6,7 @@ import { DriveWealthError } from "./Error";
 import type { CommissionSchedule } from "./Account";
 import type Instrument from "./Instrument";
 
-const SEC_FEE_RATE = 0.0000231;
+const SEC_FEE_RATE = 0.000013;
 const SEC_FEE_MIN = 0.01;
 const SEC_FEE_MAX = Number.POSITIVE_INFINITY;
 const TAF_FEE_RATE = 0.000119;
