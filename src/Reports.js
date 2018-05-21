@@ -75,8 +75,8 @@ export default class Reports {
 	): Promise<Array<Object>> {
 		const queryString =
 			`?accountID=${accountID}`
-			+ `&dateStart=${startDate.toISOString()}`
-			+ `&dateEnd=${endDate.toISOString()}`
+			+ `&startDate=${startDate.toISOString()}`
+			+ `&endDate=${endDate.toISOString()}`
 			+ "&type=02";
 
 		return request({
@@ -97,8 +97,8 @@ export default class Reports {
 	): Promise<Array<Object>> {
 		const queryString =
 			`?accountID=${accountID}`
-			+ `&dateStart=${startDate.toISOString()}`
-			+ `&dateEnd=${endDate.toISOString()}`
+			+ `&startDate=${startDate.toISOString()}`
+			+ `&endDate=${endDate.toISOString()}`
 			+ "&type=01";
 
 		return request({
@@ -119,8 +119,8 @@ export default class Reports {
 	): Promise<Array<Object>> {
 		const queryString =
 			`?accountID=${accountID}`
-			+ `&dateStart=${startDate.toISOString()}`
-			+ `&dateEnd=${endDate.toISOString()}`
+			+ `&startDate=${startDate.toISOString()}`
+			+ `&endDate=${endDate.toISOString()}`
 			+ "&type=03";
 
 		return request({
