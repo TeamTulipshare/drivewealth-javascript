@@ -54,17 +54,5 @@ describe("Account", () => {
 		test("get an account's subscription", async () => {
 			expect(await account.getSubscription()).toBeDefined();
 		});
-
-		test.skip("add a subscription to an account", async () => {
-			expect(await account.addSubscription({ planID, paymentID })).toBeDefined();
-		});
-
-		test("update subscription settings", async () => {
-			expect(await account.updateSubscription({ planID, paymentID })).toBeDefined();
-		});
-
-		test("cancel a subscription", async () => {
-			expect(await account.cancelSubscription()).toBeDefined();
-		});
 	});
 });
