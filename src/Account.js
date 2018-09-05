@@ -265,24 +265,25 @@ export default class Account {
 	 * @param {string} method
 	 * @param {object} options
 	 */
-	static changeSubscription(method: string, {
-		userID,
-		accountID,
+	static updateSubscription({
+		subscriptionID,
 		planID,
-		paymentID,
+		bankAccountID,
+		cardID,
 	}: {
-		userID: string,
-		accountID: string,
+		subscriptionID: string,
 		planID: string,
-		paymentID: string,
+		bankAccountID?: string,
+		cardID?: string,
 	}): Promise<Object> {
 		return request({
-			method,
-			endpoint: `/users/${userID}/accounts/${accountID}/subscriptions`,
-			sessionKey: Sessions.get(userID),
-			body: !method.startsWith("P") ? undefined : {
+			method: "PATCH",
+			endpoint: `/subscriptions/${subscriptionID}`,
+			sessionKey: Sessions.getAny(),
+			body: {
+				bankAccountID,
+				cardID,
 				planID,
-				[paymentID.startsWith("card") ? "cardID" : "bankAccountID"]: paymentID,
 			},
 		}).then(({ body }) => body);
 	}
@@ -290,64 +291,54 @@ export default class Account {
 	/**
 	 * @static
 	 */
-	static getSubscription(options: Object): Promise<Object> {
-		return Account.changeSubscription("GET", options);
+	static getSubscription(userID: string, accountID: string): Promise<Object> {
+		return request({
+			method: "GET",
+			endpoint: `/users/${userID}/subscriptions`,
+			sessionKey: Sessions.getAny(),
+		}).then(({ body }) =>
+			body
+				.filter(sub => sub.accountDetails.accountID === accountID)
+				.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0],
+		);
 	}
 
 	/**
 	 * @static
 	 */
-	static addSubscription(options: Object): Promise<Object> {
-		return Account.changeSubscription("POST", options);
+	static addSubscription({
+		accountID,
+		planID,
+		bankAccountID,
+		cardID,
+	}: {
+		accountID: string,
+		planID: string,
+		bankAccountID?: string,
+		cardID?: string,
+	}): Promise<Object> {
+		return request({
+			method: "POST",
+			endpoint: "/subscriptions",
+			sessionKey: Sessions.getAny(),
+			body: {
+				accountID,
+				bankAccountID,
+				cardID,
+				planID,
+			},
+		}).then(({ body }) => body);
 	}
 
 	/**
 	 * @static
 	 */
-	static updateSubscription(options: Object): Promise<Object> {
-		return Account.changeSubscription("PUT", options);
-	}
-
-	/**
-	 * @static
-	 */
-	static cancelSubscription(options: Object): Promise<Object> {
-		return Account.changeSubscription("DELETE", options);
-	}
-
-	extractIDs(options?: Object): Object {
-		return Object.assign({}, options, {
-			userID: this.userID,
-			accountID: this.accountID,
-		});
-	}
-
-	/**
-	 * @instance
-	 */
-	getSubscription(): Promise<Object> {
-		return Account.getSubscription(this.extractIDs());
-	}
-
-	/**
-	 * @instance
-	 */
-	addSubscription(options: Object): Promise<Object> {
-		return Account.addSubscription(this.extractIDs(options));
-	}
-
-	/**
-	 * @instance
-	 */
-	updateSubscription(options: Object): Promise<Object> {
-		return Account.updateSubscription(this.extractIDs(options));
-	}
-
-	/**
-	 * @instance
-	 */
-	cancelSubscription(): Promise<Object> {
-		return Account.cancelSubscription(this.extractIDs());
+	static cancelSubscription(subscriptionID: string): Promise<Object> {
+		return request({
+			method: "DELETE",
+			endpoint: `/subscriptions/${subscriptionID}`,
+			sessionKey: Sessions.getAny(),
+		}).then(({ body }) => body);
 	}
 
 }

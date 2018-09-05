@@ -99,16 +99,11 @@ export default class Funding {
 	 */
 	static getSubscriptionPlans(userID: string) {
 		return request({
-			endpoint: "/funding/ach/subscription-plans",
+			endpoint: "/subscriptions/plans",
 			sessionKey: Sessions.get(userID),
 		}).then(({ body }) => {
-			const pricing = [].concat(body.data)
-				.sort((x, y) => x.amount - y.amount)
-				.map(price => Object.assign(
-					{},
-					price,
-					{ amount: Number(price.amount / 100) },
-				));
+			const pricing = [].concat(body)
+				.sort((x, y) => x.amount - y.amount);
 
 			return pricing;
 		});
