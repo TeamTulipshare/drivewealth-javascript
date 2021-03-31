@@ -17,11 +17,16 @@ module.exports = {
 	},
 	devtool: "#inline-source-map",
 	module: {
-		loaders: [
+
+//change "loaders to rules" for backwards compatiblity 
+// https://stackoverflow.com/questions/49370849/configuration-module-has-an-unknown-property-loaders
+		// change laoder: babel to babel-loader
+		//
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: "babel",
+				loader: "babel-loader",
 				query: {
 					compact: false,
 					presets: ["es2015"],
